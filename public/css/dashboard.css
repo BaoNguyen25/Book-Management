@@ -132,45 +132,6 @@ section {
   text-align: center;
 }
 
-#book-table {
-  border-collapse: collapse;
-  width: 100%;
-}
 
-#book-table th,
-#book-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-#book-table th {
-  background-color: #f2f2f2;
-}
-
-#book-table input[type="text"] {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.edit-button,
-.delete-button {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.edit-button:hover,
-.delete-button:hover {
-  background-color: #3e8e41;
-}
 
 

@@ -10,11 +10,11 @@ const bookSchema = new Schema({
         unique: true
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'Author',
     },
     category: {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: 'Category',
     },
     quantity: {

@@ -64,8 +64,9 @@ class AccessController {
         const userId = req.params.id;
 
         if (!token || !password) {
+            console.log(token, ' ', password)
             return res.status(400).json({
-                message: 'Email, token or password is missing'
+                message: 'Token or password is missing'
             });
         }
 

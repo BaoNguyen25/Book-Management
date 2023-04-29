@@ -2,8 +2,6 @@
 
 const signInBtn = document.getElementById('signInBtn');
 
-console.log('alkdalksjds')
-
 signInBtn.addEventListener('click', async() => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;

@@ -1,17 +1,14 @@
 'use strict';
 
 const router = require('express').Router();
+const { addBook, searchBook, editBook, deleteBook } = require('../../controllers/book.controller');
 
-router.post('/add', (req, res) => {
-    res.send('Add book');
-});
+router.post('/add', addBook);
 
-router.post('/edit', (req, res) => {
-    res.send('Edit book');
-});
+router.post('/edit', editBook);
 
-router.post('/delete', (req, res) => {
-    res.send('Delete book');
-});
+router.post('/delete', deleteBook);
+
+router.post('/search', searchBook);
 
 module.exports = router;

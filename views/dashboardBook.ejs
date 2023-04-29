@@ -23,7 +23,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0">Mục Lục</h2>
+                    
                 </div>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -31,20 +31,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
-                    <div class="navigation">
-                        <div class="n1">
-                            <div class="search">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" placeholder="Tìm Kiếm">
-                            </div>
-                        </div>
-                        
-                       
-                    </div>
-                    
-               
-                
+            
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
@@ -63,66 +50,121 @@
             </nav>
 
             <main>
-                <section id="add-book" style="display:none">
-                  <h2>Thêm sách</h2>
-                  <form>
-                    <label for="title">Thể loại:</label>
-                    <input type="text" id="title" name="title" required>
-                    <label for="author">Tác giả:</label>
-                    <input type="text" id="author" name="author" required>
-                    <label for="isbn">Giá:</label>
-                    <input type="text" id="isbn" name="isbn" required>
-                    <button type="submit">Add</button>
-                    <button id="close-add0button"> x </button>
-                  </form>
-                </section> 
-                <<table id="book-table">
+                <div class="navigation">
+                        
+                    <div class="search-container">
+                        <input type="text" class="search-container" id="search-content" placeholder="Tìm kiếm...">
+                        <button type="submit" class="search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                </div>
+                <h2 style="text-align: center;">Danh sách Sách</h2>
+                <div class="addbook">
+                  <section id="add-book" style="display:none">
+                    <div>
+                      <h2>Thêm sách</h2>
+                    </div>
+                    
+                    <div class="form-container">
+                      <form>
+                        <div class="form-row">
+                          <label for="name">Tên:</label>
+                          <input type="text" id="add-name" name="add-name">
+                        </div>
+                        <div class="form-row">
+                          <label for="category">Thể loại:</label>
+                          <input type="text" id="add-category" name="add-category">
+                        </div>
+                        <div class="form-row">
+                          <label for="author">Tác giả:</label>
+                          <input type="text" id="add-author" name="add-author">
+                        </div>
+                        <div class="form-row">
+                          <label for="number">Số lượng:</label>
+                          <input type="text" id="add-number" name="add-number">
+                        </div>
+                        <div class="form-row">
+                          <label for="price">Giá:</label>
+                          <input type="text" id="add-price" name="add-price">
+                        </div>
+                        <div>
+                          <button id="close-add-btn" style="float: right;"> Đóng </button>
+                          <button type="submit" id="submit-add-btn">Thêm</button>
+                        </div>
+                      </form>
+                    </div>
+                  </section> 
+                </div>
+                
+              <button id="add-btn">Thêm sách</button>
+
+              </main>
+                <table id="book-table">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Genre</th>
-                        <th>Author</th>
-                        <th>Price</th>
-                        <th></th>
+                        <th>Tên sách</th>
+                        <th>Thể loại sách</th>
+                        <th>Tác giả</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td><input type="text" name="name"></td>
-                        <td><input type="text" name="genre"></td>
-                        <td><input type="text" name="author"></td>
-                        <td><input type="text" name="price"></td>
-                        <td><button class="edit-button">Edit</button></td>
-                        <td><button class="delete-button">Delete</button></td>
-                      </tr>
+                      <% for (let i = 0; i < bookList.length; i++) { %>
+                        <tr>
+                            <td id="name-<%= i %>"><%= bookList[i].name %></td>
+                            <td id="category-<%= i %>"><%= bookList[i].category %></td>
+                            <td id="author-<%= i %>"><%= bookList[i].author %></td>
+                            <td id="number-<%= i %>"><%= bookList[i].quantity %></td>
+                            <td id="price-<%= i %>"><%= bookList[i].price %></td>
+                            <td class="button-column" colspan="2">
+                              <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
+                              <button class="delete-button" id="delete-btn-<%= i%>">Xóa</button>
+                            </td>
+                        </tr>
+                      <% } %>
                     </tbody>
                   </table>
-                  <button id="add-btn">Add Book</button>
-                <!-- <section id="edit-book">
-                  <h2>Edit Book</h2>
-                  <form>
-                    <label for="edit-title">Title:</label>
-                    <input type="text" id="edit-title" name="edit-title" required>
-                    <label for="edit-author">Author:</label>
-                    <input type="text" id="edit-author" name="edit-author" required>
-                    <label for="edit-isbn">ISBN:</label>
-                    <input type="text" id="edit-isbn" name="edit-isbn" required>
-                    <button type="submit">Save</button>
-                  </form>
-                </section>
-                <section id="search-book">
-                  <h2>Search Book</h2>
-                  <form>
-                    <label for="search-title">Title:</label>
-                    <input type="text" id="search-title" name="search-title">
-                    <label for="search-author">Author:</label>
-                    <input type="text" id="search-author" name="search-author">
-                    <label for="search-isbn">ISBN:</label>
-                    <input type="text" id="search-isbn" name="search-isbn">
-                    <button type="submit">Search</button>
-                  </form>
-                </section> -->
+                 
+                  <div class="edit-book">
+                    <section id="edit-book" style="display: none;">
+                      <div>
+                        <h2>Chỉnh sửa sách</h2>
+                      </div>
+                      <div>
+                        
+                      </div>
+                      <div class="form-container">
+                        <form>
+                          <div class="form-row">
+                            <label for="edit-name">Tên:</label>
+                            <input type="text" id="edit-name" name="edit-name">
+                          </div>
+                          <div class="form-row">
+                            <label for="edit-category">Thể loại:</label>
+                            <input type="text" id="edit-category" name="edit-category">
+                          </div>
+                          <div class="form-row">
+                            <label for="edit-author">Tác giả:</label>
+                            <input type="text" id="edit-author" name="edit-author">
+                          </div>
+                          <div class="form-row">
+                            <label for="edit-number">Số lượng:</label>
+                            <input type="text" id="edit-number" name="edit-number">
+                          </div>
+                          <div class="form-row">
+                            <label for="edit-price">Giá:</label>
+                            <input type="text" id="edit-price" name="edit-price">
+                          </div>
+                          <div class="button-container">
+                            <button type="submit" id="submit-edit-btn">Lưu</button>
+                            <button id="close-edit-btn">Đóng</button>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+                  </div>
+           
               </main>
 
             
@@ -131,7 +173,7 @@
     </div>
     <!-- /#page-content-wrapper -->
     </div>
-    <script src="/scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboardBook.js"></script>
 </body>
 </html>

@@ -13,4 +13,6 @@ router.get('/', (req, res) => {
 
 router.use('/dashboard', require('./dashboard/index'));
 
+router.use('/book', require('./book/index'));
+
 module.exports = router;

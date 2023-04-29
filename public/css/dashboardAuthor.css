@@ -1,0 +1,177 @@
+.search-container {
+  display: flex;
+  align-items: center; /* căn giữa theo chiều dọc */
+  justify-content: center; /* căn giữa theo chiều ngang */
+  width: 100%;
+  border-radius: 30px;
+  
+}
+.search-container input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  
+}
+.search-container button[type="submit"] {
+  width: 5%;
+  background-color: #27ae60;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  
+}
+
+button.search:hover {
+  background-color: (var(--));
+  }
+
+/* style cho table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+   
+    margin: 50px;
+  }
+  
+  
+  /* style cho table head */
+  thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  /* style cho table th */
+  th {
+    background-color: #27ae60;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  thead th{
+    text-align: center;
+    color: #ffffff;
+    padding: 10px;
+  }
+  tbody td{
+    text-align: center;
+    padding: 10px;
+  }
+  /* style cho table td */
+  td {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  /* style cho button */
+  button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  /* style cho button chỉnh sửa */
+  button[type="button"]:first-child {
+    background-color: #4CAF50;
+  }
+  
+  /* style cho button xóa */
+  button[type="button"]:last-child {
+    background-color: #f44336;
+  }
+
+  
+  /* style cho h2 */
+  h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+
+  /* Đặt phần tử "aside" ở giữa màn hình */
+  aside {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  }
+
+  aside h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  aside label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  aside input[type="text"],
+  aside input[type="tel"],
+  aside input[type="email"],
+  aside textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  aside input[type="submit"],
+  aside button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-right: 10px;
+  }
+  
+  aside button {
+    background-color: #f44336;
+  }
+  
+  aside button:focus,
+  aside input:focus {
+    outline: none;
+  }
+  
+  aside button:hover,
+  aside input[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  aside button:hover {
+    background-color: #b71c1c;
+  }
+
+
+  
+  
+  
