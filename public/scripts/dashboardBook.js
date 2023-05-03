@@ -302,6 +302,7 @@ async function handleDeleteButtonEvent(event) {
             .then(async data => {
                 if (data.message == 'Delete book successfully') {
                     alert('Delete book successfully');
+                    
                     await deleteBookInTable(book_name);
                 } else {
                     alert('Delete book failed');

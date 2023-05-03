@@ -1,7 +1,7 @@
 'use strict'
 
 const mongoose = require('mongoose');
-const {app, db, environment} = require('../config/config.app');
+const { db, environment } = require('../config/config.app');
 
 class Database {
     constructor() {

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/dashboardImport.css" />
+    <title>Quản Lý Sách</title>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <%- include('partials/navbar') %>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>Huy hà
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Thông Tin</a></li>
+                                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main>
+                <div class="navigation">
+                        
+                    <div class="search-container">
+                        <input type="text" class="search-container" id="search-content" placeholder="Tìm kiếm...">
+                        <button type="submit" class="search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                </div>
+                <h2 style="text-align: center;">Danh sách Sách</h2>
+                <div class="addimport">
+                  <section id="add-import" style="display:none">
+                    <div>
+                      <h2>Thêm phiếu nhập</h2>
+                    </div>
+                    
+                    <div class="form-container">
+                      <form>
+                        <div class="form-row">
+                          <label for="addQuantity">Tên phiếu nhập:</label>
+                          <input type="text" id="add-import-name" name="add-import-name">
+                          <label for="adđate">Ngày nhập:</label>
+                          <input type="date" id="add-import-date" name="book-date">
+                          <label for="addBookDetail">Tên sách:</label>
+                          <select id="add-book-detail" class="add-book-detail">
+                            <option value=""></option>
+                            <% for (let i = 0; i < bookList.length; i++) { %>
+                              <option value="<%= bookList[i].name %>"><%= bookList[i].name %></option>
+                            <% } %>
+                          </select>
+                          <label for="addQuantity">Số lượng:</label>
+                          <input type="text" id="add-book-quantity" name="book-quantity">
+                          <button id="detail-add-btn">
+                            Nhập</button>
+                        </div>
+                        <table id="add-table">
+                          <thead>
+                            <tr>
+                              <th>Tên sách</th>
+                              <th>Số lượng</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                        <div>
+                          <button id="close-add-btn" style="float: right;"> Đóng </button>
+                          <button type="submit" id="submit-add-btn">Thêm</button>
+                        </div>
+                      </form>
+                    </div>
+                  </section> 
+                </div>
+                
+              <button id="add-btn">Thêm sách</button>
+
+              </main>
+                <table id="import-table">
+                    <thead>
+                      <tr>
+                        <th>Tên sách</th>
+                        <th>Sách</th>
+                        <th>Tổng số lượng sách</th>
+                        <th>Thực hiện bởi</th>
+                        <th>Ngày</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let i = 0; i < importList.length; i++) { %>
+                        <tr>
+                          <td id="name-<%= i %>"><%= importList[i].name %></td>
+                          <td id="book-name-<%= i %>">
+                            <select id="book-name-detail-<%= i %>">
+                              <% for (let j = 0; j < importList[i].detail.length; j++) { %>
+                                <option value="<%= JSON.stringify(importList[i].detail[j]) %>"><%= importList[i].detail[j].bookName %></option>
+                              <% } %>
+                            </select>
+                          </td>
+                          <td id="book-quantity-<%= i %>"><%= importList[i].detail.reduce((accumulator, currentValue) => 
+                            accumulator + currentValue.quantity, 0) %></td>
+                          <td id="made-by-<%= i %>"><%= importList[i].madeBy %></td>
+                          <td id="date-<%= i %>"><%= new Date(importList[i].date)
+                            .toLocaleDateString('en-GB') %></td>
+                          <td>
+                            <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
+                            <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                 
+                  <div class="edit-import">
+                    <section id="edit-import" style="display: none;">
+                      <div>
+                        <h2>Chỉnh phiếu nhập</h2>
+                      </div>
+                      <div>
+                        
+                      </div>
+                      <div class="form-container">
+                        <form>
+                          <div class="form-row">
+                            <label for="editQuantity">Tên phiếu nhập:</label>
+                            <input type="text" id="edit-import-name" name="edit-import-name">
+                            <label for="editdate">Ngày nhập:</label>
+                            <input type="date" id="edit-import-date" name="book-date">
+                            <label for="editBookDetail">Tên sách:</label>
+                            <select id="edit-book-detail" class="edit-book-detail">
+                              <% for (let i = 0; i < bookList.length; i++) { %>
+                                <option value="<%= bookList[i].name %>"><%= bookList[i].name %></option>
+                              <% } %>
+                            </select>
+                            <label for="editQuantity">Số lượng:</label>
+                            <input type="text" id="edit-book-quantity" name="book-quantity">
+                            <button id="detail-edit-btn">
+                              Nhập</button>
+                          </div>
+                          <table id="edit-table">
+                            <thead>
+                              <tr>
+                                <th>Tên sách</th>
+                                <th>Số lượng</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                          <div>
+                            <button id="close-edit-btn" style="float: right;"> Đóng </button>
+                            <button type="submit" id="submit-edit-btn">Thêm</button>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+                  </div>
+           
+              </main>
+
+            
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    </div>
+    <script src="/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/dashboardImport.js"></script>
+</body>
+</html>

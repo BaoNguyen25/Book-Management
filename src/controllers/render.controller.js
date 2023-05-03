@@ -3,6 +3,7 @@
 const { getBookList } = require("../services/book.service");
 const { getAuthorList } = require("../services/author.service");
 const { getCategoryList } = require("../services/category.service");
+const { getImportList } = require("../services/import.service");
 
 class RenderController {
     getSignIn = async (req, res) => {
@@ -36,6 +37,13 @@ class RenderController {
 
     getAuthorPage = async (reg, res) =>{
         res.render('dashboardAuthor', { authorList: await getAuthorList() });
+    }
+
+    getImportPage = async (reg, res) =>{
+        res.render('dashboardImport', { 
+            bookList: await getBookList(),
+            importList: await getImportList(),
+            });
     }
 }
 

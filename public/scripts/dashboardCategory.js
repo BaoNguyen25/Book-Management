@@ -171,7 +171,7 @@ const addCategoryToTable = async (name, products=0, description="") => {
     cell1.id = `name-${size - 1}`;
 
     cell2.innerHTML = products ?? 0;
-    cell2.id = `category-${size - 1}`;
+    cell2.id = `description-${size - 1}`;
 
     cell3.innerHTML = description ?? "";
     cell3.id = `most-sold-${size - 1}`;
@@ -228,12 +228,13 @@ async function handleEditButtonEvent(event) {
 
     try {
         let category_name = document.getElementById(`name-${category_id}`).innerHTML;
+        let category_description = document.getElementById(`description-${category_id}`).innerHTML;
 
         let edit_name = document.getElementById("edit-name");
         edit_name.value = category_name;    
         edit_name.setAttribute("old-name", category_name);
         let edit_description = document.getElementById("edit-description");
-        edit_description.value = category_name;
+        edit_description.value = category_description;
 
         let edit_section = document.getElementById("edit-category");
         edit_section.style.display ='block';

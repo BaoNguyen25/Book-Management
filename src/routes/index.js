@@ -17,4 +17,6 @@ router.use('/author', require('./author/index'));
 
 router.use('/category', require('./category/index'));
 
+router.use('/import', require('./import/index'));
+
 module.exports = router;
