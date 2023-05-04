@@ -45,6 +45,14 @@ class RenderController {
             importList: await getImportList(),
             });
     }
+
+    getEmployeePage = async (reg, res) =>{
+        res.render('dashboardEmployee');
+    }
+
+    getInvoicePage = async (reg, res) =>{
+        res.render('dashboardInvoice');
+    }
 }
 
 module.exports = new RenderController();
