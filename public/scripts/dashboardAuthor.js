@@ -5,6 +5,24 @@ let toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
+//function
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+  
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+  
+    alert.classList.add("showAlert");
+  
+    setTimeout(() => {
+      alert.classList.remove("showAlert");
+    }, 1000);
+  }
+  
 
 //others
 let add_btn = document.getElementById("add-btn");
@@ -92,18 +110,18 @@ submit_add_btn.addEventListener('click', async (event) => {
                     if (data.message == 'Add author successfully') {
                         let add_section = document.getElementById("add-author");
                         add_section.style.display = "none";
-                        alert('Add author successfully');
+                        notification("success", "thành công");
                         await addAuthorToTable(name);
 
                         document.getElementById("add-name").value = '';
                     } else {
-                        alert('Add author failed');
+                        notification("error", "thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        alert('Add author failed')
+        notification("error", "thất bại");
     }
 });
 
@@ -129,16 +147,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit author successfully') {
                     let edit_section = document.getElementById("edit-author");
                     edit_section.style.display = "none";
-                    alert('Edit author successfully');
+                    notification("success", "thành công");
                     await editAuthorInTable(oldName, name);
                 } else {
-                    alert('Edit author failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit author failed')
+        notification("error", "thất bại");
     }
 });
 
@@ -255,15 +273,15 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete author successfully') {
-                    alert('Delete author successfully');
+                    notification("success", "thành công");
                     await deleteAuthorInTable(author_name);
                 } else {
-                    alert('Delete author failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Delete author failed')
+        notification("error", "thất bại");
     }
 }

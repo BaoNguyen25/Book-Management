@@ -5,6 +5,23 @@ let toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
+//function
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+  
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+  
+    alert.classList.add("showAlert");
+  
+    setTimeout(() => {
+      alert.classList.remove("showAlert");
+    }, 1000);
+  }
 
 //others
 let add_btn = document.getElementById("add-btn");
@@ -60,14 +77,14 @@ search_btn.addEventListener('click', async (event) => {
             .then(async data => {
                 if (data.message == 'Search employee successfully') {
                     let employeeList = data.metadata;
-                    
+                    notification("success", "thành công");
                     await clearTableBody();
 
                     for (let i = 0; i < employeeList.length; i++) {
                         await addEmployeeToTable(employeeList[i].name, employeeList[i].products, employeeList[i].description);
                     }   
                 } else {
-                    alert('Search employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
@@ -75,8 +92,14 @@ search_btn.addEventListener('click', async (event) => {
 
 submit_add_btn.addEventListener('click', async (event) => {
     event.preventDefault();
+    let id = document.getElementById("add-id").value;
     let name = document.getElementById("add-name").value;
-    let description = document.getElementById("add-description").value;
+    let gender = document.getElementById("add-gender").value;
+    let position = document.getElementById("add-position").value;
+    let phone = document.getElementById("add-phone").value;
+    let address = document.getElementById("add-address").value;
+    let cardid = document.getElementById("add-cardid").value;
+    let email = document.getElementById("add-email").value;
 
     try {
         let data = await fetch('/employee/add', {
@@ -85,8 +108,14 @@ submit_add_btn.addEventListener('click', async (event) => {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    id: id,
                     name: name,
-                    description: description
+                    email: email,
+                    gender: gender,
+                    role: position,
+                    phone: phone,
+                    address: address,
+                    identity: cardid
                 })
             })
             .then(response => response.json())
@@ -94,19 +123,19 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add employee successfully') {
                     let add_section = document.getElementById("add-employee");
                     add_section.style.display = "none";
-                    alert('Add employee successfully');
+                    notification("success", "thành công");;
                     let fetched = data.metadata
                     await addEmployeeToTable(fetched.name, fetched.products, fetched.description);
 
                     document.getElementById("add-name").value = '';
                 } else {
-                    alert('Add employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Add employee failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -135,16 +164,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit employee successfully') {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
-                    alert('Edit employee successfully');
+                    notification("success", "thành công");;
                     await editEmployeeInTable(oldName, name);
                 } else {
-                    alert('Edit employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit employee failed')
+        notification("error", "thất bại")
     }
 });
 

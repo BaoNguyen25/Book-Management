@@ -282,3 +282,83 @@ td {
   z-index: 9999;
   border-radius: 10px;
 }
+
+
+.alert {
+  color: #ffffff; /* Màu chữ trắng */
+  text-align: center; /* Căn giữa nội dung alert */
+  padding: 20px 40px;
+  min-width: 420px;
+  position: absolute;
+  top: 3%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  border-radius: 4px;
+  z-index: 999;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.alert.showAlert{
+  opacity: 1;
+  pointer-events: auto;
+}
+.alert.show{
+  animation: show_slide 1s ease forwards;
+}
+@keyframes show_slide {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(-10px);
+  }
+}
+.alert.hide{
+  animation: hide_slide 1s ease forwards;
+}
+@keyframes hide_slide {
+  0%{
+    transform: translateX(-10px);
+  }
+  40%{
+    transform: translateX(0%);
+  }
+  80%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+}
+.alert .fa-exclamation-circle{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  
+  font-size: 30px;
+}
+.alert .msg {
+  margin-top: 10px; /* Khoảng cách giữa icon và nội dung */
+}
+.alert .close-btn{
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px 18px;
+  cursor: pointer;
+}
+
+.alert .close-btn .fas{
+  font-size: 22px;
+  line-height: 40px;
+}
