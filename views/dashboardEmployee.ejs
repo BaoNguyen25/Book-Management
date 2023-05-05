@@ -74,13 +74,37 @@
                     <div class="form-container">
                       <form>
                         <div class="form-row">
+                          <label for="id">Mã nhân viên:</label>
+                          <input type="text" id="add-id" name="add-id">
+                        </div>
+                        <div class="form-row">
                           <label for="name">Tên:</label>
                           <input type="text" id="add-name" name="add-name">
                         </div>
                         <div class="form-row">
-                            <label for="description">Mô tả:</label>
-                            <input type="text" id="add-description" name="add-description">
-                          </div>
+                          <label for="gender">Giới tính:</label>
+                          <input type="text" id="add-gender" name="add-gender">
+                        </div>
+                        <div class="form-row">
+                            <label for="position">Chức vụ:</label>
+                            <input type="text" id="add-position" name="add-position">
+                        </div>
+                        <div class="form-row">
+                            <label for="phone">Số điện thoại:</label>
+                            <input type="text" id="add-phone" name="add-phone">
+                        </div>
+                        <div class="form-row">
+                            <label for="address">Địa chỉ:</label>
+                            <input type="text" id="add-address" name="add-address">
+                        </div>
+                        <div class="form-row">
+                          <label for="cardid">CMND:</label>
+                          <input type="text" id="add-cardid" name="add-cardid">
+                        </div>
+                        <div class="form-row">
+                          <label for="email">Email:</label>
+                          <input type="text" id="add-email" name="add-email">
+                      </div>
                         <div>
                           <button id="close-add-btn" style="float: right;">Đóng</button>
                           <button type="submit" id="submit-add-btn">Thêm</button>
@@ -96,20 +120,26 @@
                 <table id="employee-table">
                     <thead>
                       <tr>
+                        <th>Mã nhân viên</th>
                         <th>Tên nhân viên</th>
+                        <th>Giới tính</th>
                         <th>Chức vụ</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
+                        <th>CMND</th>
                         <th>Email</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td>002211</td>
                         <td>Nguyễn Văn A</td>
+                        <td>Nam</td>
                         <td>Nhân viên</td>
                         <td>0123456789</td>
                         <td>123 Đường ABC</td>
+                        <td>20001111</td>
                         <td>nva@gmail.com</td>
                         <td class="button-column" colspan="2">
                           <button class="edit-button" id="edit-btn-">Chỉnh sửa</button>
@@ -130,10 +160,22 @@
                       <div class="form-container">
                         <form>
                           <div class="form-row">
+                            <label for="edit-name">Mã nhân viên:</label>
+                            <input type="text" id="edit-id" name="edit-id">
                             <label for="edit-name">Tên:</label>
                             <input type="text" id="edit-name" name="edit-name">
-                            <label for="edit-name">Mô tả:</label>
-                            <input type="text" id="edit-description" name="edit-description">
+                            <label for="edit-name">Giới tính:</label>
+                            <input type="text" id="edit-gender" name="edit-gender">
+                            <label for="edit-name">Chức vụ:</label>
+                            <input type="text" id="edit-position" name="edit-position">
+                            <label for="edit-name">Số điện thoại:</label>
+                            <input type="text" id="edit-phone" name="edit-phone">
+                            <label for="edit-name">Địa chỉ:</label>
+                            <input type="text" id="edit-address" name="edit-address">
+                            <label for="edit-name">CMND:</label>
+                            <input type="text" id="edit-cardid" name="edit-cardid">
+                            <label for="edit-name">Email:</label>
+                            <input type="text" id="edit-email" name="edit-email">
                           </div>
                           <div class="button-container">
                             <button type="submit" id="submit-edit-btn">Lưu</button>
