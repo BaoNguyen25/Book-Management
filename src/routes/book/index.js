@@ -2,8 +2,9 @@
 
 const router = require('express').Router();
 const { addBook, searchBook, editBook, deleteBook } = require('../../controllers/book.controller');
+const { upload } = require('../../config/config.multer');
 
-router.post('/add', addBook);
+router.post('/add', upload.single('image'), addBook);
 
 router.post('/edit', editBook);
 

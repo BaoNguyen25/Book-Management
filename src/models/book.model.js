@@ -17,6 +17,13 @@ const bookSchema = new Schema({
         type: String,
         ref: 'Category',
     },
+    description: {
+        type: String,
+    },
+    image: {
+        type: String,
+        default: 'https://via.placeholder.com/150'
+    },
     quantity: {
         type: Number,
         default: 0

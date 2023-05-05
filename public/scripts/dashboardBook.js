@@ -80,41 +80,47 @@ submit_add_btn.addEventListener('click', async (event) => {
     let category = document.getElementById("add-category").value;
     let author = document.getElementById("add-author").value;
     let number = document.getElementById("add-number").value;
+    let image = document.getElementById("add-image");
     let price = document.getElementById("add-price").value;
+    
+    console.log(image.files[0])
+
+    const formData = new FormData();
+
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('author', author);
+    formData.append('quantity', number);
+    formData.append('image', image.files[0]);
+    formData.append('price', price);
 
     try {
         let data = await fetch('/book/add', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: name,
-                    category: category,
-                    author: author,
-                    quantity: number,
-                    price: price
-                    })
-                })
-                .then(response => response.json())
-                .then(async data => {
-                    if (data.message == 'Add book successfully') {
-                        let add_section = document.getElementById("add-book");
-                        add_section.style.display = "none";
-                        alert('Add book successfully');
-                        let fetched = data.metadata;
-                        await addBookToTable(fetched.name, fetched.category, fetched.author, fetched.quantity, fetched.price);
+            },
+            body:
+                formData
+            })
+            .then(response => response.json())
+            .then(async data => {
+                if (data.message == 'Add book successfully') {
+                    let add_section = document.getElementById("add-book");
+                    add_section.style.display = "none";
+                    alert('Add book successfully');
+                    let fetched = data.metadata;
+                    await addBookToTable(fetched.name, fetched.category, fetched.author, fetched.quantity, fetched.price);
 
-                        document.getElementById("add-name").value = '';
-                        document.getElementById("add-category").value = '';
-                        document.getElementById("add-author").value = '';
-                        document.getElementById("add-number").value = '';
-                        document.getElementById("add-price").value = '';
-                    } else {
-                        alert('Add book failed');
-                    }
+                    document.getElementById("add-name").value = '';
+                    document.getElementById("add-category").value = '';
+                    document.getElementById("add-author").value = '';
+                    document.getElementById("add-number").value = '';
+                    document.getElementById("add-price").value = '';
+                } else {
+                    alert('Add book failed');
                 }
-            );
+            }
+        );
     } catch (e) {
         console.log(e);
         alert('Add book failed')
