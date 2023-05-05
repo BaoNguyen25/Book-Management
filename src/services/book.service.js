@@ -4,6 +4,10 @@ const { Book } = require('../models/book.model');
 const { Author } = require('../models/author.model');
 const { Category } = require('../models/category.model');
 
+const { uploadImage, deleteImage } = require('../utils/uploadImageFirebase')
+
+const fs = require('fs');
+
 class AccessService {
     static getBookList = async () => {
         const bookList = await Book.find().catch((error) => {
@@ -14,13 +18,18 @@ class AccessService {
         return bookList;
     }
 
-    static addBook = async (name, category, author, quantity, price) => {
+    static addBook = async (name, category, author, quantity, image, price) => {
         try {
+            const driveLink = await uploadImage(image, name);
+
+            if (!driveLink) throw new Error('Upload image failed');
+
             const book = await Book.create({
                 name: name,
                 category: category,
                 author: author,
                 quantity: quantity,
+                image: driveLink,
                 price: price
             });
     
@@ -96,6 +105,19 @@ class AccessService {
     }
 
     static deleteBook = async (name) => {
+        const book = await Book.findOne({ name: name }).catch((error) => {
+            console.log(error);
+            return null;
+        });
+
+        if (!book) return null;
+
+        const imageUrl = book.image;
+
+        const fileName = imageUrl.split('%2F')[1].split('?')[0];
+        
+        await deleteImage(fileName);
+
         return await Book.findOneAndDelete({ name: name }).catch((error) => {
             console.log(error);
             return null;

@@ -2,22 +2,29 @@
 
 const { addBook, searchBook, editBook, deleteBook } = require('../services/book.service');
 
+const fs = require('fs');
+
 class BookController {
-    addBook = async (req, res, next) => {
+    addBook = async (req, res) => {
         const { name, category, author, quantity, price } = req.body;
+        const file = req.file;
 
-        const book = await addBook(name, category, author, quantity, price);
-
-        if (book) {
-            res.status(200).json({
-                message: 'Add book successfully',
-                metadata: book
-            });
-        } else {
-            res.status(500).json({
-                message: 'Add book failed'
+        if (!name || !category || !author || !quantity || !price || !file) {
+            return res.status(400).json({
+                message: 'Invalid input'
             });
         }
+
+        const book = await addBook(name, category, author, quantity, file, price);
+
+        fs.unlinkSync(file.path);
+
+        return book ? res.status(200).json({
+            message: 'Add book successfully',
+            metadata: book
+        }) : res.status(500).json({
+            message: 'Add book failed'
+        }); 
     }
 
     searchBook = async (req, res, next) => {

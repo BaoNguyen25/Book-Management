@@ -66,14 +66,13 @@
                     </div>
                     
                     <div class="form-container">
-                      <form>
+                      <form enctype="multipart/form-data">
                         <div class="form-row">
                           <label for="name">Tên:</label>
                           <input type="text" id="add-name" name="add-name">
                         </div>
                         <div class="form-row">
                           <label for="category">Thể loại:</label>
-                          <!-- <input type="text" id="add-category" name="add-category"> -->
                           <select id="add-category" name="add-category">
                             <% for (let i = 0; i < categoryList.length; i++) { %>
                               <option value="<%= categoryList[i].name %>"><%= categoryList[i].name %></option>
@@ -82,7 +81,6 @@
                         </div>
                         <div class="form-row">
                           <label for="author">Tác giả:</label>
-                          <!-- <input type="text" id="add-author" name="add-author"> -->
                           <select id="add-author" name="add-author">
                             <% for (let i = 0; i < authorList.length; i++) { %>
                               <option value="<%= authorList[i].name %>"><%= authorList[i].name %></option>
@@ -92,6 +90,10 @@
                         <div class="form-row">
                           <label for="number">Số lượng:</label>
                           <input type="text" id="add-number" name="add-number">
+                        </div>
+                        <div class="form-row">
+                          <label for="image">Hình ảnh:</label>
+                          <input type="file" accept="image/*" id="add-image" name="add-image">
                         </div>
                         <div class="form-row">
                           <label for="price">Giá:</label>
@@ -146,7 +148,7 @@
                         
                       </div>
                       <div class="form-container">
-                        <form>
+                        <form enctype="multipart/form-data">
                           <div class="form-row">
                             <label for="edit-name">Tên:</label>
                             <input type="text" id="edit-name" name="edit-name">
@@ -172,6 +174,10 @@
                           <div class="form-row">
                             <label for="edit-number">Số lượng:</label>
                             <input type="text" id="edit-number" name="edit-number">
+                          </div>
+                          <div class="form-row">
+                            <label for="image">Hình ảnh:</label>
+                            <input type="file" accept="image/*" id="edit-image" name="edit-image">
                           </div>
                           <div class="form-row">
                             <label for="edit-price">Giá:</label>
