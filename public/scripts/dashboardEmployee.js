@@ -75,8 +75,14 @@ search_btn.addEventListener('click', async (event) => {
 
 submit_add_btn.addEventListener('click', async (event) => {
     event.preventDefault();
+    let id = document.getElementById("add-id").value;
     let name = document.getElementById("add-name").value;
-    let description = document.getElementById("add-description").value;
+    let gender = document.getElementById("add-gender").value;
+    let position = document.getElementById("add-position").value;
+    let phone = document.getElementById("add-phone").value;
+    let address = document.getElementById("add-address").value;
+    let cardid = document.getElementById("add-cardid").value;
+    let email = document.getElementById("add-email").value;
 
     try {
         let data = await fetch('/employee/add', {
@@ -85,8 +91,14 @@ submit_add_btn.addEventListener('click', async (event) => {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    id: id,
                     name: name,
-                    description: description
+                    email: email,
+                    gender: gender,
+                    role: position,
+                    phone: phone,
+                    address: address,
+                    identity: cardid
                 })
             })
             .then(response => response.json())
