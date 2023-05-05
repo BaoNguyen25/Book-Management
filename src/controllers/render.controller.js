@@ -51,7 +51,10 @@ class RenderController {
     }
 
     getInvoicePage = async (reg, res) =>{
-        res.render('dashboardInvoice');
+        res.render('dashboardInvoice', {
+            bookList: await getBookList(),
+            importList: await getImportList(),
+        });
     }
 }
 
