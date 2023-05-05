@@ -2,17 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="./images/logo.ico" type="image/x-icon" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/css/fileinput.min.css" media="all"
-        rel="stylesheet" type="text/css" />
-    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/dashboardInvoice.css" />
     <title>Lập hóa đơn</title>
@@ -20,7 +15,7 @@
 
 <body>
 
-    <div class="wrapper">
+    <div class="d-flex" id="wrapper">
        <!-- Sidebar -->
        <%- include('partials/navbar') %>
        <!-- /#sidebar-wrapper -->
@@ -56,222 +51,149 @@
                 </div>
             </nav>
 
-        <!-- <div id="content">
-             <form id="invoice-form" method="post">
-                <div class="row p-2">
-                    <div class="col-md-9">
-                        <div class="card text-bg-light mb-3" style="max-width: 48rem;">
-                            <div class="card-header">
-                                <h5>Thông tin khách hàng</h5>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group p-3">
-                                    <div class="row">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-10 mx-auto text-center">
-                                                <div class="alert alert-danger" role="alert" id="MessageValidate"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="customerName">Tên khách hàng</label>
-                                            <input type="text" name="customerName" class="form-control"
-                                                id="customerName" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="customerAddress">Địa chỉ</label>
-                                            <input type="text" name="customerAddress" class="form-control"
-                                                id="customerAddress" required>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="customerPhoneNumber">Điện thoại</label>
-                                            <input type="text" name="customerPhoneNumber" class="form-control"
-                                                id="customerPhoneNumber" required>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="customerEmail">Email</label>
-                                            <input type="email" name="customerEmail" class="form-control"
-                                                id="customerEmail" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                       
-                        <div class="row">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-8">
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                    data-target="#addBookModal">
-                                    <i class="fas fa-plus"></i>
-                                    Thêm sách
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
+            <main>
+                <div class="navigation">
+                        
+                    <div class="search-container">
+                        <input type="text" class="search-container" id="search-content" placeholder="Tìm kiếm...">
+                        <button type="submit" class="search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12" id="invoice-table">
-
-                                <table class="table table-striped table-info border" id="list-book">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Tên sách</th>
-                                            <th scope="col">Tác giả</th>
-                                            <th scope="col">Thể loại</th>
-                                            <th scope="col">Số lượng</th>
-                                            <th scope="col">Đơn giá</th>
-                                        </tr>
-                                    </thead>
-                                    <input type="hidden" id="current-amount" name="currentAmount" value=0>
-                                    <input type="hidden" id="max-index" name="maxIndex" value={{maxIndex}}>
-                                    <input type="hidden" id="sum-price-hidden" name="sumPrice" value=0>
-                                    <tbody id="invoice-content">
-
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                        <div class="row my-2">
-
-                        </div>
-                        <div class="row text-center">
-                            <div class="col-md-6">
-                                <button id="debt-button" type="submit" class="btn btn-outline-success"
-                                    form="invoice-form" formaction="./invoice/debt">
-                                    <i class="fas fa-edit"></i>
-                                    Ghi nợ
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <button id="pay-button" type="submit" class="btn btn-outline-success"
-                                    form="invoice-form" formaction="./invoice/pay">
-                                    <i class="fas fa-file-invoice-dollar"></i>
-                                    Thanh toán
-                                </button>
-                            </div>
-                            <div class="col-md-4">
-                                <h2>Tổng: <span id="sum-price"></span></h2>
-                            </div>
-                        </div>
+                <h2 style="text-align: center;">Danh sách phiếu nhập</h2>
+                <div class="addimport">
+                  <section id="add-import" style="display:none">
+                    <div>
+                      <h2>Thêm phiếu nhập</h2>
                     </div>
+                    
+                    <div class="form-container">
+                      <form>
+                        <div class="form-row">
+                          <label for="addQuantity">Tên phiếu nhập:</label>
+                          <input type="text" id="add-import-name" name="add-import-name">
+                          <label for="adđate">Ngày nhập:</label>
+                          <input type="date" id="add-import-date" name="book-date">
+                          <label for="addBookDetail">Tên sách:</label>
+                          <select id="add-book-detail" class="add-book-detail">
+                            <option value=""></option>
+                            <% for (let i = 0; i < bookList.length; i++) { %>
+                              <option value="<%= bookList[i].name %>"><%= bookList[i].name %></option>
+                            <% } %>
+                          </select>
+                          <label for="addQuantity">Số lượng:</label>
+                          <input type="text" id="add-book-quantity" name="book-quantity">
+                          <button id="detail-add-btn">
+                            Nhập</button>
+                        </div>
+                        <table id="add-table">
+                          <thead>
+                            <tr>
+                              <th>Tên sách</th>
+                              <th>Số lượng</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                        <div>
+                          <button id="close-add-btn" style="float: right;"> Đóng </button>
+                          <button type="submit" id="submit-add-btn">Thêm</button>
+                        </div>
+                      </form>
+                    </div>
+                  </section> 
                 </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal fade" role="dialog" id="addBookModal">
-        <div class="modal-dialog modal-xl .modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Thêm sách</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="border: none">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form>
-                    <div class="modal-body" style="max-height: 60vh; overflow-y:scroll">
-                        <table class="table table-striped table-info" id="addModal">
+                
+              <button id="add-btn">Thêm phiếu nhập</button>
+
+              </main>
+                <table id="import-table">
+                    <thead>
+                      <tr>
+                        <th>Tên sách</th>
+                        <th>Sách</th>
+                        <th>Tổng số lượng sách</th>
+                        <th>Thực hiện bởi</th>
+                        <th>Ngày</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let i = 0; i < importList.length; i++) { %>
+                        <tr>
+                          <td id="name-<%= i %>"><%= importList[i].name %></td>
+                          <td id="book-name-<%= i %>">
+                            <select id="book-name-detail-<%= i %>">
+                              <% for (let j = 0; j < importList[i].detail.length; j++) { %>
+                                <option value="<%= JSON.stringify(importList[i].detail[j]) %>"><%= importList[i].detail[j].bookName %></option>
+                              <% } %>
+                            </select>
+                          </td>
+                          <td id="book-quantity-<%= i %>"><%= importList[i].detail.reduce((accumulator, currentValue) => 
+                            accumulator + currentValue.quantity, 0) %></td>
+                          <td id="made-by-<%= i %>"><%= importList[i].madeBy %></td>
+                          <td id="date-<%= i %>"><%= new Date(importList[i].date)
+                            .toLocaleDateString('en-GB') %></td>
+                          <td>
+                            <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
+                            <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                 
+                  <div class="edit-import">
+                    <section id="edit-import" style="display: none;">
+                      <div>
+                        <h2>Chỉnh phiếu nhập</h2>
+                      </div>
+                      <div>
+                        
+                      </div>
+                      <div class="form-container">
+                        <form>
+                          <div class="form-row">
+                            <label for="editQuantity">Tên phiếu nhập:</label>
+                            <input type="text" id="edit-import-name" name="edit-import-name">
+                            <label for="editdate">Ngày nhập:</label>
+                            <input type="date" id="edit-import-date" name="book-date">
+                            <label for="editBookDetail">Tên sách:</label>
+                            <select id="edit-book-detail" class="edit-book-detail">
+                              <% for (let i = 0; i < bookList.length; i++) { %>
+                                <option value="<%= bookList[i].name %>"><%= bookList[i].name %></option>
+                              <% } %>
+                            </select>
+                            <label for="editQuantity">Số lượng:</label>
+                            <input type="text" id="edit-book-quantity" name="book-quantity">
+                            <button id="detail-edit-btn">
+                              Nhập</button>
+                          </div>
+                          <table id="edit-table">
                             <thead>
-                                <tr>
-                                    <th scope="col">Tên sách</th>
-                                    <th scope="col">Tác giả</th>
-                                    <th scope="col">Thể loại</th>
-                                    <th scope="col">Đơn giá</th>
-                                    <th scope="col">Lượng tồn</th>
-                                    <th scope="col">Số lượng</th>
-                                </tr>
+                              <tr>
+                                <th>Tên sách</th>
+                                <th>Số lượng</th>
+                                <th></th>
+                              </tr>
                             </thead>
                             <tbody>
-                                {{#each books}}
-                                <tr>
-                                    <td>{{this.TenSach}}</td>
-                                    <td>{{this.TacGia}}</td>
-                                    <td>{{this.TheLoai}}</td>
-                                    <td>{{format_number this.DonGia}}</td>
-                                    <td>{{this.LuongTon}}</td>
-                                    <td>{{this.PhanTramGiamGia}}%</td>
-                                    <td>
-                                        <input type="number" name="amount" style="width: 40px"
-                                            id="{{this.Index}}-amount" class="numberOfBook"
-                                            title="Lượng tổn tối thiểu sau khi bán là {{../minAfterSelling}}">
-                                    </td>
-                                    <input type="hidden" id="{{this.Index}}" name="index" value="{{this.Index}}">
-                                    <input type="hidden" id="{{this.Index}}-id" name="id" value="{{this.Id}}">
-                                    <input type="hidden" id="{{this.Index}}-name" name="name" value="{{this.TenSach}}">
-                                    <input type="hidden" id="{{this.Index}}-author" name="author"
-                                        value="{{this.TacGia}}">
-                                    <input type="hidden" id="{{this.Index}}-type" name="type" value="{{this.TheLoai}}">
-                                    <input type="hidden" id="{{this.Index}}-price" name="price" value="{{this.DonGia}}">
-                                    <input type="hidden" id="{{this.Index}}-rest" name="rest" value="{{this.LuongTon}}">
-                                    <input type="hidden" id="{{this.Index}}-promotion" name="promotion"
-                                        value="{{this.PhanTramGiamGia}}">
-                                </tr>
-                                {{/each}}
                             </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal"
-                            id="confirmAddBookToInvoice">Thêm</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    {{!-- modal add invoice import successfully --}}
-    <div class="modal fade" id="informAddInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center mx-auto">
-                    <div>
-                        <h1 class="fa fa-check-circle" style="color: green; font-size: 60px; width: 60px"></h1>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <h3 class="text-center">{{alert}}</h3>
-                    </div>
-                    <form action="./invoice" method="get" class="text-center">
-                        <button class="btn btn-success btn-block" type="submit">Xác nhận</button>
-                    </form>
-                </div>
+                          </table>
+                          <div>
+                            <button id="close-edit-btn" style="float: right;"> Đóng </button>
+                            <button type="submit" id="submit-edit-btn">Thêm</button>
+                          </div>
+                        </form>
+                      </div>
+                    </section>
+                  </div>
+           
+              </main>
 
-            </div>
-        </div>
-    </div>
-    {{!-- modal add debt failed --}}
-    <div class="modal fade" id="informAddDebtFailed" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center mx-auto">
-                    <div>
-                        <h1 class="fa fa-times-circle" style="color: red; font-size: 60px; width: 60px"></h1>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div>
-                        <h3 class="text-center">{{failedAlert}}</h3>
-                    </div>
-                    <form action="./invoice" method="get" class="text-center">
-                        <button class="btn btn-danger btn-block" type="submit">Xác nhận</button>
-                    </form>
-                </div>
-
-            </div>
-        </div> -->
-    </div> 
+    
+    
     <script src="/scripts/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboardInvoice.js"></script>
 </body>
