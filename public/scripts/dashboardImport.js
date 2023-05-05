@@ -5,7 +5,23 @@ let toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
-
+//function
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+  
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+  
+    alert.classList.add("showAlert");
+  
+    setTimeout(() => {
+      alert.classList.remove("showAlert");
+    }, 1000);
+  }
 //others
 let add_btn = document.getElementById("add-btn");
 let close_add_section = document.getElementById("close-add-btn");
@@ -95,7 +111,7 @@ search_btn.addEventListener('click', async (event) => {
             })
             .then(response => response.json())
             .then(async data => {
-                if (data.message == 'Search import successfully') {
+                if (data.message == notification("success", "thành công")) {
                     let importList = data.metadata;
                     
                     await clearTableBody("import-table");
@@ -104,7 +120,7 @@ search_btn.addEventListener('click', async (event) => {
                         await addImportToTable(importList[i]);
                     }   
                 } else {
-                    alert('Search import failed');
+                    notification("success", "thất bại);
                 }
             }
         );
@@ -144,7 +160,7 @@ submit_add_btn.addEventListener('click', async (event) => {
                     if (data.message == 'Add import successfully') {
                         let add_section = document.getElementById("add-import");
                         add_section.style.display = "none";
-                        alert('Add import successfully');
+                        notification("success", "thành công");
                         let fetched = data.metadata;
                         await addImportToTable(fetched);
 
@@ -152,13 +168,13 @@ submit_add_btn.addEventListener('click', async (event) => {
                         document.getElementById("add-import-date").value = '';
                         document.getElementById("add-import-name").value = '';
                     } else {
-                        alert('Add import failed');
+                        notification("error", "thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        alert('Add import failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -202,17 +218,17 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit import successfully') {
                     let edit_section = document.getElementById("edit-import");
                     edit_section.style.display = "none";
-                    alert('Edit import successfully');
+                    notification("success", "thành công");
                     let edited = data.metadata;
                     await editImportInTable(oldName, edited);
                 } else {
-                    alert('Edit import failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit import failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -455,16 +471,16 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete import successfully') {
-                    alert('Delete import successfully');
+                    notification("success", "thành công");
                     await deleteImportInTable("import-table", import_name);
                 } else {
-                    alert('Delete import failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Delete import failed')
+        notification("error", "thất bại")
     }
 }
 
@@ -490,6 +506,6 @@ const handleDeleteDetailButtonEvent = async (event) => {
         }
     } catch (err) {
         console.log(err);
-        alert('Delete detail failed');
+        notification("error", "thất bại");
     }  
 };

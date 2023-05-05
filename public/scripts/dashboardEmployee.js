@@ -5,6 +5,23 @@ let toggleButton = document.getElementById("menu-toggle");
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
+//function
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+  
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+  
+    alert.classList.add("showAlert");
+  
+    setTimeout(() => {
+      alert.classList.remove("showAlert");
+    }, 1000);
+  }
 
 //others
 let add_btn = document.getElementById("add-btn");
@@ -60,14 +77,14 @@ search_btn.addEventListener('click', async (event) => {
             .then(async data => {
                 if (data.message == 'Search employee successfully') {
                     let employeeList = data.metadata;
-                    
+                    notification("success", "thành công");
                     await clearTableBody();
 
                     for (let i = 0; i < employeeList.length; i++) {
                         await addEmployeeToTable(employeeList[i].name, employeeList[i].products, employeeList[i].description);
                     }   
                 } else {
-                    alert('Search employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
@@ -106,19 +123,19 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add employee successfully') {
                     let add_section = document.getElementById("add-employee");
                     add_section.style.display = "none";
-                    alert('Add employee successfully');
+                    notification("success", "thành công");;
                     let fetched = data.metadata
                     await addEmployeeToTable(fetched.name, fetched.products, fetched.description);
 
                     document.getElementById("add-name").value = '';
                 } else {
-                    alert('Add employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Add employee failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -147,16 +164,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit employee successfully') {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
-                    alert('Edit employee successfully');
+                    notification("success", "thành công");;
                     await editEmployeeInTable(oldName, name);
                 } else {
-                    alert('Edit employee failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit employee failed')
+        notification("error", "thất bại")
     }
 });
 
