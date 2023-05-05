@@ -59,19 +59,19 @@
                         <button type="submit" class="search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                       </div>
                 </div>
-                <h2 style="text-align: center;">Danh sách phiếu nhập</h2>
+                <h2 style="text-align: center;">Danh sách hóa đơn</h2>
                 <div class="addimport">
                   <section id="add-import" style="display:none">
                     <div>
-                      <h2>Thêm phiếu nhập</h2>
+                      <h2>Thêm hóa đơn</h2>
                     </div>
                     
                     <div class="form-container">
                       <form>
                         <div class="form-row">
-                          <label for="addQuantity">Tên phiếu nhập:</label>
+                          <label for="addQuantity">Tên khách hàng:</label>
                           <input type="text" id="add-import-name" name="add-import-name">
-                          <label for="adđate">Ngày nhập:</label>
+                          <label for="adđate">Ngày lập:</label>
                           <input type="date" id="add-import-date" name="book-date">
                           <label for="addBookDetail">Tên sách:</label>
                           <select id="add-book-detail" class="add-book-detail">
@@ -82,6 +82,8 @@
                           </select>
                           <label for="addQuantity">Số lượng:</label>
                           <input type="text" id="add-book-quantity" name="book-quantity">
+                          <label for="addQuantity">Đơn giá:</label>
+                          <input type="text" id="add-book-quantity" name="book-quantity">
                           <button id="detail-add-btn">
                             Nhập</button>
                         </div>
@@ -90,6 +92,7 @@
                             <tr>
                               <th>Tên sách</th>
                               <th>Số lượng</th>
+                              <th>Đơn giá</th>
                               <th></th>
                             </tr>
                           </thead>
@@ -105,24 +108,25 @@
                   </section> 
                 </div>
                 
-              <button id="add-btn">Thêm phiếu nhập</button>
+              <button id="add-btn">Thêm hóa đơn</button>
 
               </main>
                 <table id="import-table">
                     <thead>
                       <tr>
+                        <th>Tên khách hàng</th>
                         <th>Tên sách</th>
-                        <th>Sách</th>
-                        <th>Tổng số lượng sách</th>
+                        <th>Số lượng</th>
                         <th>Thực hiện bởi</th>
                         <th>Ngày</th>
+                        <th>Đơn giá</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <% for (let i = 0; i < importList.length; i++) { %>
                         <tr>
-                          <td id="name-<%= i %>"><%= importList[i].name %></td>
+                          <td>Tran Van B</td>
                           <td id="book-name-<%= i %>">
                             <select id="book-name-detail-<%= i %>">
                               <% for (let j = 0; j < importList[i].detail.length; j++) { %>
@@ -135,6 +139,7 @@
                           <td id="made-by-<%= i %>"><%= importList[i].madeBy %></td>
                           <td id="date-<%= i %>"><%= new Date(importList[i].date)
                             .toLocaleDateString('en-GB') %></td>
+                          <td>100000VND</td> <!--sum=?-->
                           <td>
                             <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
                             <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
@@ -147,7 +152,7 @@
                   <div class="edit-import">
                     <section id="edit-import" style="display: none;">
                       <div>
-                        <h2>Chỉnh phiếu nhập</h2>
+                        <h2>Chỉnh hóa đơn</h2>
                       </div>
                       <div>
                         
@@ -155,9 +160,9 @@
                       <div class="form-container">
                         <form>
                           <div class="form-row">
-                            <label for="editQuantity">Tên phiếu nhập:</label>
+                            <label for="editQuantity">Tên khách hàng:</label>
                             <input type="text" id="edit-import-name" name="edit-import-name">
-                            <label for="editdate">Ngày nhập:</label>
+                            <label for="editdate">Ngày lập:</label>
                             <input type="date" id="edit-import-date" name="book-date">
                             <label for="editBookDetail">Tên sách:</label>
                             <select id="edit-book-detail" class="edit-book-detail">
@@ -167,6 +172,8 @@
                             </select>
                             <label for="editQuantity">Số lượng:</label>
                             <input type="text" id="edit-book-quantity" name="book-quantity">
+                            <label for="editQuantity">Đơn giá:</label>
+                            <input type="text" id="edit-price-quantity" name="price-quantity">
                             <button id="detail-edit-btn">
                               Nhập</button>
                           </div>
@@ -175,6 +182,7 @@
                               <tr>
                                 <th>Tên sách</th>
                                 <th>Số lượng</th>
+                                <th>Đơn giá</th>
                                 <th></th>
                               </tr>
                             </thead>
@@ -183,7 +191,7 @@
                           </table>
                           <div>
                             <button id="close-edit-btn" style="float: right;"> Đóng </button>
-                            <button type="submit" id="submit-edit-btn">Thêm</button>
+                            <button type="submit" id="submit-edit-btn">Thiết lập</button>
                           </div>
                         </form>
                       </div>
