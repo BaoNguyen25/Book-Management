@@ -29,6 +29,7 @@
             overflow-y: auto;
         }
     </style>
+    <link rel="stylesheet" href="/css/dashboardInvoice.css">
     <title>Lập hóa đơn</title>
 </head>
 
@@ -37,81 +38,7 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <%- include('partials/navbar') %>
-        <!-- <nav id="sidebar">
-            <div class="sidebar-header">
-                <div id="header" style='color:black'>
-                    <a href="./home.html">
-                        <img src="./assets/images/logo.png" id="logo-img" alt=""></img>
-                    </a>
-                    <h3 id="logo-title">BookStore Manager</h3>
-                </div>
-            </div>
-
-            <ul class="list-unstyled components">
-                <li class="{{#if active.home}}active{{/if}}">
-                    <a href="./home.html">
-                        <i class="fas fa-chart-pie" aria-hidden="true"></i>
-                        Trang chính
-                    </a>
-                </li>
-                <li class="{{#if active.bookLookUp}}active{{/if}}">
-                    <a href="./bookLookUp.html">
-                        <i class="fas fa-search"></i>
-                        Tra cứu Sách
-                    </a>
-                </li>
-
-                <li class="{{#if active.invoice}}active{{/if}}">
-                    <a href="./invoice.html">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        Lập hóa đơn
-                    </a>
-                </li>
-
-                <li class="{{#if active.payment}}active{{/if}}">
-                    <a href="./payment.html">
-                        <i class="fas fa-money-bill"></i>
-                        Phiếu thu tiền nợ
-                    </a>
-                </li>
-                <li class="{{#if active.bookImport}}active{{/if}}">
-                    <a href="./bookImport.html">
-                        <i class="fas fa-upload"></i>
-                        Lập phiếu nhập
-                    </a>
-                </li>
-                <li class="{{#if active.report}}active{{/if}}">
-                    <a href="./debtReport.html">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo công nợ
-                    </a>
-                </li>
-                <li class="{{#if active.report}}active{{/if}}">
-                    <a href="./inventoryReport.html">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo tồn kho
-                    </a>
-                </li>
-                <li class="{{#if active.regulation}}active{{/if}}">
-                    <a href="./regulation.html">
-                        <i class="fas fa-tasks"></i>
-                        Quy định
-                    </a>
-                </li>
-                <li class="{{#if active.promotion}}active{{/if}}">
-                    <a href="./promotion.html">
-                        <i class="fas fa-cart-arrow-down"></i>
-                        Thiết lập khuyến mãi
-                    </a>
-                </li>
-                <li>
-                    <a href="./signout.html">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Đăng xuất
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
+        
         <!-- Page Content  -->
         <div id="content">
             <form id="invoice-form" method="post">
@@ -335,7 +262,7 @@
             </div>
         </div>
     </div>
-    <script src="/scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboardInvoice.js"></script>
 </body>
 

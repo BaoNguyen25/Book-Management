@@ -1,192 +1,192 @@
 .search-container {
-    display: flex;
-    align-items: center; /* căn giữa theo chiều dọc */
-    justify-content: center; /* căn giữa theo chiều ngang */
-    width: 100%;
-    border-radius: 30px;
-    
+display: flex;
+align-items: center; /* căn giữa theo chiều dọc */
+justify-content: center; /* căn giữa theo chiều ngang */
+width: 100%;
+border-radius: 30px;
+
 }
-  .search-container input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    border-radius: 30px;
-    border: none;
+.search-container input[type="text"] {
+width: 80%;
+padding: 10px;
+border-radius: 30px;
+border: none;
 }
-  .search-container button[type="submit"] {
-    width: 5%;
-    background-color: #27ae60;
-    color: #ffffff;
-    border: none;
-    padding: 10px;
-    border-radius: 30px;
+.search-container button[type="submit"] {
+width: 5%;
+background-color: #27ae60;
+color: #ffffff;
+border: none;
+padding: 10px;
+border-radius: 30px;
 }
-  
-  button.search:hover {
-    background-color: (var(--));
+
+button.search:hover {
+background-color: (var(--));
 }
 
 .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin: 0 auto;
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+margin: 0 auto;
 }
 
 #content {
-    flex: 1;
-    padding: 20px;
+flex: 1;
+padding: 20px;
 }
 
 .card-header {
-    background-color: #17a2b8;
-    color: #fff;
-    font-size: 20px;
+background-color: #17a2b8;
+color: #fff;
+font-size: 20px;
 }
 
 .card-body {
-    background-color: #fff;
+background-color: #fff;
 }
 
 .form-control:focus {
-    border-color: #17a2b8;
-    box-shadow: none;
+border-color: #17a2b8;
+box-shadow: none;
 }
 
 .form-row {
-    margin-bottom: 10px;
+margin-bottom: 10px;
 }
 
 .alert-danger {
-    display: none;
+display: none;
 }
 
 .table td {
-    vertical-align: middle;
+vertical-align: middle;
 }
 
 .table th {
-    text-align: center;
-    vertical-align: middle;
+text-align: center;
+vertical-align: middle;
 }
 
 .table th:first-child,
 .table td:first-child {
-    padding-left: 20px;
+padding-left: 20px;
 }
 
 .table th:last-child,
 .table td:last-child {
-    padding-right: 20px;
+padding-right: 20px;
 }
 
 #invoice-content .input-group {
-    margin-bottom: 5px;
+margin-bottom: 5px;
 }
 
 #invoice-content .input-group:last-child {
-    margin-bottom: 0;
+margin-bottom: 0;
 }
 
 #addBookModal .modal-dialog {
-    max-width: 800px;
+max-width: 800px;
 }
 
 #addBookModal .modal-dialog .modal-body {
-    padding: 0;
+padding: 0;
 }
 
 #addBookModal .modal-dialog .modal-body table th:first-child,
 #addBookModal .modal-dialog .modal-body table td:first-child {
-    padding-left: 15px;
+padding-left: 15px;
 }
 
 #addBookModal .modal-dialog .modal-body table th:last-child,
 #addBookModal .modal-dialog .modal-body table td:last-child {
-    padding-right: 15px;
+padding-right: 15px;
 }
 
 #addBookModal .modal-dialog .modal-body .form-control {
-    border-radius: 0;
+border-radius: 0;
 }
 
 #addBookModal .modal-dialog .modal-body .form-group {
-    margin-bottom: 0;
+margin-bottom: 0;
 }
 
 #addBookModal .modal-dialog .modal-body .modal-footer {
-    border-top: 0;
-    padding: 10px 20px;
+border-top: 0;
+padding: 10px 20px;
 }
 
 #addBookModal .modal-dialog .modal-body .modal-footer .btn {
-    border-radius: 0;
+border-radius: 0;
 }
 
 #sum-price {
-    font-size: 36px;
-    font-weight: bold;
-    color: #28a745;
-    }
-    
-    .alert {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 0;
-    }
-    
-    .card-header {
-    background-color: #007bff;
-    color: #fff;
-    }
-    
-    .card-body {
-    background-color: #f8f9fa;
-    }
-    
-    .form-group {
-    margin-bottom: 0;
-    }
-    
-    .table-info {
-    background-color: #e9ecef;
-    }
-    
-    .btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
-    }
-    
-    .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: #fff;
-    }
-    
-    .btn-outline-success {
-    border-color: #28a745;
-    color: #28a745;
-    }
-    
-    .btn-outline-success:hover {
-    background-color: #28a745;
-    color: #fff;
-    }
-    
-    .form-control:focus {
-    border-color: #007bff;
-    box-shadow: none;
-    }
-    
-    input[type="text"],
-    input[type="email"] {
-    border-radius: 0;
-    border-color: #ced4da;
-    box-shadow: none;
-    }
-    
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-    border-color: #007bff;
-    box-shadow: none;
-    }
+font-size: 36px;
+font-weight: bold;
+color: #28a745;
+}
+
+.alert {
+font-size: 14px;
+font-weight: bold;
+margin-bottom: 0;
+}
+
+.card-header {
+background-color: #007bff;
+color: #fff;
+}
+
+.card-body {
+background-color: #f8f9fa;
+}
+
+.form-group {
+margin-bottom: 0;
+}
+
+.table-info {
+background-color: #e9ecef;
+}
+
+.btn-outline-primary {
+border-color: #007bff;
+color: #007bff;
+}
+
+.btn-outline-primary:hover {
+background-color: #007bff;
+color: #fff;
+}
+
+.btn-outline-success {
+border-color: #28a745;
+color: #28a745;
+}
+
+.btn-outline-success:hover {
+background-color: #28a745;
+color: #fff;
+}
+
+.form-control:focus {
+border-color: #007bff;
+box-shadow: none;
+}
+
+input[type="text"],
+input[type="email"] {
+border-radius: 0;
+border-color: #ced4da;
+box-shadow: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+border-color: #007bff;
+box-shadow: none;
+}
 
 
