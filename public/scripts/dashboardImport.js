@@ -120,7 +120,7 @@ search_btn.addEventListener('click', async (event) => {
                         await addImportToTable(importList[i]);
                     }   
                 } else {
-                    notification("success", "thất bại);
+                    notification("success", "thất bại");
                 }
             }
         );
