@@ -20,7 +20,7 @@ function notification(status, msg) {
   
     setTimeout(() => {
       alert.classList.remove("showAlert");
-    }, 1000);
+    }, 3000);
   }
 //others
 let add_btn = document.getElementById("add-btn");
@@ -111,7 +111,7 @@ search_btn.addEventListener('click', async (event) => {
             })
             .then(response => response.json())
             .then(async data => {
-                if (data.message == notification("success", "thành công")) {
+                if (data.message == 'Search import successfully') {
                     let importList = data.metadata;
                     
                     await clearTableBody("import-table");
@@ -119,8 +119,10 @@ search_btn.addEventListener('click', async (event) => {
                     for (let i = 0; i < importList.length; i++) {
                         await addImportToTable(importList[i]);
                     }   
+
+                    notification("success", "thành công");
                 } else {
-                    notification("success", "thất bại);
+                    notification("success", "thất bại");
                 }
             }
         );
