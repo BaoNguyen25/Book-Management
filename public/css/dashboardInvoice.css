@@ -1,192 +1,87 @@
-.search-container {
+ .search-container {
     display: flex;
     align-items: center; /* căn giữa theo chiều dọc */
     justify-content: center; /* căn giữa theo chiều ngang */
     width: 100%;
-    border-radius: 30px;
-    
-}
-  .search-container input[type="text"] {
-    width: 80%;
-    padding: 10px;
-    border-radius: 30px;
-    border: none;
-}
-  .search-container button[type="submit"] {
-    width: 5%;
-    background-color: #27ae60;
-    color: #ffffff;
-    border: none;
-    padding: 10px;
-    border-radius: 30px;
-}
-  
-  button.search:hover {
-    background-color: (var(--));
+    border-radius: 30px;   
 }
 
-.wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin: 0 auto;
-}
-
-#content {
-    flex: 1;
-    padding: 20px;
-}
-
-.card-header {
-    background-color: #17a2b8;
-    color: #fff;
-    font-size: 20px;
-}
-
-.card-body {
-    background-color: #fff;
-}
-
-.form-control:focus {
-    border-color: #17a2b8;
-    box-shadow: none;
-}
-
-.form-row {
-    margin-bottom: 10px;
-}
-
-.alert-danger {
-    display: none;
-}
-
-.table td {
-    vertical-align: middle;
-}
-
-.table th {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.table th:first-child,
-.table td:first-child {
-    padding-left: 20px;
-}
-
-.table th:last-child,
-.table td:last-child {
-    padding-right: 20px;
-}
-
-#invoice-content .input-group {
-    margin-bottom: 5px;
-}
-
-#invoice-content .input-group:last-child {
-    margin-bottom: 0;
-}
-
-#addBookModal .modal-dialog {
-    max-width: 800px;
-}
-
-#addBookModal .modal-dialog .modal-body {
-    padding: 0;
-}
-
-#addBookModal .modal-dialog .modal-body table th:first-child,
-#addBookModal .modal-dialog .modal-body table td:first-child {
-    padding-left: 15px;
-}
-
-#addBookModal .modal-dialog .modal-body table th:last-child,
-#addBookModal .modal-dialog .modal-body table td:last-child {
-    padding-right: 15px;
-}
-
-#addBookModal .modal-dialog .modal-body .form-control {
-    border-radius: 0;
-}
-
-#addBookModal .modal-dialog .modal-body .form-group {
-    margin-bottom: 0;
-}
-
-#addBookModal .modal-dialog .modal-body .modal-footer {
-    border-top: 0;
-    padding: 10px 20px;
-}
-
-#addBookModal .modal-dialog .modal-body .modal-footer .btn {
-    border-radius: 0;
-}
-
-#sum-price {
-    font-size: 36px;
-    font-weight: bold;
-    color: #28a745;
-    }
-    
-    .alert {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 0;
-    }
-    
-    .card-header {
-    background-color: #007bff;
-    color: #fff;
-    }
-    
-    .card-body {
-    background-color: #f8f9fa;
-    }
-    
-    .form-group {
-    margin-bottom: 0;
-    }
-    
-    .table-info {
-    background-color: #e9ecef;
-    }
-    
-    .btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
-    }
-    
-    .btn-outline-primary:hover {
-    background-color: #007bff;
-    color: #fff;
-    }
-    
-    .btn-outline-success {
-    border-color: #28a745;
-    color: #28a745;
-    }
-    
-    .btn-outline-success:hover {
-    background-color: #28a745;
-    color: #fff;
-    }
-    
-    .form-control:focus {
-    border-color: #007bff;
-    box-shadow: none;
-    }
-    
-    input[type="text"],
-    input[type="email"] {
-    border-radius: 0;
-    border-color: #ced4da;
-    box-shadow: none;
-    }
-    
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-    border-color: #007bff;
-    box-shadow: none;
-    }
-
-
+#invoice-form label {
+        font-weight: bold;
+      }
+      
+      #invoice-form input[type="text"],
+      #invoice-form input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      
+      #invoice-form input[type="text"]:focus,
+      #invoice-form input[type="email"]:focus {
+        border-color: #4da6ff;
+        box-shadow: 0 0 8px 0 #4da6ff;
+      }
+      
+      /* Định dạng bảng chứa danh sách sách */
+      #list-book {
+        margin-top: 20px;
+        font-size: 14px;
+      }
+      
+      #list-book th {
+        font-weight: bold;
+        background-color: #f2f2f2;
+      }
+      
+      #list-book td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+      }
+      
+      #list-book tr:hover {
+        background-color: #f2f2f2;
+      }
+      
+      /* Định dạng phần tổng số tiền */
+      #sum-price {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      /* Định dạng các nút hành động */
+      .btn-outline-primary {
+        color: #007bff;
+        border-color: #007bff;
+      }
+      
+      .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+      
+      .btn-outline-success {
+        color: #28a745;
+        border-color: #28a745;
+      }
+      
+      .btn-outline-success:hover {
+        background-color: #28a745;
+        color: #fff;
+      }
+      
+      /* Định dạng alert box */
+      .alert {
+        padding: 8px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      
+      .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
