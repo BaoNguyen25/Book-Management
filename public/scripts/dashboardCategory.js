@@ -23,6 +23,24 @@ add_btn.addEventListener('click', () => {
     add_section.style.display = 'block';
 })
 
+//function
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+  
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+  
+    alert.classList.add("showAlert");
+  
+    setTimeout(() => {
+      alert.classList.remove("showAlert");
+    }, 1000);
+  }
+
 close_add_section.addEventListener('click', (event) =>{
     event.preventDefault();
     let add_section = document.getElementById("add-category");
@@ -94,19 +112,19 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add category successfully') {
                     let add_section = document.getElementById("add-category");
                     add_section.style.display = "none";
-                    alert('Add category successfully');
+                    notification("success", "thành công");
                     let fetched = data.metadata
                     await addCategoryToTable(fetched.name, fetched.products, fetched.description);
 
                     document.getElementById("add-name").value = '';
                 } else {
-                    alert('Add category failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Add category failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -135,16 +153,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit category successfully') {
                     let edit_section = document.getElementById("edit-category");
                     edit_section.style.display = "none";
-                    alert('Edit category successfully');
+                    notification("success", "thành công");
                     await editCategoryInTable(oldName, name);
                 } else {
-                    alert('Edit category failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit category failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -264,15 +282,15 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete category successfully') {
-                    alert('Delete category successfully');
+                    notification("success", "thành công");
                     await deletecategoryInTable(category_name);
                 } else {
-                    alert('Delete category failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Delete category failed')
+        notification("error", "thất bại")
     }
 }
