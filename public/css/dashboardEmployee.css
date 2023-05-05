@@ -1,92 +1,89 @@
 .search-container {
-display: flex;
-align-items: center; /* căn giữa theo chiều dọc */
-justify-content: center; /* căn giữa theo chiều ngang */
-width: 100%;
-border-radius: 30px;
+    display: flex;
+    align-items: center; /* căn giữa theo chiều dọc */
+    justify-content: center; /* căn giữa theo chiều ngang */
+    width: 100%;
+    border-radius: 30px;
 
 }
 .search-container input[type="text"] {
-width: 80%;
-padding: 10px;
-border-radius: 30px;
-border: none;
+    width: 80%;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
 
 }
-.search-container button[type="submit"] {
-width: 5%;
-background-color: #27ae60;
-color: #ffffff;
-border: none;
-padding: 10px;
-border-radius: 30px;
 
+.search-container button[type="submit"] {
+    width: 5%;
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
 }
 
 button.search:hover {
-background-color: (var(--));
+    background-color: (var(--));
 }
 
-#add-category{
-height: 300px;
+#add-employee{
+height: 800px;
 width: 500px; /* Đặt chiều rộng cho phần tử */
 margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
 padding: auto; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
-position: relative; /* Đặt vị trí để có thể sử dụng các thuộc tính top, bottom, left, right */
-top: 20%; /* Đặt vị trí theo chiều dọc */
 right: -15%;
-transform: translateY(-20%);
 background-color: #f2f2f2;
 box-shadow: 0px 0px 10px #888888; 
 
 }
 
-#add-category h2 {
+#add-employee h2 {
 text-align: left;
 float: left;
 width: 50%;
 margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
 font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
 }
-#add-category form label {
+#add-employee form label {
 text-align: justify;
 }
 .form-container {
 clear: both;
 }
-#add-category form input {
+#add-employee form input {
 width: 100%;
 margin-bottom: 10px;
 }
 
-#add-category form button {
+#add-employee form button {
 display: block;
 margin: 10px auto;
 }
-#add-category form input[type="text"], #add-category form button[type="submit"] {
+#add-employee form input[type="text"], #add-employee form button[type="submit"] {
 padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
 border-radius: 5px; /* Đặt bo góc cho input và button */
 border: none; /* Xóa viền cho input và button */
 font-size: 16px; /* Đặt cỡ chữ cho input và button */
 }
 
-#add-category form button[type="submit"] {
+#add-employee form button[type="submit"] {
 background-color: #4CAF50; /* Đặt màu nền cho button */
 color: white; /* Đặt màu chữ cho button */
 cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
 }
 
-#add-category form button[type="submit"]:hover {
+#add-employee form button[type="submit"]:hover {
 background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
 }
 
-#add-category form label {
+#add-employee form label {
 display: block; /* Hiển thị label theo dạng khối */
 /* Đặt khoảng cách dưới mỗi label */
 font-size: 16px; /* Đặt cỡ chữ cho label */
 }
 
-.addcategory {
+.addemployee {
 position: fixed;
 top: 50%;
 left: 50%;
@@ -98,7 +95,7 @@ border-radius: 10px;
 #close-add-btn {
 float: right;
 }
-#add-category form button[type="submit"] {
+#add-employee form button[type="submit"] {
 float: right;
 margin-right: 10px;
 }
@@ -201,12 +198,12 @@ color: #fff;
 background-color: var(--main-text-color);
 margin-bottom: 16px;
 }
-#category-table td:nth-child(5) {
+#employee-table td:nth-child(5) {
 width: 100px;
 }
 
-#edit-category {
-height: 300px;
+#edit-employee {
+height: 200px;
 width: 500px; /* Đặt chiều rộng cho phần tử */
 margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
 padding: 20px; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
@@ -219,25 +216,26 @@ box-shadow: 0px 0px 10px #888888;
 
 }
 
-#edit-category  h2 {
+#edit-employee  h2 {
 text-align: left;
 float: left;
 width: 50%;
 margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
 font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
 }
-#edit-category form label {
+#edit-employee form label {
 text-align: justify;
 }
 .form-container {
 clear: both;
+
 }
-#edit-category form input {
+#edit-employee form input {
 width: 100%;
 margin-bottom: 10px;
 }
 
-#edit-category form input[type="text"], #edit-category form button[type="submit"] {
+#edit-employee form input[type="text"], #edit-employee form button[type="submit"] {
 padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
 border-radius: 5px; /* Đặt bo góc cho input và button */
 border: none; /* Xóa viền cho input và button */
@@ -252,23 +250,23 @@ justify-content: flex-end;
 margin-left: 10px;
 }
 
-#edit-category form button[type="submit"] {
+#edit-employee form button[type="submit"] {
 background-color: #4CAF50; /* Đặt màu nền cho button */
 color: white; /* Đặt màu chữ cho button */
 cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
 }
 
-#edit-category form button[type="submit"]:hover {
+#edit-employee form button[type="submit"]:hover {
 background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
 }
 
-#edit-category  form label {
+#edit-employee  form label {
 display: block; /* Hiển thị label theo dạng khối */
 margin-bottom: 10px; /* Đặt khoảng cách dưới mỗi label */
 font-size: 16px; /* Đặt cỡ chữ cho label */
 }
 
-.edit-category  {
+.edit-employee  {
 position: fixed;
 top: 50%;
 left: 50%;
