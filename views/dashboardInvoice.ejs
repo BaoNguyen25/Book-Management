@@ -12,109 +12,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/css/fileinput.min.css" media="all"
         rel="stylesheet" type="text/css" />
-    <style>
-        th {
-            position: sticky;
-            top: 0;
-            z-index: 1;
-
-        }
-
-        .modal-body {
-            padding-top: 0;
-        }
-
-        #invoice-table {
-            max-height: 36vh;
-            overflow-y: auto;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/dashboardInvoice.css" />
     <title>Lập hóa đơn</title>
 </head>
 
 <body>
 
     <div class="wrapper">
-        <!-- Sidebar  -->
-        <%- include('partials/navbar') %>
-        <!-- <nav id="sidebar">
-            <div class="sidebar-header">
-                <div id="header" style='color:black'>
-                    <a href="./home.html">
-                        <img src="./assets/images/logo.png" id="logo-img" alt=""></img>
-                    </a>
-                    <h3 id="logo-title">BookStore Manager</h3>
-                </div>
-            </div>
+       <!-- Sidebar -->
+       <%- include('partials/navbar') %>
+       <!-- /#sidebar-wrapper -->
 
-            <ul class="list-unstyled components">
-                <li class="{{#if active.home}}active{{/if}}">
-                    <a href="./home.html">
-                        <i class="fas fa-chart-pie" aria-hidden="true"></i>
-                        Trang chính
-                    </a>
-                </li>
-                <li class="{{#if active.bookLookUp}}active{{/if}}">
-                    <a href="./bookLookUp.html">
-                        <i class="fas fa-search"></i>
-                        Tra cứu Sách
-                    </a>
-                </li>
-
-                <li class="{{#if active.invoice}}active{{/if}}">
-                    <a href="./invoice.html">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                        Lập hóa đơn
-                    </a>
-                </li>
-
-                <li class="{{#if active.payment}}active{{/if}}">
-                    <a href="./payment.html">
-                        <i class="fas fa-money-bill"></i>
-                        Phiếu thu tiền nợ
-                    </a>
-                </li>
-                <li class="{{#if active.bookImport}}active{{/if}}">
-                    <a href="./bookImport.html">
-                        <i class="fas fa-upload"></i>
-                        Lập phiếu nhập
-                    </a>
-                </li>
-                <li class="{{#if active.report}}active{{/if}}">
-                    <a href="./debtReport.html">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo công nợ
-                    </a>
-                </li>
-                <li class="{{#if active.report}}active{{/if}}">
-                    <a href="./inventoryReport.html">
-                        <i class="fas fa-chart-bar"></i>
-                        Báo cáo tồn kho
-                    </a>
-                </li>
-                <li class="{{#if active.regulation}}active{{/if}}">
-                    <a href="./regulation.html">
-                        <i class="fas fa-tasks"></i>
-                        Quy định
-                    </a>
-                </li>
-                <li class="{{#if active.promotion}}active{{/if}}">
-                    <a href="./promotion.html">
-                        <i class="fas fa-cart-arrow-down"></i>
-                        Thiết lập khuyến mãi
-                    </a>
-                </li>
-                <li>
-                    <a href="./signout.html">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Đăng xuất
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
         <!-- Page Content  -->
-        <div id="content">
-            <form id="invoice-form" method="post">
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>Huy hà
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Thông Tin</a></li>
+                                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        <!-- <div id="content">
+             <form id="invoice-form" method="post">
                 <div class="row p-2">
                     <div class="col-md-9">
                         <div class="card text-bg-light mb-3" style="max-width: 48rem;">
@@ -158,13 +101,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="row py-5">
-                            <div class="col-md-12">
-
-                                <img src="./assets/images/bill.png" alt="" srcset="" height="160px">
-                            </div>
-
-                        </div>
+                       
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
@@ -333,8 +270,8 @@
                 </div>
 
             </div>
-        </div>
-    </div>
+        </div> -->
+    </div> 
     <script src="/scripts/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboardInvoice.js"></script>
 </body>

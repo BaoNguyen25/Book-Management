@@ -38,17 +38,17 @@
 }
 
 .card-header {
-    background-color: #17a2b8;
+    background-color: #27ae60;
     color: #fff;
     font-size: 20px;
 }
 
 .card-body {
-    background-color: #fff;
+    background-color: #27ae60;
 }
 
 .form-control:focus {
-    border-color: #17a2b8;
+    border-color: #27ae60;
     box-shadow: none;
 }
 
@@ -135,7 +135,7 @@
     }
     
     .card-header {
-    background-color: #007bff;
+    background-color: #27ae60;
     color: #fff;
     }
     
@@ -152,12 +152,12 @@
     }
     
     .btn-outline-primary {
-    border-color: #007bff;
-    color: #007bff;
+    border-color: #27ae60;
+    color: #27ae60;
     }
     
     .btn-outline-primary:hover {
-    background-color: #007bff;
+    background-color: #27ae60;
     color: #fff;
     }
     
@@ -172,7 +172,7 @@
     }
     
     .form-control:focus {
-    border-color: #007bff;
+    border-color: #27ae60;
     box-shadow: none;
     }
     
@@ -185,7 +185,7 @@
     
     input[type="text"]:focus,
     input[type="email"]:focus {
-    border-color: #007bff;
+    border-color: #27ae60;
     box-shadow: none;
     }
 
