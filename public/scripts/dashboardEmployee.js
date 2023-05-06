@@ -148,11 +148,23 @@ submit_add_btn.addEventListener('click', async (event) => {
 
 submit_edit_btn.addEventListener('click', async (event) => {
     event.preventDefault();
+
+    let edit_id = document.getElementById("edit-id");
+    let id = edit_id.value;
     let edit_name = document.getElementById("edit-name");
     let name = edit_name.value;
-    let oldName = edit_name.getAttribute("old-name");
-    let edit_description = document.getElementById("edit-description");
-    let description = edit_description.value;
+    let edit_gender = document.getElementById("edit-gender");
+    let gender = edit_gender.value;
+    let edit_position = document.getElementById("edit-position");
+    let position = edit_position.value;
+    let edit_phone = document.getElementById("edit-phone");
+    let phone = edit_phone.value;
+    let edit_address = document.getElementById("edit-address");
+    let address = edit_address.value;
+    let edit_cardid = document.getElementById("edit-cardid");
+    let cardid = edit_cardid.value;
+    let edit_email = document.getElementById("edit-email");
+    let email = edit_email.value;
 
     try {
         let data = await fetch('/employee/edit', {
@@ -161,9 +173,14 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    oldName: oldName,
+                    id: id,
                     name: name,
-                    description: description
+                    email: email,
+                    gender: gender,
+                    role: position,
+                    phone: phone,
+                    address: address,
+                    identity: cardid
                 })
             })
             .then(response => response.json())
@@ -280,17 +297,34 @@ const deleteEmployeeInTable = async (email) => {
 async function handleEditButtonEvent(event) {
     event.preventDefault();
     let btn = event.currentTarget;
-    let employee_id = btn.id.split('-')[2];
+    let id = btn.id.split('-')[2];
 
     try {
-        let employee_name = document.getElementById(`name-${employee_id}`).innerHTML;
-        let employee_description = document.getElementById(`description-${employee_id}`).innerHTML;
+        let employee_id = document.getElementById(`id-${id}`).innerHTML;
+        let employee_name = document.getElementById(`name-${id}`).innerHTML;
+        let employee_gender = document.getElementById(`gender-${id}`).innerHTML;
+        let employee_position = document.getElementById(`position-${id}`).innerHTML;
+        let employee_phone = document.getElementById(`phone-${id}`).innerHTML;
+        let employee_address = document.getElementById(`address-${id}`).innerHTML;
+        let employee_cardid = document.getElementById(`cardid-${id}`).innerHTML;
+        let employee_email = document.getElementById(`email-${id}`).innerHTML;
 
+        let edit_id = document.getElementById("edit-id");
+        edit_id.value = employee_id;
         let edit_name = document.getElementById("edit-name");
-        edit_name.value = employee_name;    
-        edit_name.setAttribute("old-name", employee_name);
-        let edit_description = document.getElementById("edit-description");
-        edit_description.value = employee_description;
+        edit_name.value = employee_name;
+        let edit_gender = document.getElementById("edit-gender");
+        edit_gender.value = employee_gender;
+        let edit_position = document.getElementById("edit-position");
+        edit_position.value = employee_position;
+        let edit_phone = document.getElementById("edit-phone");
+        edit_phone.value = employee_phone;
+        let edit_address = document.getElementById("edit-address");
+        edit_address.value = employee_address;
+        let edit_cardid = document.getElementById("edit-cardid");
+        edit_cardid.value = employee_cardid;
+        let edit_email = document.getElementById("edit-email");
+        edit_email.value = employee_email;
 
         let edit_section = document.getElementById("edit-employee");
         edit_section.style.display ='block';
