@@ -4,7 +4,7 @@ const { User } = require('../models/user.model');
 
 class EmployeeService {
     static getEmployeeList = async () => {
-        return await Employee.find().catch((err) => { return null; });
+        return await User.find().catch((err) => { return null; });
     }
 
     static addEmployee = async (id, name, gender, role, phone, address, identity, email) => {
@@ -20,8 +20,8 @@ class EmployeeService {
         }).catch((err) => { return null; });
     }
 
-    static deleteEmployee = async (name) => {
-        return await User.findOneAndDelete({ name: name }).catch((err) => { return null; });
+    static deleteEmployee = async (email) => {
+        return await User.findOneAndDelete({ email: email }).catch((err) => { return null; });
     }
 
     static searchEmployee = async (content) => {

@@ -4,10 +4,10 @@ const { addEmployee, deleteEmployee, searchEmployee } = require('../services/emp
 
 class EmployeeController {
     addEmployee = async (req, res, next) => {
-        const {id, name, gender, position, phone, address, cardid, email} = req.body;
+        const {id, name, gender, role, phone, address, identity, email} = req.body;
 
-        const employee = await addEmployee(id, name, gender, position, phone, address, cardid, email);
-
+        const employee = await addEmployee(id, name, gender, role, phone, address, identity, email);
+        
         return employee ? res.status(200).json({
             message: 'Add employee successfully',
             metadata: employee
@@ -20,9 +20,9 @@ class EmployeeController {
     }
 
     deleteEmployee = async (req, res, next) => {
-        const { name } = req.body;
+        const { email } = req.body;
 
-        const employee = await deleteEmployee(name);
+        const employee = await deleteEmployee(email);
 
         return employee ? res.status(200).json({
             message: 'Delete employee successfully',
