@@ -102,6 +102,7 @@ const editImage = async (image, fileName) => {
 
             resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F
             ${fileName}?alt=media`);
+            
         });
     } catch (error) {
         console.log(error);
