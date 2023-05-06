@@ -17,8 +17,6 @@ const firebaseSDK = {
     client_x509_cert_url: process.env.client_x509_cert_url,
 }
 
-const serviceAccount = require("../../admin_sdk.json");
-
 admin.initializeApp({   
   credential: admin.credential.cert(firebaseSDK),
     storageBucket: "tkpm-hcmus-385715.appspot.com",

@@ -6,7 +6,7 @@ const fs = require('fs');
 
 class BookController {
     addBook = async (req, res) => {
-        const { name, category, author, quantity, price } = req.body;
+        let { name, category, author, quantity, price } = req.body;
         const file = req.file;
 
         if (!name || !category || !author || !quantity || !price || !file) {
@@ -14,6 +14,9 @@ class BookController {
                 message: 'Invalid input'
             });
         }
+
+        quantity = parseInt(quantity) < 0 ? Math.abs(parseInt(quantity)) : parseInt(quantity);
+        price = parseInt(price) < 0 ? Math.abs(parseInt(price)) : parseInt(price);
 
         const book = await addBook(name, category, author, quantity, file, price);
 
@@ -42,11 +45,22 @@ class BookController {
 
     editBook = async (req, res, next) => {
         let { oldName, name, category, author, quantity, price } = req.body;
+        let file = req.file;
 
-        quantity = parseInt(quantity) < 0 ? undefined : parseInt(quantity);
-        price = parseInt(price) < 0 ? undefined : parseInt(price);
+        if (req.user.role !== 'Admin' && quantity && price) {
+            return res.status(403).json({
+                message: 'Permission denied'
+            });
+        }
 
-        const book = await editBook(oldName, name, category, author, quantity, price);
+        quantity = parseInt(quantity) < 0 ? Math.abs(parseInt(quantity)) : parseInt(quantity);
+        price = parseInt(price) < 0 ? Math.abs(parseInt(price)) : parseInt(price);
+
+        const book = await editBook(oldName, name, category, author, quantity, file, price);
+
+        if (file) {
+            fs.unlinkSync(file.path);
+        }
 
         return book ? res.status(200).json({
             message: 'Edit book successfully',
