@@ -12,7 +12,6 @@ class InvoiceService {
                 return new InvoiceDetailModel({
                     bookName: book.name,
                     quantity: book.quantity,
-                    price: book.price,
                 });
             });
     

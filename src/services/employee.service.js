@@ -25,8 +25,7 @@ class EmployeeService {
     }
 
     static searchEmployee = async (content) => {
-        return await User.find({ name: { $regex: content, $options: 'i' } }).sort({ products: -1 })
-        .catch((err) => { return null; });
+        return User.find({ name: { $regex: content, $options: 'i' } }).catch((err) => { return null });
     }
 
     static editEmployee = async (id, name, gender, role, phone, address, identity, email) => {
