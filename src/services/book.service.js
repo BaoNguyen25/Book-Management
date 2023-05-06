@@ -4,7 +4,7 @@ const { Book } = require('../models/book.model');
 const { Author } = require('../models/author.model');
 const { Category } = require('../models/category.model');
 
-const { uploadImage, deleteImage } = require('../utils/uploadImageFirebase')
+const { uploadImage, deleteImage, editImage } = require('../utils/uploadImageFirebase')
 
 const fs = require('fs');
 
@@ -20,16 +20,16 @@ class AccessService {
 
     static addBook = async (name, category, author, quantity, image, price) => {
         try {
-            const driveLink = await uploadImage(image, name);
+            const imageUrl = await uploadImage(image, name);
 
-            if (!driveLink) throw new Error('Upload image failed');
+            if (!imageUrl) throw new Error('Upload image failed');
 
             const book = await Book.create({
                 name: name,
                 category: category,
                 author: author,
                 quantity: quantity,
-                image: driveLink,
+                image: imageUrl,
                 price: price
             });
     
@@ -57,7 +57,7 @@ class AccessService {
         });
     };
 
-    static editBook = async (oldName, name, category, author, quantity, price) => {
+    static editBook = async (oldName, name, category, author, quantity, image, price) => {
         let updateInfo = {};
 
         const fieldsToUpdate = [
@@ -65,6 +65,7 @@ class AccessService {
             { key: 'category', value: category },
             { key: 'author', value: author },
             { key: 'quantity', value: quantity },
+            { key: 'image', value: image },
             { key: 'price', value: price },
         ];
         
@@ -78,6 +79,14 @@ class AccessService {
             const book = await Book.findOne({ name: oldName });
             const curAuthor = book.author;
             const curCategory = book.category;
+
+            if (image) {
+                const updateLink = await editImage(image, oldName);
+
+                if (!updateLink) throw new Error('Upload image failed');
+
+                updateInfo['image'] = updateLink;
+            }
 
             const editedBook = await Book.findOneAndUpdate({ name: oldName }, updateInfo, { new: true });
             
@@ -105,23 +114,25 @@ class AccessService {
     }
 
     static deleteBook = async (name) => {
-        const book = await Book.findOne({ name: name }).catch((error) => {
+        try {
+            const book = await Book.findOne({ name: name }).catch((error) => {
+                console.log(error);
+                return null;
+            });
+    
+            if (!book) return null;
+    
+            const imageUrl = book.image;
+    
+            const fileName = imageUrl.split('%2F')[1].split('?')[0].trim();
+                        
+            await deleteImage(fileName);
+    
+            return await Book.findOneAndDelete({ name: name })
+        } catch (error) {
             console.log(error);
             return null;
-        });
-
-        if (!book) return null;
-
-        const imageUrl = book.image;
-
-        const fileName = imageUrl.split('%2F')[1].split('?')[0];
-        
-        await deleteImage(fileName);
-
-        return await Book.findOneAndDelete({ name: name }).catch((error) => {
-            console.log(error);
-            return null;
-        });
+        }
     }
 }
 

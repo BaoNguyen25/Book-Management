@@ -54,6 +54,7 @@
 //     uploadImage,
 // };
 
+const { error } = require('console');
 const { storage } = require('../config/config.firebase');
 
 const fs = require('fs');
@@ -68,7 +69,8 @@ const uploadImage = async (image, fileName) => {
         });
 
         return await new Promise((resolve, reject) => {
-            resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F${fileName}?alt=media`);
+            resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F
+            ${fileName}?alt=media`);
         });
     } catch (error) {
         console.log(error);
@@ -81,10 +83,35 @@ const deleteImage = async (fileName) => {
         await storage.bucket().file(`images/${fileName}`).delete();
     } catch (error) {
         console.log(error);
+        return null;
     }
 };
+
+const editImage = async (image, fileName) => {
+    try {
+        const file = storage.bucket().file(`images/${fileName}`);
+
+        return await new Promise(async (resolve, reject) => {
+            const imageContent = fs.readFileSync(image.path);
+            
+            await file.save(imageContent, {
+                metadata: {
+                    contentType: image.mimetype,
+                },
+            });
+
+            resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F
+            ${fileName}?alt=media`);
+        });
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+};
+
 
 module.exports = {
     uploadImage,
     deleteImage,
+    editImage,
 };

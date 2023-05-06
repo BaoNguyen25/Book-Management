@@ -6,7 +6,7 @@ const { upload } = require('../../config/config.multer');
 
 router.post('/add', upload.single('image'), addBook);
 
-router.post('/edit', editBook);
+router.post('/edit', upload.single('image') ,editBook);
 
 router.post('/delete', deleteBook);
 

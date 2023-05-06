@@ -138,23 +138,25 @@ submit_edit_btn.addEventListener('click', async (event) => {
     let author = edit_author.value;
     let edit_number = document.getElementById("edit-number");
     let number = edit_number.value;
+    let image = document.getElementById("edit-image");
     let edit_price = document.getElementById("edit-price");
     let price = edit_price.value;
+
+    const formData = new FormData();
+    formData.append('oldName', oldName);
+    formData.append('name', name);
+    formData.append('category', category);
+    formData.append('author', author);
+    formData.append('quantity', number);
+    formData.append('image', image.files[0]);
+    formData.append('price', price);
 
     try {
         let data = await fetch('/book/edit', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    oldName: oldName,
-                    name: name,
-                    category: category,
-                    author: author,
-                    quantity: number,
-                    price: price,
-                })
+            },
+            body: formData
             })
             .then(response => response.json())
             .then(async data => {
