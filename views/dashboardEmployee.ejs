@@ -132,20 +132,23 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>002211</td>
-                        <td>Nguyễn Văn A</td>
-                        <td>Nam</td>
-                        <td>Nhân viên</td>
-                        <td>0123456789</td>
-                        <td>123 Đường ABC</td>
-                        <td>20001111</td>
-                        <td>nva@gmail.com</td>
-                        <td class="button-column" colspan="2">
-                          <button class="edit-button" id="edit-btn-">Chỉnh sửa</button>
-                          <button class="delete-button" id="delete-btn-">Xóa</button>
-                        </td>
-                      </tr>
+                      <% for (let i = 0; i < employeeList.length; i++) { %>
+                        <tr>
+                            <td id="id-<%= i %>"><%= employeeList[i].id %></td>
+                            <td id="name-<%= i %>"><%= employeeList[i].name %></td>
+                            <td id="gender-<%= i %>"><%= employeeList[i].gender %></td>
+                            <td id="position-<%= i %>"><%= employeeList[i].role %></td>
+                            <td id="phone-<%= i %>"><%= employeeList[i].phone %></td>
+                            <td id="address-<%= i %>"><%= employeeList[i].address %></td>
+                            <td id="cardid-<%= i %>"><%= employeeList[i].identity %></td>
+                            <td id="email-<%= i %>"><%= employeeList[i].email %></td>
+
+                            <td class="button-column" colspan="2">
+                              <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
+                              <button class="delete-button" id="delete-btn-<%= i%>">Xóa</button>
+                            </td>
+                        </tr>
+                      <% } %>
                     </tbody>
                   </table>
                  
