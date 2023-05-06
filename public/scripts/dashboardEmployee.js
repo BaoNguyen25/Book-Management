@@ -92,7 +92,6 @@ search_btn.addEventListener('click', async (event) => {
 
 submit_add_btn.addEventListener('click', async (event) => {
     event.preventDefault();
-    let id = document.getElementById("add-id").value;
     let name = document.getElementById("add-name").value;
     let gender = document.getElementById("add-gender").value;
     let position = document.getElementById("add-position").value;
@@ -108,7 +107,6 @@ submit_add_btn.addEventListener('click', async (event) => {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: id,
                     name: name,
                     email: email,
                     gender: gender,
@@ -125,9 +123,7 @@ submit_add_btn.addEventListener('click', async (event) => {
                     add_section.style.display = "none";
                     notification("success", "Thành công");;
                     let fetched = data.metadata
-                    await addEmployeeToTable(fetched.id, fetched.name, fetched.gender, fetched.role, fetched.phone, fetched.address, fetched.identity, fetched.email);
-
-                    document.getElementById("add-id").value = '';
+                    await addEmployeeToTable(fetched.name, fetched.gender, fetched.role, fetched.phone, fetched.address, fetched.identity, fetched.email);
                     document.getElementById("add-name").value = '';
                     document.getElementById("add-gender").value = '';
                     document.getElementById("add-position").value = '';
@@ -149,8 +145,6 @@ submit_add_btn.addEventListener('click', async (event) => {
 submit_edit_btn.addEventListener('click', async (event) => {
     event.preventDefault();
 
-    let edit_id = document.getElementById("edit-id");
-    let id = edit_id.value;
     let edit_name = document.getElementById("edit-name");
     let name = edit_name.value;
     let edit_gender = document.getElementById("edit-gender");
@@ -174,7 +168,6 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    id: id,
                     name: name,
                     email: email,
                     gender: gender,
@@ -190,7 +183,7 @@ submit_edit_btn.addEventListener('click', async (event) => {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
                     notification("success", "Thành công");;
-                    await editEmployeeInTable(id, name, email, gender, position, phone, address, cardid);
+                    await editEmployeeInTable(name, email, gender, position, phone, address, cardid);
                 } else {
                     notification("error", "Thất bại");
                 }
@@ -211,7 +204,7 @@ const clearTableBody = async () => {
     }
 }
 
-const addEmployeeToTable = async (id, name, gender, position, phone, address, cardid, email) => {
+const addEmployeeToTable = async (name, gender, position, phone, address, cardid, email) => {
     let table = document.getElementById("employee-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let size = table.rows.length;
@@ -224,31 +217,27 @@ const addEmployeeToTable = async (id, name, gender, position, phone, address, ca
     let cell6 = row.insertCell(5);
     let cell7 = row.insertCell(6);
     let cell8 = row.insertCell(7);
-    let cell9 = row.insertCell(8);
 
-    cell1.innerHTML = id ?? "";
-    cell1.id = `id-${size - 1}`;
+    cell1.innerHTML = name ?? "";
+    cell1.id = `name-${size - 1}`;
 
-    cell2.innerHTML = name ?? "";
-    cell2.id = `name-${size - 1}`;
+    cell2.innerHTML = gender ?? "";
+    cell2.id = `gender-${size - 1}`;
 
-    cell3.innerHTML = gender ?? "";
-    cell3.id = `gender-${size - 1}`;
-
-    cell4.innerHTML = position ?? "";
-    cell4.id = `position-${size - 1}`;
+    cell3.innerHTML = position ?? "";
+    cell3.id = `position-${size - 1}`;
     
-    cell5.innerHTML = phone ?? "";
-    cell5.id = `phone-${size - 1}`;
+    cell4.innerHTML = phone ?? "";
+    cell4.id = `phone-${size - 1}`;
 
-    cell6.innerHTML = address ?? "";
-    cell6.id = `address-${size - 1}`;
+    cell5.innerHTML = address ?? "";
+    cell5.id = `address-${size - 1}`;
 
-    cell7.innerHTML = cardid ?? "";
-    cell7.id = `cardid-${size - 1}`;
+    cell6.innerHTML = cardid ?? "";
+    cell6.id = `cardid-${size - 1}`;
 
-    cell8.innerHTML = email ?? "";
-    cell8.id = `email-${size - 1}`;
+    cell7.innerHTML = email ?? "";
+    cell7.id = `email-${size - 1}`;
 
     let edit_btn = document.createElement("button");
     edit_btn.setAttribute("class", "edit-button");
@@ -268,22 +257,21 @@ const addEmployeeToTable = async (id, name, gender, position, phone, address, ca
     btn_column.appendChild(edit_btn);
     btn_column.appendChild(delete_btn);
 
-    cell9.appendChild(btn_column);
+    cell8.appendChild(btn_column);
 }
 
-const editEmployeeInTable = async (id, name, email, gender, role, phone, address, identity) => {
+const editEmployeeInTable = async (name, email, gender, role, phone, address, identity) => {
     let table = document.getElementById("employee-table");
     let table_body = table.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < table_body.rows.length; i++) {
-        if (table_body.rows[i].cells[7].innerHTML == email) {
-            table_body.rows[i].cells[0].innerHTML = id;
-            table_body.rows[i].cells[1].innerHTML = name;
-            table_body.rows[i].cells[2].innerHTML = gender;
-            table_body.rows[i].cells[3].innerHTML = role;
-            table_body.rows[i].cells[4].innerHTML = phone;
-            table_body.rows[i].cells[5].innerHTML = address;
-            table_body.rows[i].cells[6].innerHTML = identity;
+        if (table_body.rows[i].cells[6].innerHTML == email) {
+            table_body.rows[i].cells[0].innerHTML = name;
+            table_body.rows[i].cells[1].innerHTML = gender;
+            table_body.rows[i].cells[2].innerHTML = role;
+            table_body.rows[i].cells[3].innerHTML = phone;
+            table_body.rows[i].cells[4].innerHTML = address;
+            table_body.rows[i].cells[5].innerHTML = identity;
             return
         }
     }
@@ -294,7 +282,7 @@ const deleteEmployeeInTable = async (email) => {
     let table_body = table.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < table_body.rows.length; i++) {
-        if (table_body.rows[i].cells[7].innerHTML == email) {
+        if (table_body.rows[i].cells[6].innerHTML == email) {
             table_body.deleteRow(i);
             return;
         }
@@ -307,7 +295,6 @@ async function handleEditButtonEvent(event) {
     let id = btn.id.split('-')[2];
 
     try {
-        let employee_id = document.getElementById(`id-${id}`).innerHTML;
         let employee_name = document.getElementById(`name-${id}`).innerHTML;
         let employee_gender = document.getElementById(`gender-${id}`).innerHTML;
         let employee_position = document.getElementById(`position-${id}`).innerHTML;
@@ -316,8 +303,7 @@ async function handleEditButtonEvent(event) {
         let employee_cardid = document.getElementById(`cardid-${id}`).innerHTML;
         let employee_email = document.getElementById(`email-${id}`).innerHTML;
 
-        let edit_id = document.getElementById("edit-id");
-        edit_id.value = employee_id;
+        
         let edit_name = document.getElementById("edit-name");
         edit_name.value = employee_name;
         let edit_gender = document.getElementById("edit-gender");

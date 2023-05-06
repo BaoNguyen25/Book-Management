@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const { Schema, Types, Model } = mongoose;
 
-const invoiceDetailSchema = new Schema({
+const InvoiceDetailSchema = new Schema({
     bookName: {
         type: String,
         required: true
@@ -14,9 +14,9 @@ const invoiceDetailSchema = new Schema({
     },
 });
 
-const invoiceDetailModel = mongoose.model('invoiceDetail', invoiceDetailSchema);
+const InvoiceDetailModel = mongoose.model('invoiceDetail', InvoiceDetailSchema);
 
-const invoiceSchema = new Schema({
+const InvoiceSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -27,7 +27,7 @@ const invoiceSchema = new Schema({
         required: true
     },
     detail: {
-        type: [invoiceDetailSchema],
+        type: [InvoiceDetailSchema],
     },
     date: {
         type: Date,
@@ -37,11 +37,11 @@ const invoiceSchema = new Schema({
     timestamps: true
 });
 
-const invoiceModel = mongoose.model('invoice', invoiceSchema);
+const InvoiceModel = mongoose.model('invoice', InvoiceSchema);
 
 module.exports = {
-    invoiceModel,
-    invoiceDetailModel,
-    invoiceDetailSchema,
-    invoiceSchema,
+    InvoiceModel,
+    InvoiceDetailModel,
+    InvoiceDetailSchema,
+    InvoiceSchema,
 };

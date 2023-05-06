@@ -20,7 +20,7 @@ function notification(status, msg) {
   
     setTimeout(() => {
       alert.classList.remove("showAlert");
-    }, 1000);
+    }, 3000);
   }
 //others
 let add_btn = document.getElementById("add-btn");
@@ -37,13 +37,13 @@ let detail_edit_btn = document.getElementById("detail-edit-btn");
 let navbar_highlight = document.getElementById("receipt-link").classList.add("active");
 
 add_btn.addEventListener('click', () => {
-    let add_section = document.getElementById("add-import");
+    let add_section = document.getElementById("add-invoice");
     add_section.style.display = 'block';
 })
 
 close_add_section.addEventListener('click', (event) =>{
     event.preventDefault();
-    let add_section = document.getElementById("add-import");
+    let add_section = document.getElementById("add-invoice");
     add_section.style.display = "none";
 })
 
@@ -92,7 +92,7 @@ delete_btn.forEach((btn) => {
 close_edit_section.addEventListener('click', (event) => {
     event.preventDefault();
     clearTableBody("edit-table");
-    let edit_section = document.getElementById("edit-import");
+    let edit_section = document.getElementById("edit-invoice");
     edit_section.style.display = "none";
 })
 
@@ -100,7 +100,7 @@ search_btn.addEventListener('click', async (event) => {
     event.preventDefault();
 
     let content = document.getElementById("search-content").value;
-    let data = await fetch('/import/search', {
+    let data = await fetch('/invoice/search', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -111,14 +111,16 @@ search_btn.addEventListener('click', async (event) => {
             })
             .then(response => response.json())
             .then(async data => {
-                if (data.message == notification("success", "thành công")) {
-                    let importList = data.metadata;
+                if (data.message == 'Search invoice successfully') {
+                    let invoiceList = data.metadata;
                     
-                    await clearTableBody("import-table");
+                    await clearTableBody("invoice-table");
 
-                    for (let i = 0; i < importList.length; i++) {
-                        await addImportToTable(importList[i]);
+                    for (let i = 0; i < invoiceList.length; i++) {
+                        await addInvoiceToTable(invoiceList[i]);
                     }   
+
+                    notification("success", "thành công");
                 } else {
                     notification("success", "thất bại");
                 }
@@ -128,12 +130,12 @@ search_btn.addEventListener('click', async (event) => {
 
 submit_add_btn.addEventListener('click', async (event) => {
     event.preventDefault();
-    let importName  = document.getElementById("add-import-name").value;
+    let invoiceName  = document.getElementById("add-invoice-name").value;
     let table = document.getElementById("add-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let rows = table_body.getElementsByTagName("tr");
     let bookDetail = [];
-    let importDate = document.getElementById("add-import-date").value;
+    let invoiceDate = document.getElementById("add-invoice-date").value;
 
     for (let i = 0; i < rows.length; i++) {
         let data = {};
@@ -144,49 +146,49 @@ submit_add_btn.addEventListener('click', async (event) => {
     }
 
     try {
-        let data = await fetch('/import/add', {
+        let data = await fetch('/invoice/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     bookDetail: bookDetail,
-                    name: importName,
-                    date: importDate
+                    name: invoiceName,
+                    date: invoiceDate
                     })
                 })
                 .then(response => response.json())
                 .then(async data => {
-                    if (data.message == 'Add import successfully') {
-                        let add_section = document.getElementById("add-import");
+                    if (data.message == 'Add invoice successfully') {
+                        let add_section = document.getElementById("add-invoice");
                         add_section.style.display = "none";
-                        alert('Add import successfully');
+                        notification("success", "thành công");
                         let fetched = data.metadata;
-                        await addImportToTable(fetched);
+                        await addInvoiceToTable(fetched);
 
                         document.getElementById("add-book-quantity").value = '';
-                        document.getElementById("add-import-date").value = '';
-                        document.getElementById("add-import-name").value = '';
+                        document.getElementById("add-invoice-date").value = '';
+                        document.getElementById("add-invoice-name").value = '';
                     } else {
-                        alert('Add import failed');
+                        notification("error", "thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        alert('Add import failed')
+        notification("error", "thất bại")
     }
 });
 
 submit_edit_btn.addEventListener('click', async (event) => {
     event.preventDefault();
-    let importName  = document.getElementById("edit-import-name").value;
-    let oldName = document.getElementById("edit-import-name").getAttribute("old-name");
+    let invoiceName  = document.getElementById("edit-invoice-name").value;
+    let oldName = document.getElementById("edit-invoice-name").getAttribute("old-name");
     let table = document.getElementById("edit-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let rows = table_body.getElementsByTagName("tr");
     let bookDetail = [];
-    let importDate = document.getElementById("edit-import-date").value;
+    let invoiceDate = document.getElementById("edit-invoice-date").value;
 
     for (let i = 0; i < rows.length; i++) {
         let data = {};
@@ -196,39 +198,39 @@ submit_edit_btn.addEventListener('click', async (event) => {
         bookDetail.push(data);
     }
 
-    if (importName == '' || importDate == '' || bookDetail.length == 0) {
+    if (invoiceName == '' || invoiceDate == '' || bookDetail.length == 0) {
         throw new Error('Please fill in all the fields');
     }
 
     try {
-        let data = await fetch('/import/edit', {
+        let data = await fetch('/invoice/edit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     oldName: oldName,
-                    name: importName,
+                    name: invoiceName,
                     bookDetail: bookDetail,
-                    date: importDate    
+                    date: invoiceDate    
                 })
             })
             .then(response => response.json())
             .then(async data => {
-                if (data.message == 'Edit import successfully') {
-                    let edit_section = document.getElementById("edit-import");
+                if (data.message == 'Edit invoice successfully') {
+                    let edit_section = document.getElementById("edit-invoice");
                     edit_section.style.display = "none";
-                    alert('Edit import successfully');
+                    notification("success", "thành công");
                     let edited = data.metadata;
-                    await editImportInTable(oldName, edited);
+                    await editInvoiceInTable(oldName, edited);
                 } else {
-                    alert('Edit import failed');
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit import failed')
+        notification("error", "thất bại")
     }
 });
 
@@ -306,8 +308,8 @@ const editDetailToTable = async (name, quantity) => {
     cell3.appendChild(delete_btn);
 };
 
-const addImportToTable = async (data) => {
-    let table = document.getElementById("import-table");
+const addInvoiceToTable = async (data) => {
+    let table = document.getElementById("invoice-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let size = table.rows.length;
     let row = table_body.insertRow(-1);
@@ -318,11 +320,12 @@ const addImportToTable = async (data) => {
     let cell4 = row.insertCell(3);
     let cell5 = row.insertCell(4);
     let cell6 = row.insertCell(5);
+    let cell7 = row.insertCell(6);
 
     let name = data.name;
     let detail = data.detail;
     let madeBy = data.madeBy;
-
+    let price = '100000'
     let selectTag = `<select id=book-name-detail-${size - 1 > 0 ? size : 0}>`;
     let bookCount = 0;
 
@@ -347,6 +350,8 @@ const addImportToTable = async (data) => {
     cell5.innerHTML =  new Date(data.date)
     .toLocaleDateString('en-GB');
     cell5.id = `date-${size - 1 >= 0 ? size - 1 : 0}`;
+    cell6.innerHTML = price;
+    cell6.id = `price-${size - 1 >= 0 ? size - 1 : 0}`;
 
     let edit_btn = document.createElement("button");
     edit_btn.setAttribute("class", "edit-button");
@@ -366,11 +371,11 @@ const addImportToTable = async (data) => {
     btn_column.appendChild(edit_btn);
     btn_column.appendChild(delete_btn);
 
-    cell6.appendChild(btn_column);
+    cell7.appendChild(btn_column);
 }
 
-const editImportInTable = async (oldName, data) => {
-    let table = document.getElementById("import-table");
+const editInvoiceInTable = async (oldName, data) => {
+    let table = document.getElementById("invoice-table");
     let table_body = table.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < table_body.rows.length; i++) {
@@ -402,7 +407,7 @@ const editImportInTable = async (oldName, data) => {
     }
 }
 
-const deleteImportInTable = async (tableName, name) => {
+const deleteInvoiceInTable = async (tableName, name) => {
     let table = document.getElementById(tableName); 
     let table_body = table.getElementsByTagName("tbody")[0];
 
@@ -417,23 +422,23 @@ const deleteImportInTable = async (tableName, name) => {
 async function handleEditButtonEvent(event) {
     event.preventDefault();
     let btn = event.currentTarget;
-    let import_id = btn.id.split('-')[2];
+    let invoice_id = btn.id.split('-')[2];
 
-    let import_name = document.getElementById(`name-${import_id}`).innerHTML;
-    let import_detail = document.getElementById(`book-name-detail-${import_id}`);
-    let import_date = document.getElementById(`date-${import_id}`).innerHTML;
+    let invoice_name = document.getElementById(`name-${invoice_id}`).innerHTML;
+    let invoice_detail = document.getElementById(`book-name-detail-${invoice_id}`);
+    let invoice_date = document.getElementById(`date-${invoice_id}`).innerHTML;
 
     try {
-        let edit_name = document.getElementById("edit-import-name");
-        edit_name.value = import_name;
-        edit_name.setAttribute("old-name", import_name);
+        let edit_name = document.getElementById("edit-invoice-name");
+        edit_name.value = invoice_name;
+        edit_name.setAttribute("old-name", invoice_name);
 
-        let edit_date = document.getElementById("edit-import-date");
-        let date_parts = import_date.split('/');
+        let edit_date = document.getElementById("edit-invoice-date");
+        let date_parts = invoice_date.split('/');
         let date = new Date(Date.UTC(date_parts[2], date_parts[1] - 1, date_parts[0]));
         edit_date.value = date.toISOString().slice(0, 10);
 
-        const options = import_detail.options;
+        const options = invoice_detail.options;
 
         for (let i = 0; i < options.length; i++) {
             let value = options[i].value;
@@ -443,7 +448,7 @@ async function handleEditButtonEvent(event) {
             editDetailToTable(value.bookName, value.quantity);
         }
 
-        let edit_section = document.getElementById("edit-import");
+        let edit_section = document.getElementById("edit-invoice");
         edit_section.style.display ='block';
     } catch (e) {
         console.log(e);
@@ -454,33 +459,33 @@ async function handleEditButtonEvent(event) {
 async function handleDeleteButtonEvent(event) {
     event.preventDefault();
     let btn = event.currentTarget;
-    let import_id = btn.id.split('-')[2];
+    let invoice_id = btn.id.split('-')[2];
 
-    let import_name = document.getElementById(`name-${import_id}`).innerHTML;
+    let invoice_name = document.getElementById(`name-${invoice_id}`).innerHTML;
 
     try {
-        const data = await fetch('/import/delete', {
+        const data = await fetch('/invoice/delete', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: import_name,
+                    name: invoice_name,
                 })
             })
             .then(response => response.json())
             .then(async data => {
-                if (data.message == 'Delete import successfully') {
+                if (data.message == 'Delete invoice successfully') {
                     notification("success", "thành công");
-                    await deleteImportInTable("import-table", import_name);
+                    await deleteInvoiceInTable("invoice-table", invoice_name);
                 } else {
-                    notification("success", "thất bại");
+                    notification("error", "thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("success", "thất bại")
+        notification("error", "thất bại")
     }
 }
 
@@ -506,6 +511,6 @@ const handleDeleteDetailButtonEvent = async (event) => {
         }
     } catch (err) {
         console.log(err);
-        notification("success", "thất bại");
+        notification("error", "thất bại");
     }  
 };

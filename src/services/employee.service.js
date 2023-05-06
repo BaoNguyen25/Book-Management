@@ -7,9 +7,19 @@ class EmployeeService {
         return await User.find().catch((err) => { return null; });
     }
 
-    static addEmployee = async (id, name, gender, role, phone, address, identity, email) => {
+    static addEmployee = async (name, gender, role, phone, address, identity, email) => {
+        const info = {
+            name: name,
+            email: email,
+            gender: gender,
+            role: role,
+            phone: phone,
+            address: address,
+            identity: identity
+        };
+
+        // await User.register(info, "123456");
         return await User.create({
-            id: id,
             name: name,
             email: email,
             gender: gender,
@@ -28,10 +38,9 @@ class EmployeeService {
         return User.find({ name: { $regex: content, $options: 'i' } }).catch((err) => { return null });
     }
 
-    static editEmployee = async (id, name, gender, role, phone, address, identity, email) => {
+    static editEmployee = async (name, gender, role, phone, address, identity, email) => {
         try {
             const editedEmployee = {
-                id: id,
                 name: name,
                 gender: gender,
                 role: role,

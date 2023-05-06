@@ -71,8 +71,8 @@
                       </div>
                 </div>
                 <h2 style="text-align: center;">Danh sách hóa đơn</h2>
-                <div class="addimport">
-                  <section id="add-import" style="display:none">
+                <div class="addinvoice">
+                  <section id="add-invoice" style="display:none">
                     <div>
                       <h2>Thêm hóa đơn</h2>
                     </div>
@@ -80,10 +80,10 @@
                     <div class="form-container">
                       <form>
                         <div class="form-row">
-                          <label for="addQuantity">Tên khách hàng:</label>
-                          <input type="text" id="add-import-name" name="add-import-name">
-                          <label for="adđate">Ngày lập:</label>
-                          <input type="date" id="add-import-date" name="book-date">
+                          <label for="addName">Tên khách hàng:</label>
+                          <input type="text" id="add-invoice-name" name="add-invoice-name">
+                          <label for="adddate">Ngày lập:</label>
+                          <input type="date" id="add-invoice-date" name="add-invoice-date">
                           <label for="addBookDetail">Tên sách:</label>
                           <select id="add-book-detail" class="add-book-detail">
                             <option value=""></option>
@@ -92,7 +92,7 @@
                             <% } %>
                           </select>
                           <label for="addQuantity">Số lượng:</label>
-                          <input type="text" id="add-book-quantity" name="book-quantity">
+                          <input type="text" id="add-book-quantity" name="add-book-quantity">
                           <button id="detail-add-btn">
                             Nhập</button>
                         </div>
@@ -119,7 +119,7 @@
               <button id="add-btn">Thêm hóa đơn</button>
 
               </main>
-                <table id="import-table">
+                <table id="invoice-table">
                     <thead>
                       <tr>
                         <th>Tên khách hàng</th>
@@ -132,22 +132,22 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% for (let i = 0; i < importList.length; i++) { %>
+                      <% for (let i = 0; i < invoiceList.length; i++) { %>
                         <tr>
-                          <td>Tran Van B</td>
+                          <td id="name-<%= i %>"><%= invoiceList[i].name %></td>
                           <td id="book-name-<%= i %>">
                             <select id="book-name-detail-<%= i %>">
-                              <% for (let j = 0; j < importList[i].detail.length; j++) { %>
-                                <option value="<%= JSON.stringify(importList[i].detail[j]) %>"><%= importList[i].detail[j].bookName %></option>
+                              <% for (let j = 0; j < invoiceList[i].detail.length; j++) { %>
+                                <option value="<%= JSON.stringify(invoiceList[i].detail[j]) %>"><%= invoiceList[i].detail[j].bookName %></option>
                               <% } %>
                             </select>
                           </td>
-                          <td id="book-quantity-<%= i %>"><%= importList[i].detail.reduce((accumulator, currentValue) => 
+                          <td id="book-quantity-<%= i %>"><%= invoiceList[i].detail.reduce((accumulator, currentValue) => 
                             accumulator + currentValue.quantity, 0) %></td>
-                          <td id="made-by-<%= i %>"><%= importList[i].madeBy %></td>
-                          <td id="date-<%= i %>"><%= new Date(importList[i].date)
+                          <td id="made-by-<%= i %>"><%= invoiceList[i].madeBy %></td>
+                          <td id="date-<%= i %>"><%= new Date(invoiceList[i].date)
                             .toLocaleDateString('en-GB') %></td>
-                          <td>100000VND</td> <!--sum=?-->
+                          <td id="price-<%= i %>">100000</td> <!--sum=?-->
                           <td>
                             <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
                             <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
@@ -157,8 +157,8 @@
                     </tbody>
                   </table>
                  
-                  <div class="edit-import">
-                    <section id="edit-import" style="display: none;">
+                  <div class="edit-invoice">
+                    <section id="edit-invoice" style="display: none;">
                       <div>
                         <h2>Chỉnh hóa đơn</h2>
                       </div>
@@ -169,9 +169,9 @@
                         <form>
                           <div class="form-row">
                             <label for="editQuantity">Tên khách hàng:</label>
-                            <input type="text" id="edit-import-name" name="edit-import-name">
+                            <input type="text" id="edit-invoice-name" name="edit-invoice-name">
                             <label for="editdate">Ngày lập:</label>
-                            <input type="date" id="edit-import-date" name="book-date">
+                            <input type="date" id="edit-invoice-date" name="book-date">
                             <label for="editBookDetail">Tên sách:</label>
                             <select id="edit-book-detail" class="edit-book-detail">
                               <% for (let i = 0; i < bookList.length; i++) { %>
@@ -207,7 +207,7 @@
 
     
     
-    <script src="/scripts/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="/scripts/dashboardInvoice.js"></script>
 </body>
 

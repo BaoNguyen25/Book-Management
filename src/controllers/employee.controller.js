@@ -4,10 +4,9 @@ const { addEmployee, editEmployee, deleteEmployee, searchEmployee } = require('.
 
 class EmployeeController {
     addEmployee = async (req, res, next) => {
-        const {id, name, gender, role, phone, address, identity, email} = req.body;
+        const {name, gender, role, phone, address, identity, email} = req.body;
 
-        const employee = await addEmployee(id, name, gender, role, phone, address, identity, email);
-        
+        const employee = await addEmployee(name, gender, role, phone, address, identity, email);
         return employee ? res.status(200).json({
             message: 'Add employee successfully',
             metadata: employee
@@ -17,9 +16,9 @@ class EmployeeController {
     }
 
     editEmployee = async (req, res, next) => {
-        const {id, name, gender, role, phone, address, identity, email} = req.body;
+        const {name, gender, role, phone, address, identity, email} = req.body;
 
-        const employee = await editEmployee(id, name, gender, role, phone, address, identity, email);
+        const employee = await editEmployee(name, gender, role, phone, address, identity, email);
 
         return employee ? res.status(200).json({
             message: 'Edit employee successfully',

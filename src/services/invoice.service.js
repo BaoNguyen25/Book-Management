@@ -3,7 +3,6 @@
 const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { Book } = require('../models/book.model');
 const { compareBookDetails } = require('../helper/compareArray');
-const invoiceController = require('../controllers/invoice.controller');
 
 class InvoiceService {
     static addInvoice = async (name, bookDetail, date, madeBy) => {
@@ -23,7 +22,7 @@ class InvoiceService {
             });
 
             for (let i = 0; i < bookDetail.length; i++) { 
-                await Book.findOneAndUpdate({ name: bookDetail[i].name }, { $inc: { quantity: bookDetail[i].quantity } });
+                await Book.findOneAndUpdate({ name: bookDetail[i].name }, { $inc: { quantity: -bookDetail[i].quantity } });
             }
 
             return invoice;
@@ -83,7 +82,7 @@ class InvoiceService {
             const deleted = await InvoiceModel.findOneAndDelete({name: name});
 
             for (let i = 0; i < bookDetail.length; i++) {
-                await Book.findOneAndUpdate({ name: bookDetail[i].bookName }, { $inc: { quantity: -bookDetail[i].quantity } });
+                await Book.findOneAndUpdate({ name: bookDetail[i].bookName }, { $inc: { quantity: bookDetail[i].quantity } });
             }
 
             return deleted;
