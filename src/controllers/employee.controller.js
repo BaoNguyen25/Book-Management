@@ -1,6 +1,6 @@
 'use strict';
 
-const { addEmployee, deleteEmployee, searchEmployee } = require('../services/employee.service')
+const { addEmployee, editEmployee, deleteEmployee, searchEmployee } = require('../services/employee.service')
 
 class EmployeeController {
     addEmployee = async (req, res, next) => {
@@ -17,6 +17,16 @@ class EmployeeController {
     }
 
     editEmployee = async (req, res, next) => {
+        const {id, name, gender, role, phone, address, identity, email} = req.body;
+
+        const employee = await editEmployee(id, name, gender, role, phone, address, identity, email);
+
+        return employee ? res.status(200).json({
+            message: 'Edit employee successfully',
+            metadata: employee
+        }) : res.status(500).json({
+            message: 'Edit employee failed'
+        });
     }
 
     deleteEmployee = async (req, res, next) => {

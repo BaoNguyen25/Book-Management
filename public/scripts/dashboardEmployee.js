@@ -163,8 +163,9 @@ submit_edit_btn.addEventListener('click', async (event) => {
     let address = edit_address.value;
     let edit_cardid = document.getElementById("edit-cardid");
     let cardid = edit_cardid.value;
-    let edit_email = document.getElementById("edit-email");
-    let email = edit_email.value;
+
+
+    let email = edit_name.getAttribute("email")
 
     try {
         let data = await fetch('/employee/edit', {
@@ -189,7 +190,7 @@ submit_edit_btn.addEventListener('click', async (event) => {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
                     notification("success", "Thành công");;
-                    await editEmployeeInTable(oldName, name);
+                    await editEmployeeInTable(id, name, email, gender, position, phone, address, cardid);
                 } else {
                     notification("error", "Thất bại");
                 }
@@ -270,13 +271,19 @@ const addEmployeeToTable = async (id, name, gender, position, phone, address, ca
     cell9.appendChild(btn_column);
 }
 
-const editEmployeeInTable = async (oldName, name) => {
+const editEmployeeInTable = async (id, name, email, gender, role, phone, address, identity) => {
     let table = document.getElementById("employee-table");
     let table_body = table.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < table_body.rows.length; i++) {
-        if (table_body.rows[i].cells[0].innerHTML == oldName) {
-            table_body.rows[i].cells[0].innerHTML = name;
+        if (table_body.rows[i].cells[7].innerHTML == email) {
+            table_body.rows[i].cells[0].innerHTML = id;
+            table_body.rows[i].cells[1].innerHTML = name;
+            table_body.rows[i].cells[2].innerHTML = gender;
+            table_body.rows[i].cells[3].innerHTML = role;
+            table_body.rows[i].cells[4].innerHTML = phone;
+            table_body.rows[i].cells[5].innerHTML = address;
+            table_body.rows[i].cells[6].innerHTML = identity;
             return
         }
     }
@@ -323,8 +330,7 @@ async function handleEditButtonEvent(event) {
         edit_address.value = employee_address;
         let edit_cardid = document.getElementById("edit-cardid");
         edit_cardid.value = employee_cardid;
-        let edit_email = document.getElementById("edit-email");
-        edit_email.value = employee_email;
+        edit_name.setAttribute("email", employee_email);
 
         let edit_section = document.getElementById("edit-employee");
         edit_section.style.display ='block';
@@ -338,9 +344,7 @@ async function handleDeleteButtonEvent(event) {
     event.preventDefault();
     let btn = event.currentTarget;
     let employee_id = btn.id.split('-')[2];
-
     let employee_email = document.getElementById(`email-${employee_id}`).innerHTML;
-    console.log(employee_email);
     try {
         const data = await fetch('/employee/delete', {
             method: 'POST',

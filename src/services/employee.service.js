@@ -28,6 +28,26 @@ class EmployeeService {
         return await User.find({ name: { $regex: content, $options: 'i' } }).sort({ products: -1 })
         .catch((err) => { return null; });
     }
+
+    static editEmployee = async (id, name, gender, role, phone, address, identity, email) => {
+        try {
+            const editedEmployee = {
+                id: id,
+                name: name,
+                gender: gender,
+                role: role,
+                phone: phone,
+                address: address,
+                identity: identity
+            }
+            const edited = await User.findOneAndUpdate({ email: email }, editedEmployee);
+
+            return edited;
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
+    }
 }
 
 module.exports = EmployeeService;

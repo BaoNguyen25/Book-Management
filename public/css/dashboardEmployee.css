@@ -205,7 +205,7 @@ width: 100px;
 }
 
 #edit-employee {
-height: 200px;
+height: 550px;
 width: 500px; /* Đặt chiều rộng cho phần tử */
 margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
 padding: 20px; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
@@ -215,13 +215,14 @@ right: -15%;
 transform: translateY(-20%);
 background-color: #f2f2f2;
 box-shadow: 0px 0px 10px #888888; 
+overflow: auto;
 
 }
 
 #edit-employee  h2 {
 text-align: left;
 float: left;
-width: 50%;
+width: 100%;
 margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
 font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
 }
