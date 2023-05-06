@@ -28,7 +28,7 @@
   }
   
   
-#add-import{
+#add-invoice{
   height: 580px;
   width: 500px; /* Đặt chiều rộng cho phần tử */
   margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
@@ -40,53 +40,53 @@
   overflow: auto;
 }
   
-#add-import h2 {
+#add-invoice h2 {
   text-align: left;
   float: left;
   width: 50%;
   margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
   font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
 }
-  #add-import form label {
+  #add-invoice form label {
   text-align: justify;
   }
   .form-container {
   clear: both;
   }
-  #add-import form input {
+  #add-invoice form input {
   width: 100%;
   margin-bottom: 10px;
   }
   
-  #add-import form button {
+  #add-invoice form button {
   display: block;
   margin: 10px auto;
   }
-  #add-import form input[type="text"], #add-import form button[type="submit"], #add-import form select,
-  #add-import form input[type="date"] {
+  #add-invoice form input[type="text"], #add-invoice form button[type="submit"], #add-invoice form select,
+  #add-invoice form input[type="date"] {
   padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
   border-radius: 5px; /* Đặt bo góc cho input và button */
   border: none; /* Xóa viền cho input và button */
   font-size: 16px; /* Đặt cỡ chữ cho input và button */
   }
   
-  #add-import form button[type="submit"] {
+  #add-invoice form button[type="submit"] {
   background-color: #4CAF50; /* Đặt màu nền cho button */
   color: white; /* Đặt màu chữ cho button */
   cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
   }
   
-  #add-import form button[type="submit"]:hover {
+  #add-ivoice form button[type="submit"]:hover {
   background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
   }
   
-  #add-import form label {
+  #add-invoice form label {
   display: block; /* Hiển thị label theo dạng khối */
    /* Đặt khoảng cách dưới mỗi label */
   font-size: 16px; /* Đặt cỡ chữ cho label */
   }
   
-  .addimport {
+  .addinvoice {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -98,7 +98,7 @@
   #close-add-btn, #close-edit-btn {
     float: right;
   }
-  #add-import form button[type="submit"] {
+  #add-invoice form button[type="submit"] {
     float: right;
     margin-right: 10px;
   }
@@ -207,11 +207,11 @@
     background-color: var(--main-text-color);
     margin-bottom: 16px;
   }
-  #import-table td:nth-child(5) {
+  #invoice-table td:nth-child(5) {
     width: 100px;
   }
   
-  #edit-import {
+  #edit-invoice {
     height: 550px;
     width: 500px; /* Đặt chiều rộng cho phần tử */
     margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
@@ -224,26 +224,26 @@
     overflow: auto;
   }
   
-  #edit-import  h2 {
+  #edit-invoice  h2 {
     text-align: left;
     float: left;
     width: 50%;
     margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
     font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
   }
-  #edit-import form label {
+  #edit-invoice form label {
     text-align: justify;
   }
   .form-container {
     clear: both;
   }
-  #edit-import form input {
+  #edit-invoice form input {
     width: 100%;
     margin-bottom: 10px;
   }
   
-  #edit-import form input[type="text"], #edit-import form button[type="submit"]
-  , #edit-import form select, #edit-import form input[type="date"] {
+  #edit-invoice form input[type="text"], #edit-invoice form button[type="submit"]
+  , #edit-invoice form select, #edit-invoice form input[type="date"] {
     padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
     border-radius: 5px; /* Đặt bo góc cho input và button */
     border: none; /* Xóa viền cho input và button */
@@ -258,28 +258,28 @@
     margin-left: 10px;
   }
   
-  #edit-import form button[type="submit"] {
+  #edit-invoice form button[type="submit"] {
     background-color: #4CAF50; /* Đặt màu nền cho button */
     color: white; /* Đặt màu chữ cho button */
     cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
   }
   
-  #edit-import form button[type="submit"]:hover {
+  #edit-invoice form button[type="submit"]:hover {
     background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
   }
 
-  #edit-import form button[type="submit"] {
+  #edit-invoice form button[type="submit"] {
     float: right;
     margin-right: 10px;
   }
   
-  #edit-import  form label {
+  #edit-invoice form label {
     display: block; /* Hiển thị label theo dạng khối */
     margin-bottom: 10px; /* Đặt khoảng cách dưới mỗi label */
     font-size: 16px; /* Đặt cỡ chữ cho label */
   }
   
-  .edit-import  {
+  .edit-invoice  {
     position: fixed;
     top: 50%;
     left: 50%;

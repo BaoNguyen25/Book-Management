@@ -262,13 +262,13 @@ margin-left: 10px;
 }
 
 #edit-employee form button[type="submit"] {
-background-color: #4CAF50; /* Đặt màu nền cho button */
-color: white; /* Đặt màu chữ cho button */
-cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  background-color: #4CAF50; /* Đặt màu nền cho button */
+  color: white; /* Đặt màu chữ cho button */
+  cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
 }
 
 #edit-employee form button[type="submit"]:hover {
-background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
 }
 
 #edit-employee  form label {
@@ -302,7 +302,7 @@ border-radius: 10px;
     opacity: 0;
     pointer-events: none;
   }
-  
+
   .alert.showAlert{
     opacity: 1;
     pointer-events: auto;
