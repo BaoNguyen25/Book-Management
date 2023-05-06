@@ -19,4 +19,6 @@ router.use('/category', require('./category/index'));
 
 router.use('/import', require('./import/index'));
 
+router.use('/employee', require('./employee/index'));
+
 module.exports = router;

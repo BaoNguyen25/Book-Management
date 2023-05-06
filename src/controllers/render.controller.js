@@ -4,6 +4,7 @@ const { getBookList } = require("../services/book.service");
 const { getAuthorList } = require("../services/author.service");
 const { getCategoryList } = require("../services/category.service");
 const { getImportList } = require("../services/import.service");
+const { getEmployeeList } = require("../services/employee.service");
 
 class RenderController {
     getSignIn = async (req, res) => {
@@ -47,7 +48,9 @@ class RenderController {
     }
 
     getEmployeePage = async (reg, res) =>{
-        res.render('dashboardEmployee');
+        res.render('dashboardEmployee', {
+            employeeList: await getEmployeeList()
+        });
     }
 
     getInvoicePage = async (reg, res) =>{

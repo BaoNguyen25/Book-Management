@@ -77,14 +77,14 @@ search_btn.addEventListener('click', async (event) => {
             .then(async data => {
                 if (data.message == 'Search employee successfully') {
                     let employeeList = data.metadata;
-                    notification("success", "thành công");
+                    notification("success", "Thành công");
                     await clearTableBody();
 
                     for (let i = 0; i < employeeList.length; i++) {
                         await addEmployeeToTable(employeeList[i].name, employeeList[i].products, employeeList[i].description);
                     }   
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Thất bại");
                 }
             }
         );
@@ -123,19 +123,26 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add employee successfully') {
                     let add_section = document.getElementById("add-employee");
                     add_section.style.display = "none";
-                    notification("success", "thành công");;
+                    notification("success", "Thành công");;
                     let fetched = data.metadata
-                    await addEmployeeToTable(fetched.name, fetched.products, fetched.description);
+                    await addEmployeeToTable(fetched.id, fetched.name, fetched.gender, fetched.role, fetched.phone, fetched.address, fetched.identity, fetched.email);
 
+                    document.getElementById("add-id").value = '';
                     document.getElementById("add-name").value = '';
+                    document.getElementById("add-gender").value = '';
+                    document.getElementById("add-position").value = '';
+                    document.getElementById("add-phone").value = '';
+                    document.getElementById("add-address").value = '';
+                    document.getElementById("add-cardid").value = '';
+                    document.getElementById("add-email").value = '';          
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Thất bại")
     }
 });
 
@@ -164,16 +171,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit employee successfully') {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
-                    notification("success", "thành công");;
+                    notification("success", "Thành công");;
                     await editEmployeeInTable(oldName, name);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Thất bại")
     }
 });
 
@@ -186,7 +193,7 @@ const clearTableBody = async () => {
     }
 }
 
-const addEmployeeToTable = async (name, products=0, description="") => {
+const addEmployeeToTable = async (id, name, gender, position, phone, address, cardid, email) => {
     let table = document.getElementById("employee-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let size = table.rows.length;
@@ -195,15 +202,35 @@ const addEmployeeToTable = async (name, products=0, description="") => {
     let cell2 = row.insertCell(1);
     let cell3 = row.insertCell(2);
     let cell4 = row.insertCell(3);
+    let cell5 = row.insertCell(4);
+    let cell6 = row.insertCell(5);
+    let cell7 = row.insertCell(6);
+    let cell8 = row.insertCell(7);
+    let cell9 = row.insertCell(8);
 
-    cell1.innerHTML = name;
-    cell1.id = `name-${size - 1}`;
+    cell1.innerHTML = id ?? "";
+    cell1.id = `id-${size - 1}`;
 
-    cell2.innerHTML = products ?? 0;
-    cell2.id = `description-${size - 1}`;
+    cell2.innerHTML = name ?? "";
+    cell2.id = `name-${size - 1}`;
 
-    cell3.innerHTML = description ?? "";
-    cell3.id = `most-sold-${size - 1}`;
+    cell3.innerHTML = gender ?? "";
+    cell3.id = `gender-${size - 1}`;
+
+    cell4.innerHTML = position ?? "";
+    cell4.id = `position-${size - 1}`;
+    
+    cell5.innerHTML = phone ?? "";
+    cell5.id = `phone-${size - 1}`;
+
+    cell6.innerHTML = address ?? "";
+    cell6.id = `address-${size - 1}`;
+
+    cell7.innerHTML = cardid ?? "";
+    cell7.id = `cardid-${size - 1}`;
+
+    cell8.innerHTML = email ?? "";
+    cell8.id = `email-${size - 1}`;
 
     let edit_btn = document.createElement("button");
     edit_btn.setAttribute("class", "edit-button");
@@ -223,7 +250,7 @@ const addEmployeeToTable = async (name, products=0, description="") => {
     btn_column.appendChild(edit_btn);
     btn_column.appendChild(delete_btn);
 
-    cell4.appendChild(btn_column);
+    cell9.appendChild(btn_column);
 }
 
 const editEmployeeInTable = async (oldName, name) => {
@@ -238,12 +265,12 @@ const editEmployeeInTable = async (oldName, name) => {
     }
 }
 
-const deleteemployeeInTable = async (name) => {
+const deleteEmployeeInTable = async (email) => {
     let table = document.getElementById("employee-table");
     let table_body = table.getElementsByTagName("tbody")[0];
 
     for (let i = 0; i < table_body.rows.length; i++) {
-        if (table_body.rows[i].cells[0].innerHTML == name) {
+        if (table_body.rows[i].cells[7].innerHTML == email) {
             table_body.deleteRow(i);
             return;
         }
@@ -278,8 +305,8 @@ async function handleDeleteButtonEvent(event) {
     let btn = event.currentTarget;
     let employee_id = btn.id.split('-')[2];
 
-    let employee_name = document.getElementById(`name-${employee_id}`).innerHTML;
-
+    let employee_email = document.getElementById(`email-${employee_id}`).innerHTML;
+    console.log(employee_email);
     try {
         const data = await fetch('/employee/delete', {
             method: 'POST',
@@ -287,14 +314,14 @@ async function handleDeleteButtonEvent(event) {
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: employee_name,
+                    email: employee_email,
                 })
             })
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete employee successfully') {
                     alert('Delete employee successfully');
-                    await deleteemployeeInTable(employee_name);
+                    await deleteEmployeeInTable(employee_email);
                 } else {
                     alert('Delete employee failed');
                 }
