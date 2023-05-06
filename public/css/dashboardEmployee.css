@@ -107,6 +107,14 @@ padding: 10px;
 border: none;
 width: 70%; /* chiếm 70% của bộ khung tìm kiếm */
 }
+
+select {
+  padding: 10px;
+  border: none;
+  width: 100%; 
+  border-radius: 5px;
+}
+
 h2 {
 margin-bottom: 16px;
 }
