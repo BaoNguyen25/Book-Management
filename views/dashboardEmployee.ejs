@@ -74,10 +74,6 @@
                     <div class="form-container">
                       <form>
                         <div class="form-row">
-                          <label for="id">Mã nhân viên:</label>
-                          <input type="text" id="add-id" name="add-id">
-                        </div>
-                        <div class="form-row">
                           <label for="name">Tên:</label>
                           <input type="text" id="add-name" name="add-name">
                         </div>
@@ -127,7 +123,6 @@
                 <table id="employee-table">
                     <thead>
                       <tr>
-                        <th>Mã nhân viên</th>
                         <th>Tên nhân viên</th>
                         <th>Giới tính</th>
                         <th>Chức vụ</th>
@@ -141,7 +136,7 @@
                     <tbody>
                       <% for (let i = 0; i < employeeList.length; i++) { %>
                         <tr>
-                            <td id="id-<%= i %>"><%= employeeList[i].id %></td>
+                          <!-- <td id="id-<%= i %>"><%= employeeList[i].id %></td> --> 
                             <td id="name-<%= i %>"><%= employeeList[i].name %></td>
                             <td id="gender-<%= i %>"><%= employeeList[i].gender %></td>
                             <td id="position-<%= i %>"><%= employeeList[i].role %></td>
@@ -169,9 +164,6 @@
                       </div>
                       <div class="form-container">
                         <form>
-                          <div class="form-row">
-                            <label for="edit-id">Mã nhân viên:</label>
-                            <input type="text" id="edit-id" name="edit-id">
                             <label for="edit-name">Tên:</label>
                             <input type="text" id="edit-name" name="edit-name">
                             <label for="edit-gender">Giới tính:</label>
