@@ -147,7 +147,7 @@
                           <td id="made-by-<%= i %>"><%= invoiceList[i].madeBy %></td>
                           <td id="date-<%= i %>"><%= new Date(invoiceList[i].date)
                             .toLocaleDateString('en-GB') %></td>
-                          <td id="price-<%= i %>">100000</td> <!--sum=?-->
+                          <td id="price-<%= i %>"><%= invoiceList[i].price %></td> <!--sum=?-->
                           <td>
                             <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
                             <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
