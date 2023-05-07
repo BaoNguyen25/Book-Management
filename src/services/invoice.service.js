@@ -13,12 +13,21 @@ class InvoiceService {
                     quantity: book.quantity,
                 });
             });
-    
+            
+            let price = 0;
+            for (let i = 0; i < bookDetail.length; i++) { 
+                await Book.findOne({name: bookDetail[i].name}).then(book => {
+                    price += book.price*bookDetail[i].quantity;
+                })
+                .catch(err => console.error(err));
+            }
+
             const invoice = await InvoiceModel.create({
                 name: name,
                 detail: bookDetailArr,
                 madeBy: madeBy,
                 date: date,
+                price: price,
             });
 
             for (let i = 0; i < bookDetail.length; i++) { 
@@ -48,12 +57,23 @@ class InvoiceService {
                     quantity: Math.abs(book.quantity),
                 });
             });
+
+            let price = 0;
+            for (let i = 0; i < newBookDetail.length; i++) { 
+                await Book.findOne({name: newBookDetail[i].bookName}).then(book => {
+                    price += book.price*newBookDetail[i].quantity;
+                })
+                .catch(err => console.error(err));
+            }
     
             const update = {
                 name: newName,
                 detail: newBookDetailArr,
                 date: date,
+                price: price,
             }
+
+            
     
             const edited = await InvoiceModel.findOneAndUpdate({ name: oldName }, update);
     

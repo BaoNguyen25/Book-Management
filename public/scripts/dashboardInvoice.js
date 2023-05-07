@@ -325,7 +325,7 @@ const addInvoiceToTable = async (data) => {
     let name = data.name;
     let detail = data.detail;
     let madeBy = data.madeBy;
-    let price = '100000'
+    let price = data.price;
     let selectTag = `<select id=book-name-detail-${size - 1 > 0 ? size : 0}>`;
     let bookCount = 0;
 
@@ -403,6 +403,8 @@ const editInvoiceInTable = async (oldName, data) => {
             table_body.rows[i].cells[3].innerHTML = data.madeBy;
             table_body.rows[i].cells[4].innerHTML = new Date(data.date)
             .toLocaleDateString('en-GB');
+            table_body.rows[i].cells[5].innerHTML = data.price;
+
         }
     }
 }
