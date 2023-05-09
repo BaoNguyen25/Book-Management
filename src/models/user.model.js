@@ -16,7 +16,7 @@ const userSchema = Schema({
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Other']
+        enum: ['Nam', 'Nữ', 'Khác']
     }, 
     role: {
         type: String,

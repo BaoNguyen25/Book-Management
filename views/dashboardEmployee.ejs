@@ -74,21 +74,25 @@
                     <div class="form-container">
                       <form>
                         <div class="form-row">
-                          <label for="id">Mã nhân viên:</label>
-                          <input type="text" id="add-id" name="add-id">
-                        </div>
-                        <div class="form-row">
                           <label for="name">Tên:</label>
                           <input type="text" id="add-name" name="add-name">
                         </div>
                         <div class="form-row">
                           <label for="gender">Giới tính:</label>
-                          <input type="text" id="add-gender" name="add-gender">
+                          <select id="add-gender" name="add-gender">
+                            <option value = "Nam">Nam</option>
+                            <option value = "Nữ">Nữ</option>
+                            <option value = "Khác">Khác</option>
+                          </select>                        
                         </div>
                         <div class="form-row">
                             <label for="position">Chức vụ:</label>
-                            <input type="text" id="add-position" name="add-position">
-                        </div>
+                            <select id="add-position" name="add-position">
+                              <option value = "Accountant">Accountant</option>
+                              <option value = "Admin">Admin</option>
+                              <option value = "Staff">Staff</option>
+                            </select>                         
+                          </div>
                         <div class="form-row">
                             <label for="phone">Số điện thoại:</label>
                             <input type="text" id="add-phone" name="add-phone">
@@ -120,7 +124,6 @@
                 <table id="employee-table">
                     <thead>
                       <tr>
-                        <th>Mã nhân viên</th>
                         <th>Tên nhân viên</th>
                         <th>Giới tính</th>
                         <th>Chức vụ</th>
@@ -134,7 +137,7 @@
                     <tbody>
                       <% for (let i = 0; i < employeeList.length; i++) { %>
                         <tr>
-                            <td id="id-<%= i %>"><%= employeeList[i].id %></td>
+                          <!-- <td id="id-<%= i %>"><%= employeeList[i].id %></td> --> 
                             <td id="name-<%= i %>"><%= employeeList[i].name %></td>
                             <td id="gender-<%= i %>"><%= employeeList[i].gender %></td>
                             <td id="position-<%= i %>"><%= employeeList[i].role %></td>
@@ -162,27 +165,30 @@
                       </div>
                       <div class="form-container">
                         <form>
-                          <div class="form-row">
-                            <label for="edit-name">Mã nhân viên:</label>
-                            <input type="text" id="edit-id" name="edit-id">
                             <label for="edit-name">Tên:</label>
                             <input type="text" id="edit-name" name="edit-name">
-                            <label for="edit-name">Giới tính:</label>
-                            <input type="text" id="edit-gender" name="edit-gender">
-                            <label for="edit-name">Chức vụ:</label>
-                            <input type="text" id="edit-position" name="edit-position">
-                            <label for="edit-name">Số điện thoại:</label>
+                            <label for="edit-gender">Giới tính:</label>
+                              <select id="edit-gender" name="edit-gender">
+                                <option value = "Nam">Nam</option>
+                                <option value = "Nữ">Nữ</option>
+                                <option value = "Khác">Khác</option>
+                              </select>                            
+                            <label for="edit-position">Chức vụ:</label>
+                              <select id="edit-position" name="edit-position">
+                                <option value = "Accountant">Accountant</option>
+                                <option value = "Admin">Admin</option>
+                                <option value = "Staff">Staff</option>
+                              </select>                             
+                           <label for="edit-phone">Số điện thoại:</label>
                             <input type="text" id="edit-phone" name="edit-phone">
-                            <label for="edit-name">Địa chỉ:</label>
+                            <label for="edit-address">Địa chỉ:</label>
                             <input type="text" id="edit-address" name="edit-address">
-                            <label for="edit-name">CMND:</label>
+                            <label for="edit-cardid">CMND:</label>
                             <input type="text" id="edit-cardid" name="edit-cardid">
-                            <label for="edit-name">Email:</label>
-                            <input type="text" id="edit-email" name="edit-email">
                           </div>
                           <div class="button-container">
                             <button type="submit" id="submit-edit-btn">Lưu</button>
-                            <button id="close-edit-btn">Đóng</button>
+                            <button id="close-edit-btn" style="float: right;"> Đóng </button>
                           </div>
                         </form>
                       </div>

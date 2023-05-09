@@ -3,7 +3,6 @@
 const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { Book } = require('../models/book.model');
 const { compareBookDetails } = require('../helper/compareArray');
-const invoiceController = require('../controllers/invoice.controller');
 
 class InvoiceService {
     static addInvoice = async (name, bookDetail, date, madeBy) => {
@@ -12,19 +11,27 @@ class InvoiceService {
                 return new InvoiceDetailModel({
                     bookName: book.name,
                     quantity: book.quantity,
-                    price: book.price,
                 });
             });
-    
+            
+            let price = 0;
+            for (let i = 0; i < bookDetail.length; i++) { 
+                await Book.findOne({name: bookDetail[i].name}).then(book => {
+                    price += book.price*bookDetail[i].quantity;
+                })
+                .catch(err => console.error(err));
+            }
+
             const invoice = await InvoiceModel.create({
                 name: name,
                 detail: bookDetailArr,
                 madeBy: madeBy,
                 date: date,
+                price: price,
             });
 
             for (let i = 0; i < bookDetail.length; i++) { 
-                await Book.findOneAndUpdate({ name: bookDetail[i].name }, { $inc: { quantity: bookDetail[i].quantity } });
+                await Book.findOneAndUpdate({ name: bookDetail[i].name }, { $inc: { quantity: -bookDetail[i].quantity } });
             }
 
             return invoice;
@@ -50,12 +57,23 @@ class InvoiceService {
                     quantity: Math.abs(book.quantity),
                 });
             });
+
+            let price = 0;
+            for (let i = 0; i < newBookDetail.length; i++) { 
+                await Book.findOne({name: newBookDetail[i].bookName}).then(book => {
+                    price += book.price*newBookDetail[i].quantity;
+                })
+                .catch(err => console.error(err));
+            }
     
             const update = {
                 name: newName,
                 detail: newBookDetailArr,
                 date: date,
+                price: price,
             }
+
+            
     
             const edited = await InvoiceModel.findOneAndUpdate({ name: oldName }, update);
     
@@ -84,7 +102,7 @@ class InvoiceService {
             const deleted = await InvoiceModel.findOneAndDelete({name: name});
 
             for (let i = 0; i < bookDetail.length; i++) {
-                await Book.findOneAndUpdate({ name: bookDetail[i].bookName }, { $inc: { quantity: -bookDetail[i].quantity } });
+                await Book.findOneAndUpdate({ name: bookDetail[i].bookName }, { $inc: { quantity: bookDetail[i].quantity } });
             }
 
             return deleted;

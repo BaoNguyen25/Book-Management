@@ -107,6 +107,14 @@ padding: 10px;
 border: none;
 width: 70%; /* chiếm 70% của bộ khung tìm kiếm */
 }
+
+select {
+  padding: 10px;
+  border: none;
+  width: 100%; 
+  border-radius: 5px;
+}
+
 h2 {
 margin-bottom: 16px;
 }
@@ -205,7 +213,7 @@ width: 100px;
 }
 
 #edit-employee {
-height: 200px;
+height: 550px;
 width: 500px; /* Đặt chiều rộng cho phần tử */
 margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
 padding: 20px; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
@@ -215,13 +223,14 @@ right: -15%;
 transform: translateY(-20%);
 background-color: #f2f2f2;
 box-shadow: 0px 0px 10px #888888; 
+overflow: auto;
 
 }
 
 #edit-employee  h2 {
 text-align: left;
 float: left;
-width: 50%;
+width: 100%;
 margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
 font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
 }
@@ -253,13 +262,13 @@ margin-left: 10px;
 }
 
 #edit-employee form button[type="submit"] {
-background-color: #4CAF50; /* Đặt màu nền cho button */
-color: white; /* Đặt màu chữ cho button */
-cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  background-color: #4CAF50; /* Đặt màu nền cho button */
+  color: white; /* Đặt màu chữ cho button */
+  cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
 }
 
 #edit-employee form button[type="submit"]:hover {
-background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
 }
 
 #edit-employee  form label {
@@ -293,7 +302,7 @@ border-radius: 10px;
     opacity: 0;
     pointer-events: none;
   }
-  
+
   .alert.showAlert{
     opacity: 1;
     pointer-events: auto;

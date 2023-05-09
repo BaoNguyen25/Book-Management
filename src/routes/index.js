@@ -21,4 +21,6 @@ router.use('/import', require('./import/index'));
 
 router.use('/employee', require('./employee/index'));
 
+router.use('/invoice', require('./invoice/index'));
+
 module.exports = router;
