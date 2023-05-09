@@ -15,19 +15,10 @@ class EmployeeService {
             role: role,
             phone: phone,
             address: address,
-            identity: identity
+            identity: identity,
         };
 
-        // await User.register(info, "123456");
-        return await User.create({
-            name: name,
-            email: email,
-            gender: gender,
-            role: role,
-            phone: phone,
-            address: address,
-            identity: identity
-        }).catch((err) => { return null; });
+        return await User.register(info, "123456").catch((err) => { return null; })
     }
 
     static deleteEmployee = async (email) => {
