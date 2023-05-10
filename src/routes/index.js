@@ -5,7 +5,7 @@ const checkAuthen = require('../middleware/checkAuthen');
 
 router.use('/access', require('./access/index'));
 
-router.use(checkAuthen);
+// router.use(checkAuthen);
 
 router.get('/', (req, res) => { res.redirect('/dashboard'); });
 
@@ -22,5 +22,7 @@ router.use('/import', require('./import/index'));
 router.use('/employee', require('./employee/index'));
 
 router.use('/invoice', require('./invoice/index'));
+
+router.use('/statistics', require('./statistics/index'));
 
 module.exports = router;
