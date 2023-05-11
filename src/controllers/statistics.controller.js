@@ -2,8 +2,15 @@
 
 const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { importModel, importDetailModel } = require('../models/import.model');
+const fs = require('fs');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const path = require('path');
 
 class StatisticsController {
+    getStatisticsPage = async (req, res) => {
+        res.render('statistics')
+    };
+
     getStatistics = async (req, res) => {
         const invoiceData = await InvoiceModel.aggregate([{
                 $unwind: "$detail"
@@ -51,7 +58,17 @@ class StatisticsController {
         }
         ]);
 
-        // Combine the data into one array with matching dates
+        const csvWriter = createCsvWriter({
+            path: __dirname + '../../../public/resources/data.csv',
+            header: [
+                { id: 'date', title: 'Date' },
+                { id: 'invoiceQuantity', title: 'Invoice Quantity' },
+                { id: 'importQuantity', title: 'Import Quantity' },
+            ]
+        });
+        // Combine the data into one array with matching 
+        var arr = [];
+        
         const combinedData = invoiceData.map((invoiceItem) => {
             const matchingImportItem = importData.find((importItem) => {
                 return (
@@ -60,12 +77,24 @@ class StatisticsController {
                     importItem._id.day === invoiceItem._id.day
                 );
             });
-            return {
-                date: "2",
+
+            const data = {
+                date: new Date(invoiceItem._id.year, invoiceItem._id.month - 1, invoiceItem._id.day),
                 invoiceQuantity: invoiceItem.quantity,
                 importQuantity: matchingImportItem ? matchingImportItem.quantity : 0
             }
+
+            arr.push(data);
         });
+
+        arr.sort(function(a,b){
+            return new Date(a.date) - new Date(b.date);
+          });
+        csvWriter.writeRecords(arr)
+        .then(() => {
+            console.log('Đã xuất dữ liệu sang file CSV');
+        });
+        
 
         return combinedData ? res.status(200).json({
             combinedData: combinedData

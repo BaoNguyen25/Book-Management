@@ -9,7 +9,11 @@ const bodyParser = require('body-parser');
 const passport = require('./config/config.passport');
 
 //apply middleware
-app.use(helmet());
+app.use(helmet(
+    {
+        contentSecurityPolicy: false,
+    }
+));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
