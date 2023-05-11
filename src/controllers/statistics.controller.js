@@ -4,7 +4,10 @@ const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { importModel, importDetailModel } = require('../models/import.model');
 
 class StatisticsController {
-    
+    getStatisticsPage = async (req, res) => {
+        res.render('statistics')
+    };
+
     getStatistics = async (req, res) => {
         const invoiceData = await InvoiceModel.aggregate([{
                 $unwind: "$detail"
@@ -62,14 +65,17 @@ class StatisticsController {
                 );
             });
             return {
-                date: new Date(invoiceItem._id.year, invoiceItem._id.month - 1, invoiceItem._id.day),
+                date: "2",
                 invoiceQuantity: invoiceItem.quantity,
                 importQuantity: matchingImportItem ? matchingImportItem.quantity : 0
             }
         });
 
-        res.render('statistics', { combinedData: combinedData });
-    }
+        return combinedData ? res.status(200).json({
+            combinedData: combinedData
+        }): res.status(400).json({
+            message: ' Get statistics failed'
+        });    }
 }
 
 module.exports = new StatisticsController();
