@@ -4,7 +4,6 @@ const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { importModel, importDetailModel } = require('../models/import.model');
 
 class StatisticsController {
-    
     getStatistics = async (req, res) => {
         const invoiceData = await InvoiceModel.aggregate([{
                 $unwind: "$detail"
