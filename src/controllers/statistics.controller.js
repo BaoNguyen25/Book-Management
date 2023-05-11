@@ -10,7 +10,6 @@ class StatisticsController {
         res.render('statistics')
     };
 
-    
     getStatistics = async (req, res) => {
         const invoiceData = await InvoiceModel.aggregate([{
                 $unwind: "$detail"
