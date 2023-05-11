@@ -4,13 +4,6 @@ const { InvoiceModel, InvoiceDetailModel } = require('../models/invoice.model');
 const { importModel, importDetailModel } = require('../models/import.model');
 
 class StatisticsController {
-<<<<<<< HEAD
-    getStatisticsPage = async (req, res) => {
-        res.render('statistics')
-    };
-
-=======
->>>>>>> 30a48de6f862ecfa610f81e91dd221afef50deef
     getStatistics = async (req, res) => {
         const invoiceData = await InvoiceModel.aggregate([{
                 $unwind: "$detail"
