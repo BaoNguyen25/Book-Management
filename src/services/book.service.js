@@ -22,6 +22,8 @@ class AccessService {
         try {
             const imageUrl = await uploadImage(image, name);
 
+            console.log(image)
+
             if (!imageUrl) throw new Error('Upload image failed');
 
             const book = await Book.create({

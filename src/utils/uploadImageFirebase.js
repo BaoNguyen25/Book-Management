@@ -58,19 +58,22 @@ const { error } = require('console');
 const { storage } = require('../config/config.firebase');
 
 const fs = require('fs');
+const { file } = require('googleapis/build/src/apis/file');
 
 const uploadImage = async (image, fileName) => {
     try {
+        const uploadName = encodeURIComponent(fileName.replaceAll(' ', ''));
+        console.log(uploadName);
+
         await storage.bucket().upload(image.path, {   
-            destination: `images/${fileName}`,
+            destination: `images/${fileName.replaceAll(' ', '')}`,
             metadata: {
                 contentType: image.mimetype,
             },
         });
 
         return await new Promise((resolve, reject) => {
-            resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F
-            ${fileName}?alt=media`);
+            resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F${uploadName}?alt=media`);
         });
     } catch (error) {
         console.log(error);
@@ -89,7 +92,8 @@ const deleteImage = async (fileName) => {
 
 const editImage = async (image, fileName) => {
     try {
-        const file = storage.bucket().file(`images/${fileName}`);
+        const uploadName = encodeURIComponent(fileName.replaceAll(' ', ''));
+        const file = storage.bucket().file(`images/${fileName.replaceAll(' ', '')}`);
 
         return await new Promise(async (resolve, reject) => {
             const imageContent = fs.readFileSync(image.path);
@@ -101,7 +105,7 @@ const editImage = async (image, fileName) => {
             });
 
             resolve(`https://firebasestorage.googleapis.com/v0/b/${storage.bucket().name}/o/images%2F
-            ${fileName}?alt=media`);
+            ${uploadName}?alt=media`);
             
         });
     } catch (error) {
