@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/dashboardOrder.css" />
+    <title>Quản lý đặt hàng</title>
+</head>
+
+<body>
+    <div class="alert" id="Alert" >
+      <span class="fas fa-exclamation-circle"></span>
+      <div class="close-btn">
+        <span class="fas fa-times"></span>
+      </div>
+    </div>
+  <div class="alert" id="Alert" >
+    <span class="fas fa-exclamation-circle"></span>
+    <div class="close-btn">
+       <span class="fas fa-times"></span>
+    </div> 
+  </div>
+    <div class="d-flex" id="wrapper">
+       <!-- Sidebar -->
+       <%- include('partials/navbar') %>
+       <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content  -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle second-text fw-bold" href="#" id="navbarDropdown"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user me-2"></i>Huy hà
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Thông Tin</a></li>
+                                <li><a class="dropdown-item" href="#">Cài đặt</a></li>
+                                <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main>
+                <div class="navigation">
+                        
+                    <div class="search-container">
+                        <input type="text" class="search-container" id="search-name" placeholder="Tìm kiếm...">
+                        <button type="submit" class="search" id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+
+                    <div class="search-container" style="display: flex; padding: 10px; gap: 10px">
+                        <div>Chọn trạng thái:</div>
+                        <select id="search-status" style="text-align: center; width: 20%; border-radius: 10px;">
+                            <option value="Delivered">Đã xong</option>
+                            <option value="Pending">Đang xử lí</option>
+                            <option value="Cancelled">Hủy bỏ</option>
+                        </select>
+                    </div>
+                </div>
+                <h2 style="text-align: center;">Danh sách đặt hàng</h2>
+
+              </main>
+                <table id="order-table">
+                    <thead>
+                      <tr>
+                        <th>Tên khách hàng</th>
+                        <th>Ngày đặt</th>
+                        <th>Chi tiết</th>
+                        <th>Tổng tiền</th>
+                        <th>Tình trạng</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for (let i = 0; i < orderList.length; i++) { %>
+                        <tr>
+                          <td id="name-<%= i %>"><%= orderList[i].user.name %></td>
+                          <td id="date-<%= i %>"><%=new Date(orderList[i].date)
+                            .toLocaleDateString('en-GB') %></td>
+                          <td id="detail-<%= i %>">
+                            <button id="btn-detail-<%= i %>" value="<%= JSON.stringify(orderList[i].orderDetails) %>" class="btn btn-link">
+                                Xem chi tiết
+                            </button>
+                          </td>
+                          <td id="price-<%= i %>"><%= orderList[i].total %></td>
+                          <td id="status-<%= i %>">
+                            <%= orderList[i].status === 'Pending' ? 'Đang xử lí' : orderList[i].status === 'Delivered' ? 'Đã xong' : 'Hủy bỏ' %>
+                          </td>
+                          <td>
+                            <button class="finish-button" id="finish-btn-<%= i %>">Hoàn thành</button>
+                            <button class="delete-button" id="delete-btn-<%= i %>">Xóa</button>
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                 
+                  <div class="detail-order">
+                    <section id="detail-order" style="display: none;">
+                      <div>
+                        <h2>Chi tiết đặt hàng</h2>
+                      </div>
+
+                      <div class="form-container">
+                          <table id="detail-table">
+                            <thead>
+                              <tr>
+                                <th>Tên sách</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                          <div>
+                            <button id="close-detail-btn" style="float: right;"> Đóng </button>
+                          </div>
+                      </div>
+                    </section>
+                  </div>
+              </main>
+    <script src="/scripts/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/scripts/dashboardorder.js"></script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@ const checkAuthen = require('../middleware/checkAuthen');
 
 router.use('/access', require('./access/index'));
 
-// router.use(checkAuthen);
+router.use(checkAuthen);
 
 router.get('/', (req, res) => { res.redirect('/dashboard'); });
 
@@ -20,6 +20,8 @@ router.use('/category', require('./category/index'));
 router.use('/import', require('./import/index'));
 
 router.use('/employee', require('./employee/index'));
+
+router.use('/order', require('./order/index'));
 
 router.use('/invoice', require('./invoice/index'));
 

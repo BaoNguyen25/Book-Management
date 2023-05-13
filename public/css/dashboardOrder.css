@@ -1,0 +1,725 @@
+.search-container {
+    display: flex;
+    align-items: center; /* căn giữa theo chiều dọc */
+    justify-content: center; /* căn giữa theo chiều ngang */
+    width: 100%;
+    border-radius: 30px;
+    
+  }
+  .search-container input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    
+  }
+  .search-container button[type="submit"] {
+    width: 5%;
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    
+  }
+  
+  button.search:hover {
+    background-color: (var(--));
+  }
+  
+  
+#add-invoice{
+  height: 580px;
+  width: 500px; /* Đặt chiều rộng cho phần tử */
+  margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
+  padding: auto; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
+  position: relative; /* Đặt vị trí để có thể sử dụng các thuộc tính top, bottom, left, right */
+  top: 20%; /* Đặt vị trí theo chiều dọc */
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 10px #888888; 
+  overflow: auto;
+}
+  
+#add-invoice h2 {
+  text-align: left;
+  float: left;
+  width: 50%;
+  margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
+  font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
+}
+  #add-invoice form label {
+  text-align: justify;
+  }
+  .form-container {
+  clear: both;
+  }
+  #add-invoice form input {
+  width: 100%;
+  margin-bottom: 10px;
+  }
+  
+  #add-invoice form button {
+  display: block;
+  margin: 10px auto;
+  }
+  #add-invoice form input[type="text"], #add-invoice form button[type="submit"], #add-invoice form select,
+  #add-invoice form input[type="date"] {
+  padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
+  border-radius: 5px; /* Đặt bo góc cho input và button */
+  border: none; /* Xóa viền cho input và button */
+  font-size: 16px; /* Đặt cỡ chữ cho input và button */
+  }
+  
+  #add-invoice form button[type="submit"] {
+  background-color: #4CAF50; /* Đặt màu nền cho button */
+  color: white; /* Đặt màu chữ cho button */
+  cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  }
+  
+  #add-ivoice form button[type="submit"]:hover {
+  background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  }
+  
+  #add-invoice form label {
+  display: block; /* Hiển thị label theo dạng khối */
+   /* Đặt khoảng cách dưới mỗi label */
+  font-size: 16px; /* Đặt cỡ chữ cho label */
+  }
+  
+  .addinvoice {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  border-radius: 10px;
+  }
+  
+  #close-add-btn, #close-detail-btn {
+    float: right;
+  }
+  #add-invoice form button[type="submit"] {
+    float: right;
+    margin-right: 10px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    border: none;
+    width: 70%; /* chiếm 70% của bộ khung tìm kiếm */
+  }
+  
+  select {
+    padding: 10px;
+    border: none;
+    width: 70%; /* chiếm 70% của bộ khung tìm kiếm */
+  }
+  
+  h2 {
+    margin-bottom: 16px;
+  }
+  
+  #close-add-btn,
+  #close-detail-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #f44336;
+  }
+  
+  
+  form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  form input[type=text], form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+  
+  form input[type=submit] {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #4CAF50;
+  }
+  
+  table {
+    
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 12px;
+    
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    text-align: center;
+    color: #f2f2f2;
+    background-color: #27ae60;
+  }
+  tbody td{
+    text-align: center;
+  }
+  td {
+    background-color: #ffffff;
+  }
+  .search-container {
+    display: flex;
+    align-items: center; /* căn giữa theo chiều dọc */
+    justify-content: center; /* căn giữa theo chiều ngang */
+    width: 100%;
+    border-radius: 30px;
+    
+  }
+  .search-container input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border-radius: 30px;
+    border: none;
+    
+  }
+  .search-container button[type="submit"] {
+    width: 5%;
+    background-color: #27ae60;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 30px;
+    
+  }
+  
+  button.search:hover {
+    background-color: (var(--));
+  }
+  
+  #add-order{
+  height: 300px;
+  width: 500px; /* Đặt chiều rộng cho phần tử */
+  margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
+  padding: auto; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
+  position: relative; /* Đặt vị trí để có thể sử dụng các thuộc tính top, bottom, left, right */
+  top: 20%; /* Đặt vị trí theo chiều dọc */
+  right: -15%;
+  transform: translateY(-20%);
+  background-color: #f2f2f2;
+  box-shadow: 0px 0px 10px #888888; 
+  
+  }
+  
+  #add-order h2 {
+  text-align: left;
+  float: left;
+  width: 50%;
+  margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
+  font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
+  }
+  #add-order form label {
+  text-align: justify;
+  }
+  .form-container {
+  clear: both;
+  }
+  #add-order form input {
+  width: 100%;
+  margin-bottom: 10px;
+  }
+  
+  #add-order form button {
+  display: block;
+  margin: 10px auto;
+  }
+  #add-order form input[type="text"], #add-order form button[type="submit"] {
+  padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
+  border-radius: 5px; /* Đặt bo góc cho input và button */
+  border: none; /* Xóa viền cho input và button */
+  font-size: 16px; /* Đặt cỡ chữ cho input và button */
+  }
+  
+  #add-order form button[type="submit"] {
+  background-color: #4CAF50; /* Đặt màu nền cho button */
+  color: white; /* Đặt màu chữ cho button */
+  cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  }
+  
+  #add-order form button[type="submit"]:hover {
+  background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  }
+  
+  #add-order form label {
+  display: block; /* Hiển thị label theo dạng khối */
+   /* Đặt khoảng cách dưới mỗi label */
+  font-size: 16px; /* Đặt cỡ chữ cho label */
+  }
+  
+  .addorder {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  border-radius: 10px;
+  }
+  
+  #close-add-btn {
+    float: right;
+  }
+  #add-order form button[type="submit"] {
+    float: right;
+    margin-right: 10px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    border: none;
+    width: 70%; /* chiếm 70% của bộ khung tìm kiếm */
+  }
+  h2 {
+    margin-bottom: 16px;
+  }
+  
+  #close-add-btn,
+  #close-detail-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #f44336;
+  }
+  
+  
+  form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  form input[type=text] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+  }
+  
+  form input[type=submit] {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #4CAF50;
+  }
+  
+  table {
+    
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    padding: 12px;
+    
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    text-align: center;
+    color: #f2f2f2;
+    background-color: #27ae60;
+  }
+  tbody td{
+    text-align: center;
+  }
+  td {
+    background-color: #ffffff;
+  }
+  
+  .detail-button, .delete-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .detail-button {
+    background-color: #4CAF50;
+    align-items: center;
+    justify-content: center;
+    
+  
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  #add-btn, #submit-add-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--main-text-color);
+    margin-bottom: 16px;
+  }
+  #order-table td:nth-child(5) {
+    width: 100px;
+  }
+  
+  #detail-order {
+    height: 300px;
+    width: 500px; /* Đặt chiều rộng cho phần tử */
+    margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
+    padding: 20px; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
+    position: relative; /* Đặt vị trí để có thể sử dụng các thuộc tính top, bottom, left, right */
+    top: 20%; /* Đặt vị trí theo chiều dọc */
+    right: -15%;
+    transform: translateY(-20%);
+    background-color: #f2f2f2;
+    box-shadow: 0px 0px 10px #888888; 
+  
+  }
+  
+  #detail-order  h2 {
+    text-align: left;
+    float: left;
+    width: 50%;
+    margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
+    font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
+  }
+  #detail-order form label {
+    text-align: justify;
+  }
+  .form-container {
+    clear: both;
+  }
+  #detail-order form input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #detail-order form input[type="text"], #detail-order form button[type="submit"] {
+    padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
+    border-radius: 5px; /* Đặt bo góc cho input và button */
+    border: none; /* Xóa viền cho input và button */
+    font-size: 16px; /* Đặt cỡ chữ cho input và button */
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .button-container button {
+    margin-left: 10px;
+  }
+  
+  #detail-order form button[type="submit"] {
+    background-color: #4CAF50; /* Đặt màu nền cho button */
+    color: white; /* Đặt màu chữ cho button */
+    cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  }
+  
+  #detail-order form button[type="submit"]:hover {
+    background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  }
+  
+  #detail-order  form label {
+    display: block; /* Hiển thị label theo dạng khối */
+    margin-bottom: 10px; /* Đặt khoảng cách dưới mỗi label */
+    font-size: 16px; /* Đặt cỡ chữ cho label */
+  }
+  
+  .detail-order  {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    border-radius: 10px;
+  }
+  
+  
+  .alert {
+    color: #ffffff; /* Màu chữ trắng */
+    text-align: center; /* Căn giữa nội dung alert */
+    padding: 20px 40px;
+    min-width: 420px;
+    position: absolute;
+    top: 3%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    z-index: 999;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .alert.showAlert{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .alert.show{
+    animation: show_slide 1s ease forwards;
+  }
+  @keyframes show_slide {
+    0%{
+      transform: translateX(100%);
+    }
+    40%{
+      transform: translateX(-10%);
+    }
+    80%{
+      transform: translateX(0%);
+    }
+    100%{
+      transform: translateX(-10px);
+    }
+  }
+  .alert.hide{
+    animation: hide_slide 1s ease forwards;
+  }
+  @keyframes hide_slide {
+    0%{
+      transform: translateX(-10px);
+    }
+    40%{
+      transform: translateX(0%);
+    }
+    80%{
+      transform: translateX(-10%);
+    }
+    100%{
+      transform: translateX(100%);
+    }
+  }
+  .alert .fa-exclamation-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    font-size: 30px;
+  }
+  .alert .msg {
+    margin-top: 10px; /* Khoảng cách giữa icon và nội dung */
+  }
+  .alert .close-btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px 18px;
+    cursor: pointer;
+  }
+  
+  .alert .close-btn .fas{
+    font-size: 22px;
+    line-height: 40px;
+  }
+  .finish-button, .delete-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .finish-button {
+    background-color: #4CAF50;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-button {
+    background-color: #f44336;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  #add-btn, #submit-add-btn, #submit-detail-btn,
+  #detail-add-btn, #detail-detail-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    color: #fff;
+    background-color: var(--main-text-color);
+    margin-bottom: 16px;
+  }
+  #invoice-table td:nth-child(5) {
+    width: 100px;
+  }
+  
+  #detail-invoice {
+    height: 550px;
+    width: 500px; /* Đặt chiều rộng cho phần tử */
+    margin: 0 auto; /* Đặt lề để căn giữa theo chiều ngang */
+    padding: 20px; /* Đặt khoảng cách giữa các phần tử bên trong phần tử */
+    position: relative; /* Đặt vị trí để có thể sử dụng các thuộc tính top, bottom, left, right */
+    top: 20%; /* Đặt vị trí theo chiều dọc */
+    background-color: #f2f2f2;
+    box-shadow: 0px 0px 10px #888888; 
+    overflow: auto;
+  }
+  
+  #detail-invoice  h2 {
+    text-align: left;
+    float: left;
+    width: 50%;
+    margin-top: 0; /* Xóa khoảng cách trên đầu tiêu đề */
+    font-size: 24px; /* Đặt cỡ chữ cho tiêu đề */
+  }
+  #detail-invoice form label {
+    text-align: justify;
+  }
+  .form-container {
+    clear: both;
+  }
+  #detail-invoice form input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  #detail-invoice form input[type="text"], #detail-invoice form button[type="submit"]
+  , #detail-invoice form select, #detail-invoice form input[type="date"] {
+    padding: 8px; /* Đặt khoảng cách giữa các phần tử input và button */
+    border-radius: 5px; /* Đặt bo góc cho input và button */
+    border: none; /* Xóa viền cho input và button */
+    font-size: 16px; /* Đặt cỡ chữ cho input và button */
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .button-container button {
+    margin-left: 10px;
+  }
+  
+  #detail-invoice form button[type="submit"] {
+    background-color: #4CAF50; /* Đặt màu nền cho button */
+    color: white; /* Đặt màu chữ cho button */
+    cursor: pointer; /* Đặt con trỏ chuột thành con trỏ tay */
+  }
+  
+  #detail-invoice form button[type="submit"]:hover {
+    background-color: #3e8e41; /* Đặt màu nền cho button khi hover */
+  }
+
+  #detail-invoice form button[type="submit"] {
+    float: right;
+    margin-right: 10px;
+  }
+  
+  #detail-invoice form label {
+    display: block; /* Hiển thị label theo dạng khối */
+    margin-bottom: 10px; /* Đặt khoảng cách dưới mỗi label */
+    font-size: 16px; /* Đặt cỡ chữ cho label */
+  }
+  
+  .detail-invoice  {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    border-radius: 10px;
+  }
+  
+
+  .alert {
+    color: #ffffff; /* Màu chữ trắng */
+    text-align: center; /* Căn giữa nội dung alert */
+    padding: 20px 40px;
+    min-width: 420px;
+    position: absolute;
+    top: 3%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    z-index: 999;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .alert.showAlert{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .alert.show{
+    animation: show_slide 1s ease forwards;
+  }
+  @keyframes show_slide {
+    0%{
+      transform: translateX(100%);
+    }
+    40%{
+      transform: translateX(-10%);
+    }
+    80%{
+      transform: translateX(0%);
+    }
+    100%{
+      transform: translateX(-10px);
+    }
+  }
+  .alert.hide{
+    animation: hide_slide 1s ease forwards;
+  }
+  @keyframes hide_slide {
+    0%{
+      transform: translateX(-10px);
+    }
+    40%{
+      transform: translateX(0%);
+    }
+    80%{
+      transform: translateX(-10%);
+    }
+    100%{
+      transform: translateX(100%);
+    }
+  }
+  .alert .fa-exclamation-circle{
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    font-size: 30px;
+  }
+  .alert .msg {
+    margin-top: 10px; /* Khoảng cách giữa icon và nội dung */
+  }
+  .alert .close-btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px 18px;
+    cursor: pointer;
+  }
+  
+  .alert .close-btn .fas{
+    font-size: 22px;
+    line-height: 40px;
+  }

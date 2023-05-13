@@ -2,7 +2,8 @@
 
 const router = require('express').Router();
 const { getDashboard, getBookPage, getCategoryPage, 
-    getAuthorPage, getImportPage, getEmployeePage, getInvoicePage } = require('../../controllers/render.controller');
+    getAuthorPage, getImportPage, getEmployeePage, getInvoicePage,
+    getOrderPage } = require('../../controllers/render.controller');
 
 router.get('/', getDashboard);
 
@@ -17,6 +18,8 @@ router.get('/import', getImportPage);
 router.get('/employee', getEmployeePage);
 
 router.get('/invoice', getInvoicePage);
+
+router.get('/order', getOrderPage);
 
 module.exports = router;
 
