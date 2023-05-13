@@ -25,8 +25,17 @@ class EmployeeService {
         return await User.findOneAndDelete({ email: email }).catch((err) => { return null; });
     }
 
-    static searchEmployee = async (content) => {
-        return User.find({ name: { $regex: content, $options: 'i' } }).catch((err) => { return null });
+    static searchEmployee = async (content = "") => {
+        return await User.aggregate([
+            {
+                $match: {
+                    $or: [
+                        { name: { $regex: content, $options: 'i' } },
+                        { role: { $regex: content, $options: 'i' } },
+                    ]
+                }
+            },
+        ]).catch((err) => {return null});
     }
 
     static editEmployee = async (name, gender, role, phone, address, identity, email) => {

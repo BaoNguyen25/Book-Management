@@ -1,4 +1,3 @@
-
 try {
     let data = fetch('/statistics/data', {
         method: 'GET',
@@ -8,80 +7,78 @@ try {
         })
         .then(response => response.json())
         .then(async res => {
-                    // set the dimensions and margins of the graph
-        var margin = {top: 20, right: 80, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
-
+            
+       // set the dimensions and margins of the graph
+        const margin = {top: 20, right: 50, bottom: 30, left: 50};
+        var width = 900;
+        var height = 500;
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom ;
         // parse the date / time
-        var parseTime = d3.timeParse("%Y-%m-%d");
+        const parseTime = d3.timeParse("%m/%d/%Y");
 
         // set the ranges
-        var x = d3.scaleTime().range([0, width]);
-        var y0 = d3.scaleLinear().range([height, 0]);
-        var y1 = d3.scaleLinear().range([height, 0]);
+        const x = d3.scaleTime().range([0, width]);
+        const y0 = d3.scaleLinear().range([height, 0]);
+        const y1 = d3.scaleLinear().range([height, 0]);
 
-        // define the line
-        var valueline1 = d3.line()
-        .x(function(d) { return x(d.Date); })
-        .y(function(d) { return y0(d['Invoice Quantity']); });
+        // define the 1st line
+        const valueline1 = d3.line()
+        .x(d => x(d.date))
+        .y(d => y0(d.invoiceQuantity));
 
-        var valueline2 = d3.line()
-        .x(function(d) { return x(d.Date); })
-        .y(function(d) { return y1(d['Import Quantity']); });
+        // define the 2nd line
+        const valueline2 = d3.line()
+        .x(d => x(d.date))
+        .y(d => y1(d.importQuantity));
 
-        // append the svg obgect to the body of the page
-        // appends a 'group' element to 'svg'
-        // moves the 'group' element to the top left margin
-        var svg = d3.select("body").append("svg")
-        .attr("width", width + margin.left + margin.right)
+        // append the svg object to the body of the 
+
+        const svg = d3.select(".statistics").append("svg")
+        .attr("width", width + 250)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-        // load the data
-        d3.csv(`../resources/data.csv`, function(error, data) {
-        if (error) throw error;
-
-        console.log(data);
+        d3.csv(`../resources/data.csv`).then(function(data) {
 
         // format the data
         data.forEach(function(d) {
-        d.Date = parseTime(d.Date);
-        d['Invoice Quantity'] = +d['Invoice Quantity'];
-        d['Import Quantity'] = +d['Import Quantity'];
+        d.date = parseTime(d.Date);
+        d.invoiceQuantity = +d['Invoice Quantity'];
+        d.importQuantity = +d['Import Quantity'];
         });
 
-        // sort the data by date
-        data.sort(function(a, b) {
-        return a.Date - b.Date;
-        });
+        // scale the range of the data
+        x.domain(d3.extent(data, d => d.date));
+        y0.domain([0, d3.max(data, d => d.invoiceQuantity)]);
+        y1.domain([0, d3.max(data, d => d.importQuantity)]);
 
-        // set the domains of the scales
-        x.domain(d3.extent(data, function(d) { return d.Date; }));
-        y0.domain([0, d3.max(data, function(d) { return d['Invoice Quantity']; })]);
-        y1.domain([0, d3.max(data, function(d) { return d['Import Quantity']; })]);
-
-        // add the valueline paths
-        svg.append("path")
-        .data([data])
-        .attr("class", "line")
-        .style("stroke", "steelblue")
+        // Add the valueline1 path
+        svg.append("g")
+        .append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 2)
         .attr("d", valueline1);
+  
 
-        svg.append("path")
-        .data([data])
-        .attr("class", "line")
-        .style("stroke", "red")
+        // Add the valueline2 path
+        svg.append("g")
+        .append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
         .attr("d", valueline2);
-
-        // add the x axis
+        // Add the X Axis
         svg.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(x));
 
-        // add the y0 axis
+        // Add the Y Axis (left)
         svg.append("g")
         .call(d3.axisLeft(y0));
 
@@ -89,8 +86,77 @@ try {
         svg.append("g")
         .attr("transform", "translate(" + width + ",0)")
         .call(d3.axisRight(y1));
-        });
+
+        svg.append("text")
+        .attr("transform", `rotate(-90) translate(${-margin.top - innerHeight / 2}, 0)`)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("dy", "-2em")
+        .style("text-anchor", "middle")
+        .text("Invoice Quantity");
+
+        svg.append("text")
+        .attr("transform", `rotate(90) translate(220, -900)`)
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("dy", "-2em")
+        .style("text-anchor", "middle")
+        .text("Import Quantity");
+
+        // Tạo một hình vuông màu đỏ cho chú thích import quantity
+        svg.append("rect")
+        .attr("x", 970)  // x position of the rectangle
+        .attr("y", 10)  // y position of the rectangle
+        .attr("width", 20)  // width of the rectangle
+        .attr("height", 20)  // height of the rectangle
+        .style("fill", "red");  // set the fill color to red
+
+        // Thêm một văn bản mô tả cho chú thích import quantity
+        svg.append("text")
+        .attr("x", 1000)  // x position of the text
+        .attr("y", 25)  // y position of the text
+        .text("Import quantity")  // set the text
+        .style("font-size", "14px");  // set the font size
+
+        // Tạo một hình vuông màu xanh cho chú thích invoice quantity
+        svg.append("rect")
+        .attr("x", 970)  // x position of the rectangle
+        .attr("y", 40)  // y position of the rectangle
+        .attr("width", 20)  // width of the rectangle
+        .attr("height", 20)  // height of the rectangle
+        .style("fill", "steelblue");  // set the fill color to blue
+
+        // Thêm một văn bản mô tả cho chú thích invoice quantity
+        svg.append("text")
+        .attr("x", 1000)  // x position of the text
+        .attr("y", 55)  // y position of the text
+        .text("Invoice quantity")  // set the text
+        .style("font-size", "14px");  // set the font size 
         
+        var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function(d) {
+          return `Số lần liên lạc 12 tháng gần nhất: }<br>Độ tuổi:}`;
+        });   
+     
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 3)
+        .attr("cx", function(d) { return x(d.date); })
+        .attr("cy", function(d) { return y0(d.invoiceQuantity); })
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
+        .style("fill", "steelblue")
+        .on('mouseover', d3.tip().attr('class', 'd3-tip').html(function(d) { return `Số lần liên lạc 12 tháng gần nhất:`;})
+        .show)
+        .on('mouseout', tip.hide);
+
+      svg.call(d3.tip());
+
+
+        }).catch(function(err) { console.log(err); });
+    
         }
     ).catch(err => console.log(err));
 } catch (e) {

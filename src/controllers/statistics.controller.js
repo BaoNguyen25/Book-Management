@@ -79,7 +79,7 @@ class StatisticsController {
             });
 
             const data = {
-                date: new Date(invoiceItem._id.year, invoiceItem._id.month - 1, invoiceItem._id.day),
+                date: new Date(invoiceItem._id.year, invoiceItem._id.month - 1, invoiceItem._id.day).toLocaleDateString("en-US"),
                 invoiceQuantity: invoiceItem.quantity,
                 importQuantity: matchingImportItem ? matchingImportItem.quantity : 0
             }
