@@ -81,7 +81,7 @@ search_btn.addEventListener('click', async (event) => {
                     await clearTableBody();
 
                     for (let i = 0; i < employeeList.length; i++) {
-                        await addEmployeeToTable(employeeList[i].id, employeeList[i].name, employeeList[i].gender, employeeList[i].role, employeeList[i].phone, employeeList[i].address, employeeList[i].identity, employeeList[i].email);
+                        await addEmployeeToTable(employeeList[i].name, employeeList[i].gender, employeeList[i].role, employeeList[i].phone, employeeList[i].address, employeeList[i].identity, employeeList[i].email);
                     }   
                 } else {
                     notification("error", "Thất bại");

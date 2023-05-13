@@ -8,7 +8,7 @@ try {
         })
         .then(response => response.json())
         .then(async res => {
-                    // set the dimensions and margins of the graph
+            
        // set the dimensions and margins of the graph
         const margin = {top: 20, right: 50, bottom: 30, left: 50};
         var width = 900;
@@ -42,11 +42,7 @@ try {
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-        // Get the data
-
-        
         d3.csv(`../resources/data.csv`).then(function(data) {
-
 
         // format the data
         data.forEach(function(d) {
@@ -136,7 +132,28 @@ try {
         .attr("x", 1000)  // x position of the text
         .attr("y", 55)  // y position of the text
         .text("Invoice quantity")  // set the text
-        .style("font-size", "14px");  // set the font size
+        .style("font-size", "14px");  // set the font size 
+        
+        var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function(d) {
+          return `Số lần liên lạc 12 tháng gần nhất: }<br>Độ tuổi:}`;
+        });   
+     
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("r", 3)
+        .attr("cx", function(d) { return x(d.date); })
+        .attr("cy", function(d) { return y0(d.invoiceQuantity); })
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
+        .style("fill", "steelblue")
+        .on('mouseover', d3.tip().attr('class', 'd3-tip').html(function(d) { return `Số lần liên lạc 12 tháng gần nhất:`;})
+        .show)
+        .on('mouseout', tip.hide);
+
+      svg.call(d3.tip());
 
 
         }).catch(function(err) { console.log(err); });

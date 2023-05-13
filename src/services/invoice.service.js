@@ -119,10 +119,11 @@ class InvoiceService {
                     $or: [
                         { name: { $regex: content, $options: 'i' } },
                         { madeBy: { $regex: content, $options: 'i' } },
+                        { date: { $eq: content } },
                     ]
                 }
             },
-        ]).catch((err) => {return null});
+        ]).catch((err) => {console.log(err)});
     }
 }
 
