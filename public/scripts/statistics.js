@@ -1,4 +1,3 @@
-
 try {
     let data = fetch('/statistics/data', {
         method: 'GET',
