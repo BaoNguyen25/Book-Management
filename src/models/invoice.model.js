@@ -20,7 +20,6 @@ const InvoiceSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
     },
     madeBy: {
         type: String,

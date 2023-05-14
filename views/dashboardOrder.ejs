@@ -96,6 +96,7 @@
                     <tbody>
                       <% for (let i = 0; i < orderList.length; i++) { %>
                         <tr>
+                          <span style="display: none;" id="id-<%= i %>" value="<%= orderList[i]._id %>"></span>
                           <td id="name-<%= i %>"><%= orderList[i].user.name %></td>
                           <td id="date-<%= i %>"><%=new Date(orderList[i].date)
                             .toLocaleDateString('en-GB') %></td>

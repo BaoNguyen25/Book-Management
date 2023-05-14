@@ -5,6 +5,10 @@ const detail_btn = document.querySelectorAll("[id^='btn-detail']");
 const detail_form = document.getElementById("detail-order");
 const close_detail_button = document.getElementById("close-detail-btn");
 const search_btn = document.getElementById("search-btn");
+const finish_btn = document.querySelectorAll("[id^='finish-btn']");
+const delete_btn = document.querySelectorAll("[id^='delete-btn']");
+
+console.log(finish_btn)
 
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
@@ -29,7 +33,7 @@ search_btn.addEventListener("click", async () => {
         .then((data) => {
             table_body.innerHTML = "";
             if (data.metadata) {
-                addOrderToTable(data.metadata);
+                addOrderToTable(data.metadata, status);
             }
         });
     } catch (error) {
@@ -46,7 +50,15 @@ close_detail_button.addEventListener("click", () => {
     detail_form.style.display = "none";
 });
 
-function addOrderToTable(orderList) {
+finish_btn.forEach((btn) => {
+    btn.addEventListener("click", handleFinishOrderEvent);
+});
+
+delete_btn.forEach((btn) => {
+    btn.addEventListener("click", handleDeleteOrderEvent);
+});
+
+function addOrderToTable(orderList, status="Pending") {
     const table = document.getElementById("order-table");
     const table_body = table.getElementsByTagName("tbody")[0];
 
@@ -71,22 +83,26 @@ function addOrderToTable(orderList) {
 
         cell3.appendChild(detail_btn);
         cell4.innerHTML = order.total;
-        cell5.innerHTML = order.status;
+        cell5.innerHTML = order.status === 'Pending' ? 'Đang giao' : order.status === 'Delivered' ? 'Đã giao' : 'Đã hủy';
 
-        let finish_btn = document.createElement("button");
-        finish_btn.setAttribute("class", "finish-button");
-        finish_btn.setAttribute("id", `finish-btn-${index}`);
-        finish_btn.innerHTML = "Hoàn thành";
-        finish_btn.setAttribute("value", order._id);
+        if (status === "Pending") {
+            let finish_btn = document.createElement("button");
+            finish_btn.setAttribute("class", "finish-button");
+            finish_btn.setAttribute("id", `finish-btn-${index}`);
+            finish_btn.innerHTML = "Hoàn thành";
+            finish_btn.setAttribute("value", order._id);
+            finish_btn.addEventListener("click", handleFinishOrderEvent);
 
-        let delete_btn = document.createElement("button");
-        delete_btn.setAttribute("class", "delete-button");
-        delete_btn.setAttribute("id", `delete-btn-${index}`);
-        delete_btn.innerHTML = "Xóa";
-        delete_btn.setAttribute("value", order._id);
+            let delete_btn = document.createElement("button");
+            delete_btn.setAttribute("class", "delete-button");
+            delete_btn.setAttribute("id", `delete-btn-${index}`);
+            delete_btn.innerHTML = "Xóa";
+            delete_btn.setAttribute("value", order._id);
+            delete_btn.addEventListener("click", handleDeleteOrderEvent);
 
-        cell6.appendChild(finish_btn);
-        cell6.appendChild(delete_btn);
+            cell6.appendChild(finish_btn);
+            cell6.appendChild(delete_btn);
+        }
     });
 }
 
@@ -115,4 +131,66 @@ function showOrderDetail(btn) {
 
         detail_form.style.display = "block";
     });
+}
+
+async function handleFinishOrderEvent(event) {
+    const btn = event.target;
+    let index = btn.id.split("-")[2];
+
+    const orderId = document.getElementById(`id-${index}`).getAttribute("value");
+
+    console.log(orderId)
+
+    try {
+        const data = await fetch("/order/finish", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ orderId }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.message === "Finish order successfully") {
+                alert(data.message);
+                location.reload();
+                return;
+            }
+
+            alert("Finish order failed");
+        });
+    } catch (error) {
+        alert("Finish order failed");
+    }
+}
+
+async function handleDeleteOrderEvent(event) {
+    const btn = event.target;
+    let index = btn.id.split("-")[2];
+
+    const orderId = document.getElementById(`id-${index}`).getAttribute("value");
+
+    console.log(orderId)
+
+    try {
+        const data = await fetch("/order/cancel", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ orderId }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.message === "Cancel order successfully") {
+                alert(data.message);
+                location.reload();
+                return;
+            }
+
+            alert("Cancel order failed");
+        });
+    } catch (error) {
+        alert("Finish order failed");
+    }
 }
