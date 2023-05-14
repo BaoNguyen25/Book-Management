@@ -9,6 +9,12 @@ const { uploadImage, deleteImage, editImage } = require('../utils/uploadImageFir
 const fs = require('fs');
 
 class AccessService {
+
+    static getBookCount = async () => {
+        const bookCount = Book.countDocuments();
+        return bookCount;
+    }
+
     static getBookList = async () => {
         const bookList = await Book.find().catch((error) => {
             console.log(error);

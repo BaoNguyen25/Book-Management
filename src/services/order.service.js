@@ -42,6 +42,25 @@ class OrderService {
           return null;
         }
       }
+
+      static getOrderCount = async () => {
+        const orderCount = Order.countDocuments();
+        return orderCount;
+      }
+
+      
+      static getOrderSales = async () => {
+        const orderSales =  Order.aggregate([
+          {
+              $group: {
+                  _id: null,
+                  total: { $sum: "$total" }
+              }
+          }
+      ]);
+        return orderSales;
+      }
+
       
 }
 
