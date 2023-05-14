@@ -105,7 +105,7 @@
                                 Xem chi tiết
                             </button>
                           </td>
-                          <td id="price-<%= i %>"><%= orderList[i].total %></td>
+                          <td id="price-<%= i %>"><%= orderList[i].total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); %></td>
                           <td id="status-<%= i %>">
                             <%= orderList[i].status === 'Pending' ? 'Đang xử lí' : orderList[i].status === 'Delivered' ? 'Đã xong' : 'Hủy bỏ' %>
                           </td>

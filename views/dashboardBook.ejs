@@ -136,7 +136,7 @@
                             <td id="category-<%= i %>"><%= bookList[i].category %></td>
                             <td id="author-<%= i %>"><%= bookList[i].author %></td>
                             <td id="number-<%= i %>"><%= bookList[i].quantity %></td>
-                            <td id="price-<%= i %>"><%= bookList[i].price%></td>
+                            <td id="price-<%= i %>"><%= bookList[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");%></td>
                             <td class="button-column" colspan="2">
                               <button class="edit-button" id="edit-btn-<%= i %>">Chỉnh sửa</button>
                               <button class="delete-button" id="delete-btn-<%= i%>">Xóa</button>

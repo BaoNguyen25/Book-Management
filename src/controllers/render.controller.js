@@ -1,12 +1,12 @@
 "use strict";
 
-const { getBookList } = require("../services/book.service");
+const { getBookList, getBookCount } = require("../services/book.service");
 const { getAuthorList } = require("../services/author.service");
 const { getCategoryList } = require("../services/category.service");
 const { getImportList } = require("../services/import.service");
 const { getEmployeeList } = require("../services/employee.service");
 const { getInvoiceList } = require("../services/invoice.service");
-const { getOrderListByStatus } = require("../services/order.service");
+const { getOrderListByStatus, getOrderCount, getOrderSales} = require("../services/order.service");
 
 class RenderController {
     getSignIn = async (req, res) => {
@@ -23,7 +23,11 @@ class RenderController {
     }
 
     getDashboard = async (req, res) => {
-        res.render('dashboard');
+        res.render('dashboard', 
+        {books: await getBookCount(),
+         orders: await getOrderCount(),
+         sales: await getOrderSales(),
+        });
     }
 
     getBookPage = async (req, res) => {

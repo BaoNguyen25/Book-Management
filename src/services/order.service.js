@@ -93,14 +93,34 @@ class OrderService {
 
   static cancelOrder = async (orderId) => {
     try {
-      const order = await Order.findOneAndUpdate({_id: orderId}, {status: "Cancelled"});
+      const order = await Order.findOneAndUpdate(
+        { _id: orderId },
+        { status: "Cancelled" }
+      );
 
       return order;
     } catch (error) {
       console.log(error);
       return null;
     }
-  }
+  };
+
+  static getOrderCount = async () => {
+    const orderCount = Order.countDocuments();
+    return orderCount;
+  };
+
+  static getOrderSales = async () => {
+    const orderSales = Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          total: { $sum: "$total" },
+        },
+      },
+    ]);
+    return orderSales;
+  };
 }
 
 module.exports = OrderService;

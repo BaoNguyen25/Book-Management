@@ -25,6 +25,11 @@ class AccessService {
                 if (!user) {
                     return reject(info.message);
                 }
+
+                //check role user
+                if (user.role === 'User') {
+                    return reject('You do not have permission to access this page');
+                }
             
                 await req.logIn(user, (err) => {
                     if (err) {
