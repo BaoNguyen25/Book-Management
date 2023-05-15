@@ -82,7 +82,7 @@ search_btn.addEventListener('click', async (event) => {
                     await clearTableBody();
 
                     for (let i = 0; i < authorList.length; i++) {
-                        await addAuthorToTable(authorList[i].name, authorList[i].products, authorList[i].mostSold);
+                        await addAuthorToTable(authorList[i].name, authorList[i].products);
                     }   
                 } else {
                     alert('Search author failed');
@@ -169,7 +169,7 @@ const clearTableBody = async () => {
     }
 }
 
-const addAuthorToTable = async (name, products, mostSold) => {
+const addAuthorToTable = async (name, products) => {
     let table = document.getElementById("author-table");
     let table_body = table.getElementsByTagName("tbody")[0];
     let size = table.rows.length;
@@ -177,16 +177,12 @@ const addAuthorToTable = async (name, products, mostSold) => {
     let cell1 = row.insertCell(0);
     let cell2 = row.insertCell(1);
     let cell3 = row.insertCell(2);
-    let cell4 = row.insertCell(3);
 
     cell1.innerHTML = name;
     cell1.id = `name-${size - 1}`;
 
     cell2.innerHTML = products ?? 0;
     cell2.id = `category-${size - 1}`;
-
-    cell3.innerHTML = mostSold ?? '';
-    cell3.id = `most-sold-${size - 1}`;
 
     let edit_btn = document.createElement("button");
     edit_btn.setAttribute("class", "edit-button");
@@ -206,7 +202,7 @@ const addAuthorToTable = async (name, products, mostSold) => {
     btn_column.appendChild(edit_btn);
     btn_column.appendChild(delete_btn);
 
-    cell4.appendChild(btn_column);
+    cell3.appendChild(btn_column);
 }
 
 const editAuthorInTable = async (oldName, name) => {
