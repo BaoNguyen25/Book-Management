@@ -23,60 +23,98 @@ class RenderController {
     }
 
     getDashboard = async (req, res) => {
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
+
         res.render('dashboard', 
         {books: await getBookCount(),
          orders: await getOrderCount(),
          sales: await getOrderSales(),
+         isAdmin: admin,
         });
     }
 
     getBookPage = async (req, res) => {
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }       
+
         res.render('dashboardBook', 
         { bookList: await getBookList(),
           authorList: await getAuthorList(),
-          categoryList: await getCategoryList() 
+          categoryList: await getCategoryList(),
+          isAdmin: admin,
         });
     }
     
-    getCategoryPage = async (reg, res) =>{
-        res.render('dashboardCategory', {categoryList: await getCategoryList()})
+    getCategoryPage = async (req, res) =>{
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
+        res.render('dashboardCategory', {categoryList: await getCategoryList(), isAdmin: admin})
     }
 
-    getAuthorPage = async (reg, res) =>{
-        res.render('dashboardAuthor', { authorList: await getAuthorList() });
+    getAuthorPage = async (req, res) =>{
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
+
+        res.render('dashboardAuthor', { 
+        authorList: await getAuthorList(),
+        isAdmin: admin, });
     }
 
-    getImportPage = async (reg, res) =>{
+    getImportPage = async (req, res) =>{
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
         res.render('dashboardImport', { 
             bookList: await getBookList(),
             importList: await getImportList(),
+            isAdmin: admin,
         });
     }
 
     getEmployeePage = async (req, res) =>{ 
         
-        // if (req.user.role == 'Admin') {
-        //     function myFunction() {
-        //         alert("You dont have permission to access on this site");
-        //     }
-        //     myFunction();
-        // } else {
-            res.render('dashboardEmployee', {
-                employeeList: await getEmployeeList(),
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
+        
+        res.render('dashboardEmployee', {
+            employeeList: await getEmployeeList(),
+            isAdmin: admin,
         });
         
     } 
 
-    getInvoicePage = async (reg, res) =>{
+    getInvoicePage = async (req, res) =>{
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
         res.render('dashboardInvoice', {
             bookList: await getBookList(),
             invoiceList: await getInvoiceList(),
+            isAdmin: admin,
         });
     }
 
-    getOrderPage = async (reg, res) =>{
+    getOrderPage = async (req, res) =>{
+        var admin = false;
+        if (req.user.role == 'Admin') {
+            admin = true;
+        }          
         res.render('dashboardOrder', {
-            orderList: await getOrderListByStatus()
+            orderList: await getOrderListByStatus(),
+            isAdmin: admin,
         });
     }
 }

@@ -9,8 +9,10 @@
             <i class="fa-solid fa-address-book"></i> Thể Loại Sách</a>
         <a href="/dashboard/author" id="author-link" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
             <i class="fa-solid fa-book-open-reader"></i> Quản Lý Tác Giả</a>
-        <a href="/dashboard/employee" id="employee-link" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-            <i class="fa-solid fa-user "></i> Quản Lý Nhân Viên</a>
+        <% if(isAdmin == true){ %>
+            <a href="/dashboard/employee" id="employee-link" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fa-solid fa-user "></i> Quản Lý Nhân Viên</a>
+        <% } %>
         <a href="/dashboard/import" id="import-link" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
             <i class="bi bi-file-earmark-plus-fill"></i> Quản Lý Nhập Sách</a>
         <a href="/dashboard/order" id="order-link" class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
