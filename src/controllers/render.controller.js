@@ -50,14 +50,22 @@ class RenderController {
         res.render('dashboardImport', { 
             bookList: await getBookList(),
             importList: await getImportList(),
-            });
-    }
-
-    getEmployeePage = async (reg, res) =>{
-        res.render('dashboardEmployee', {
-            employeeList: await getEmployeeList()
         });
     }
+
+    getEmployeePage = async (req, res) =>{ 
+        
+        // if (req.user.role == 'Admin') {
+        //     function myFunction() {
+        //         alert("You dont have permission to access on this site");
+        //     }
+        //     myFunction();
+        // } else {
+            res.render('dashboardEmployee', {
+                employeeList: await getEmployeeList(),
+        });
+        
+    } 
 
     getInvoicePage = async (reg, res) =>{
         res.render('dashboardInvoice', {

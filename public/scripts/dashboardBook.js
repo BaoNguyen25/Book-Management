@@ -206,7 +206,7 @@ const addBookToTable = async (name, category, author, number, price) => {
     cell3.id = `author-${size - 1}`;
     cell4.innerHTML = number;
     cell4.id = `number-${size - 1}`; 
-    cell5.innerHTML = price;
+    cell5.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     cell5.id = `price-${size - 1}`;
 
     let edit_btn = document.createElement("button");
@@ -240,7 +240,7 @@ const editBookInTable = async (oldName, name, category, author, number, price) =
             table_body.rows[i].cells[1].innerHTML = category;
             table_body.rows[i].cells[2].innerHTML = author;
             if (number > 0) table_body.rows[i].cells[3].innerHTML = number;
-            if (price > 0) table_body.rows[i].cells[4].innerHTML = price;
+            if (price > 0) table_body.rows[i].cells[4].innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
     }
 }

@@ -82,7 +82,7 @@ function addOrderToTable(orderList, status="Pending") {
         showOrderDetail(detail_btn);
 
         cell3.appendChild(detail_btn);
-        cell4.innerHTML = order.total;
+        cell4.innerHTML = order.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         cell5.innerHTML = order.status === 'Pending' ? 'Đang giao' : order.status === 'Delivered' ? 'Đã giao' : 'Đã hủy';
 
         if (status === "Pending") {

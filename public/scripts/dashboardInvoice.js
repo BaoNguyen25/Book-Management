@@ -350,7 +350,7 @@ const addInvoiceToTable = async (data) => {
     cell5.innerHTML =  new Date(data.date)
     .toLocaleDateString('en-GB');
     cell5.id = `date-${size - 1 >= 0 ? size - 1 : 0}`;
-    cell6.innerHTML = price;
+    cell6.innerHTML = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     cell6.id = `price-${size - 1 >= 0 ? size - 1 : 0}`;
 
     let edit_btn = document.createElement("button");
@@ -403,7 +403,7 @@ const editInvoiceInTable = async (oldName, data) => {
             table_body.rows[i].cells[3].innerHTML = data.madeBy;
             table_body.rows[i].cells[4].innerHTML = new Date(data.date)
             .toLocaleDateString('en-GB');
-            table_body.rows[i].cells[5].innerHTML = data.price;
+            table_body.rows[i].cells[5].innerHTML = data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
         }
     }

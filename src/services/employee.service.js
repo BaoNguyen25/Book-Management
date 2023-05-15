@@ -4,7 +4,7 @@ const { User } = require('../models/user.model');
 
 class EmployeeService {
     static getEmployeeList = async () => {
-        return await User.find().catch((err) => { return null; });
+        return await User.find({role:{$ne:'User'}}).catch((err) => { return null; });
     }
 
     static addEmployee = async (name, gender, role, phone, address, identity, email) => {
@@ -32,7 +32,8 @@ class EmployeeService {
                     $or: [
                         { name: { $regex: content, $options: 'i' } },
                         { role: { $regex: content, $options: 'i' } },
-                    ]
+                    ],
+                    role:{$ne:'User'}
                 }
             },
         ]).catch((err) => {return null});
