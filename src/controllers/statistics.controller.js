@@ -58,7 +58,7 @@ class StatisticsController {
         }
         ]);
 
-        const csvWriter = createCsvWriter({
+        const csvWriter = await createCsvWriter({
             path: __dirname + '../../../public/resources/data.csv',
             header: [
                 { id: 'date', title: 'Date' },
@@ -90,7 +90,7 @@ class StatisticsController {
         arr.sort(function(a,b){
             return new Date(a.date) - new Date(b.date);
           });
-        csvWriter.writeRecords(arr)
+        await csvWriter.writeRecords(arr)
         .then(() => {
             console.log('Đã xuất dữ liệu sang file CSV');
         });
