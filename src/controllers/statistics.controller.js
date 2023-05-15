@@ -97,7 +97,7 @@ class StatisticsController {
         
 
         return combinedData ? res.status(200).json({
-            combinedData: combinedData
+            message: 'Get statistics successfully',
         }): res.status(400).json({
             message: ' Get statistics failed'
         });    }
