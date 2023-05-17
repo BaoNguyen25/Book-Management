@@ -288,7 +288,7 @@ td {
   color: #ffffff; /* Màu chữ trắng */
   text-align: center; /* Căn giữa nội dung alert */
   padding: 20px 40px;
-  min-width: 420px;
+  min-width: calc(20vw);
   position: absolute;
   top: 3%;
   left: 90%;

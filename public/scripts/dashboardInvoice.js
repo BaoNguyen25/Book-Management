@@ -9,6 +9,10 @@ toggleButton.onclick = function () {
 function notification(status, msg) {
     let alert = document.getElementById("Alert");
     alert.innerHTML = msg;
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
   
     if (status === "success") {
         alert.style.backgroundColor = "green";
@@ -120,9 +124,9 @@ search_btn.addEventListener('click', async (event) => {
                         await addInvoiceToTable(invoiceList[i]);
                     }   
 
-                    notification("success", "thành công");
+                    notification("success", "Tìm kiếm thành công");
                 } else {
-                    notification("success", "thất bại");
+                    notification("success", "Tìm kiếm thất bại");
                 }
             }
         );
@@ -162,7 +166,7 @@ submit_add_btn.addEventListener('click', async (event) => {
                     if (data.message == 'Add invoice successfully') {
                         let add_section = document.getElementById("add-invoice");
                         add_section.style.display = "none";
-                        notification("success", "thành công");
+                        notification("success", "Thêm hóa đơn thành công");
                         let fetched = data.metadata;
                         await addInvoiceToTable(fetched);
 
@@ -170,13 +174,13 @@ submit_add_btn.addEventListener('click', async (event) => {
                         document.getElementById("add-invoice-date").value = '';
                         document.getElementById("add-invoice-name").value = '';
                     } else {
-                        notification("error", "thất bại");
+                        notification("error", "Thêm hóa đơn thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Thêm hóa đơn thất bại")
     }
 });
 
@@ -220,17 +224,17 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit invoice successfully') {
                     let edit_section = document.getElementById("edit-invoice");
                     edit_section.style.display = "none";
-                    notification("success", "thành công");
+                    notification("success", "Chỉnh sửa thông tin thành công");
                     let edited = data.metadata;
                     await editInvoiceInTable(oldName, edited);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Chỉnh sửa thông tin thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Chỉnh sửa thông tin thất bại")
     }
 });
 
@@ -478,16 +482,16 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete invoice successfully') {
-                    notification("success", "thành công");
+                    notification("success", "Xóa hóa đơn thành công");
                     await deleteInvoiceInTable("invoice-table", invoice_name);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Xóa hóa đơn thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Xóa hóa đơn thất bại")
     }
 }
 

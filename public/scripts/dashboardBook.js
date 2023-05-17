@@ -23,6 +23,10 @@ function notification(status, msg) {
     alert.innerHTML = msg;
     alert.style.color = "white";
 
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
+
     if (status === "success") {
         alert.style.backgroundColor = "green";
     }

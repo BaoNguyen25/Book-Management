@@ -8,11 +8,35 @@ const search_btn = document.getElementById("search-btn");
 const finish_btn = document.querySelectorAll("[id^='finish-btn']");
 const delete_btn = document.querySelectorAll("[id^='delete-btn']");
 
-console.log(finish_btn)
-
 toggleButton.onclick = function () {
     el.classList.toggle("toggled");
 };
+
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+    alert.style.color = "white";
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
+
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    }
+    else if (status === "processing") {
+        alert.style.backgroundColor = "blue";
+        alert.innerHTML = "Đang xử lý...";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+
+    alert.classList.add("showAlert");
+
+    setTimeout(() => {
+        alert.classList.remove("showAlert");
+    }, 3000);
+}
 
 //
 search_btn.addEventListener("click", async () => {
@@ -152,15 +176,15 @@ async function handleFinishOrderEvent(event) {
         .then((res) => res.json())
         .then((data) => {
             if (data.message === "Finish order successfully") {
-                alert(data.message);
+                notification('success', 'Đã hoàn thành đơn hàng')
                 location.reload();
                 return;
             }
 
-            alert("Finish order failed");
+            notification('error', 'Hoàn thành đơn hàng thất bại')
         });
     } catch (error) {
-        alert("Finish order failed");
+        notification('error', 'Hoàn thành đơn hàng thất bại')
     }
 }
 

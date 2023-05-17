@@ -9,6 +9,10 @@ toggleButton.onclick = function () {
 function notification(status, msg) {
     let alert = document.getElementById("Alert");
     alert.innerHTML = msg;
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
   
     if (status === "success") {
         alert.style.backgroundColor = "green";
@@ -110,18 +114,18 @@ submit_add_btn.addEventListener('click', async (event) => {
                     if (data.message == 'Add author successfully') {
                         let add_section = document.getElementById("add-author");
                         add_section.style.display = "none";
-                        notification("success", "thành công");
+                        notification("success", "Thêm tác giả thành công");
                         await addAuthorToTable(name);
 
                         document.getElementById("add-name").value = '';
                     } else {
-                        notification("error", "thất bại");
+                        notification("error", "Thêm tác giả thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại");
+        notification("error", "Thêm tác giả thất bại");
     }
 });
 
@@ -147,16 +151,16 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit author successfully') {
                     let edit_section = document.getElementById("edit-author");
                     edit_section.style.display = "none";
-                    notification("success", "thành công");
+                    notification("success", "Chỉnh sửa thông tin thành công");
                     await editAuthorInTable(oldName, name);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Chỉnh sửa thông tin thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại");
+        notification("error", "Chỉnh sửa thông tin thất bại");
     }
 });
 
@@ -269,15 +273,15 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete author successfully') {
-                    notification("success", "thành công");
+                    notification("success", "Xóa tác giả thành công");
                     await deleteAuthorInTable(author_name);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Xóa tác giả thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại");
+        notification("error", "Xóa tác giả thất bại");
     }
 }

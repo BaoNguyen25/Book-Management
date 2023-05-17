@@ -9,6 +9,10 @@ toggleButton.onclick = function () {
 function notification(status, msg) {
     let alert = document.getElementById("Alert");
     alert.innerHTML = msg;
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
   
     if (status === "success") {
         alert.style.backgroundColor = "green";
@@ -120,9 +124,9 @@ search_btn.addEventListener('click', async (event) => {
                         await addImportToTable(importList[i]);
                     }   
 
-                    notification("success", "thành công");
+                    notification("success", "Tìm kiếm thành công");
                 } else {
-                    notification("success", "thất bại");
+                    notification("success", "Tìm kiếm thất bại");
                 }
             }
         );
@@ -162,7 +166,7 @@ submit_add_btn.addEventListener('click', async (event) => {
                     if (data.message == 'Add import successfully') {
                         let add_section = document.getElementById("add-import");
                         add_section.style.display = "none";
-                        notification("success", "thành công");
+                        notification("success", "Thêm phiếu nhập thành công");
                         let fetched = data.metadata;
                         await addImportToTable(fetched);
 
@@ -170,13 +174,13 @@ submit_add_btn.addEventListener('click', async (event) => {
                         document.getElementById("add-import-date").value = '';
                         document.getElementById("add-import-name").value = '';
                     } else {
-                        notification("error", "thất bại");
+                        notification("error", "Thêm phiếu nhập thất bại");
                     }
                 }
             );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Thêm phiếu nhập thất bại")
     }
 });
 
@@ -220,17 +224,17 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit import successfully') {
                     let edit_section = document.getElementById("edit-import");
                     edit_section.style.display = "none";
-                    notification("success", "thành công");
+                    notification("success", "Chỉnh sửa phiếu nhập thành công");
                     let edited = data.metadata;
                     await editImportInTable(oldName, edited);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Chỉnh sửa phiếu nhập thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Chỉnh sửa phiếu nhập thất bại")
     }
 });
 
@@ -473,16 +477,16 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete import successfully') {
-                    notification("success", "thành công");
+                    notification("success", "Xóa phiếu nhập thành công");
                     await deleteImportInTable("import-table", import_name);
                 } else {
-                    notification("error", "thất bại");
+                    notification("error", "Xóa phiếu nhập thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "thất bại")
+        notification("error", "Xóa phiếu nhập thất bại");
     }
 }
 
@@ -508,6 +512,6 @@ const handleDeleteDetailButtonEvent = async (event) => {
         }
     } catch (err) {
         console.log(err);
-        notification("error", "thất bại");
+        notification("error", "Xóa phiếu nhập thất bại");
     }  
 };

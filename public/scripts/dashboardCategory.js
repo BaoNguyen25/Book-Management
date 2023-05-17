@@ -27,6 +27,10 @@ add_btn.addEventListener('click', () => {
 function notification(status, msg) {
     let alert = document.getElementById("Alert");
     alert.innerHTML = msg;
+
+    alert.style.position = "fixed";
+    alert.style.top = "30px";
+    alert.style.right = "0px";
   
     if (status === "success") {
         alert.style.backgroundColor = "green";
