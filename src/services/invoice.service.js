@@ -125,6 +125,20 @@ class InvoiceService {
             },
         ]).catch((err) => {console.log(err)});
     }
+
+    static getInvoiceSales = async () => {
+        const invoiceSales = await InvoiceModel.aggregate([
+            {
+              $group: {
+                _id: null,
+                price: { $sum: "$price" },
+              },
+            },
+        ]);
+      
+        console.log(invoiceSales)
+        return invoiceSales;
+    }
 }
 
 module.exports = InvoiceService;

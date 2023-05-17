@@ -18,6 +18,28 @@ let search_btn = document.getElementById("search-btn");
 
 let navbar_highlight = document.getElementById("book-link").classList.add("active");
 
+function notification(status, msg) {
+    let alert = document.getElementById("Alert");
+    alert.innerHTML = msg;
+    alert.style.color = "white";
+
+    if (status === "success") {
+        alert.style.backgroundColor = "green";
+    }
+    else if (status === "processing") {
+        alert.style.backgroundColor = "blue";
+        alert.innerHTML = "Đang xử lý...";
+    } else if (status === "error") {
+        alert.style.backgroundColor = "red";
+    }
+
+    alert.classList.add("showAlert");
+
+    setTimeout(() => {
+        alert.classList.remove("showAlert");
+    }, 3000);
+}
+
 add_btn.addEventListener('click', () => {
     let add_section = document.getElementById("add-book");
     add_section.style.display = 'block';
@@ -46,6 +68,8 @@ close_edit_section.addEventListener('click', (event) => {
 search_btn.addEventListener('click', async (event) => {
     event.preventDefault();
 
+    notification("processing", "Đang xử lý...");
+
     let content = document.getElementById("search-content").value;
     let data = await fetch('/book/search', {
         method: 'POST',
@@ -67,8 +91,10 @@ search_btn.addEventListener('click', async (event) => {
                         await addBookToTable(bookList[i].name, bookList[i].category, bookList[i].author
                             , bookList[i].quantity, bookList[i].price);
                     }   
+
+                    notification("success", "Tìm kiếm thành công");
                 } else {
-                    alert('Search book failed');
+                    notification("error", "Tìm kiếm thất bại");
                 }
             }
         );
@@ -81,7 +107,9 @@ submit_add_btn.addEventListener('click', async (event) => {
     let author = document.getElementById("add-author").value;
     let number = document.getElementById("add-number").value;
     let image = document.getElementById("add-image");
-    let price = document.getElementById("add-price").value;
+    let price = document.getElementById("add-price").value.split('.').join('').split(',').join('');
+
+    notification("processing", "Đang xử lý...");
     
     console.log(image.files[0])
 
@@ -107,7 +135,6 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add book successfully') {
                     let add_section = document.getElementById("add-book");
                     add_section.style.display = "none";
-                    alert('Add book successfully');
                     let fetched = data.metadata;
                     await addBookToTable(fetched.name, fetched.category, fetched.author, fetched.quantity, fetched.price);
 
@@ -116,14 +143,15 @@ submit_add_btn.addEventListener('click', async (event) => {
                     document.getElementById("add-author").value = '';
                     document.getElementById("add-number").value = '';
                     document.getElementById("add-price").value = '';
+                    notification("success", "Thêm sách thành công");
                 } else {
-                    alert('Add book failed');
+                    notification("error", "Thêm sách thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Add book failed')
+        notification("error", "Thêm sách thất bại");
     }
 });
 
@@ -140,7 +168,9 @@ submit_edit_btn.addEventListener('click', async (event) => {
     let number = edit_number.value;
     let image = document.getElementById("edit-image");
     let edit_price = document.getElementById("edit-price");
-    let price = edit_price.value;
+    let price = edit_price.value.split('.').join('').split(',').join('');
+
+    notification("processing", "Đang xử lý...");
 
     const formData = new FormData();
     formData.append('oldName', oldName);
@@ -163,17 +193,18 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit book successfully') {
                     let edit_section = document.getElementById("edit-book");
                     edit_section.style.display = "none";
-                    alert('Edit book successfully');
                     let edited = data.metadata;
                     await editBookInTable(oldName, edited.name, edited.category, edited.author, edited.quantity, edited.price);
+
+                    notification("success", "Sửa sách thành công");
                 } else {
-                    alert('Edit book failed');
+                    notification("error", "Sửa sách thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Edit book failed')
+        notification("error", "Sửa sách thất bại");
     }
 });
 
@@ -285,7 +316,7 @@ async function handleEditButtonEvent(event) {
         edit_section.style.display ='block';
     } catch (e) {
         console.log(e);
-        alert(e);
+        notification("error", "Đã có lỗi xảy ra, vui lòng f5 lại trang")
     }
 }
 
@@ -295,6 +326,8 @@ async function handleDeleteButtonEvent(event) {
     let book_id = btn.id.split('-')[2];
 
     let book_name = document.getElementById(`name-${book_id}`).innerHTML;
+
+    notification("processing", "Đang xử lý...");
 
     try {
         const data = await fetch('/book/delete', {
@@ -309,16 +342,16 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete book successfully') {
-                    alert('Delete book successfully');
+                    notification("success", "Xóa sách thành công");
                     
                     await deleteBookInTable(book_name);
                 } else {
-                    alert('Delete book failed');
+                    notification("error", "Xóa sách thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Delete book failed')
+        notification("error", "Xóa sách thất bại")
     }
 }

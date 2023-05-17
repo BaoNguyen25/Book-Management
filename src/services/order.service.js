@@ -111,7 +111,7 @@ class OrderService {
   };
 
   static getOrderSales = async () => {
-    const orderSales = Order.aggregate([
+    const orderSales = await Order.aggregate([
       {
         $group: {
           _id: null,
@@ -119,6 +119,8 @@ class OrderService {
         },
       },
     ]);
+
+    console.log(orderSales)
     return orderSales;
   };
 }

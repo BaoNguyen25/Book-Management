@@ -9,9 +9,14 @@ toggleButton.onclick = function () {
 function notification(status, msg) {
     let alert = document.getElementById("Alert");
     alert.innerHTML = msg;
+    alert.style.color = "white";
   
     if (status === "success") {
         alert.style.backgroundColor = "green";
+    }
+    else if (status === "processing") {
+        alert.style.backgroundColor = "blue";
+        alert.innerHTML = "Đang xử lý...";
     } else if (status === "error") {
         alert.style.backgroundColor = "red";
     }
@@ -20,7 +25,7 @@ function notification(status, msg) {
   
     setTimeout(() => {
       alert.classList.remove("showAlert");
-    }, 1000);
+    }, 3000);
   }
 
 //others
@@ -77,14 +82,15 @@ search_btn.addEventListener('click', async (event) => {
             .then(async data => {
                 if (data.message == 'Search employee successfully') {
                     let employeeList = data.metadata;
-                    notification("success", "Thành công");
                     await clearTableBody();
 
                     for (let i = 0; i < employeeList.length; i++) {
                         await addEmployeeToTable(employeeList[i].name, employeeList[i].gender, employeeList[i].role, employeeList[i].phone, employeeList[i].address, employeeList[i].identity, employeeList[i].email);
                     }   
+
+                    notification("success", "Tìm kiếm thành công");
                 } else {
-                    notification("error", "Thất bại");
+                    notification("error", "Tìm kiếm thất bại");
                 }
             }
         );
@@ -121,7 +127,6 @@ submit_add_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Add employee successfully') {
                     let add_section = document.getElementById("add-employee");
                     add_section.style.display = "none";
-                    notification("success", "Thành công");;
                     let fetched = data.metadata
                     await addEmployeeToTable(fetched.name, fetched.gender, fetched.role, fetched.phone, fetched.address, fetched.identity, fetched.email);
                     document.getElementById("add-name").value = '';
@@ -130,15 +135,17 @@ submit_add_btn.addEventListener('click', async (event) => {
                     document.getElementById("add-phone").value = '';
                     document.getElementById("add-address").value = '';
                     document.getElementById("add-cardid").value = '';
-                    document.getElementById("add-email").value = '';          
+                    document.getElementById("add-email").value = '';   
+                    
+                    notification("success", "Thêm nhân viên thành công");
                 } else {
-                    notification("error", "Thất bại");
+                    notification("error", "Thêm nhân viên thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "Thất bại")
+        notification("error", "Thêm nhân viên thất bại");
     }
 });
 
@@ -182,16 +189,17 @@ submit_edit_btn.addEventListener('click', async (event) => {
                 if (data.message == 'Edit employee successfully') {
                     let edit_section = document.getElementById("edit-employee");
                     edit_section.style.display = "none";
-                    notification("success", "Thành công");;
                     await editEmployeeInTable(name, email, gender, position, phone, address, cardid);
+
+                    notification("success", "Chỉnh sửa thông tin thành công");
                 } else {
-                    notification("error", "Thất bại");
+                    notification("error", "Chỉnh sửa thông tin thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        notification("error", "Thất bại")
+        notification("error", "Chỉnh sửa thông tin thất bại");
     }
 });
 
@@ -322,7 +330,7 @@ async function handleEditButtonEvent(event) {
         edit_section.style.display ='block';
     } catch (e) {
         console.log(e);
-        alert(e);
+        notification("error", "Đã có lỗi xảy ra vui lòng f5 lại trang")
     }
 }
 
@@ -344,15 +352,15 @@ async function handleDeleteButtonEvent(event) {
             .then(response => response.json())
             .then(async data => {
                 if (data.message == 'Delete employee successfully') {
-                    alert('Delete employee successfully');
                     await deleteEmployeeInTable(employee_email);
+                    notification("success", "Xóa nhân viên thành công");
                 } else {
-                    alert('Delete employee failed');
+                    notification("error", "Xóa nhân viên thất bại");
                 }
             }
         );
     } catch (e) {
         console.log(e);
-        alert('Delete employee failed')
+        notification("error", "Đã có lỗi xảy ra vui lòng f5 lại trang")
     }
 }
