@@ -7,16 +7,17 @@ submit_btn.addEventListener('click', async (event) => {
     const token = document.getElementById('token').value;
     const url = submit_btn.getAttribute('url');
 
-    if (password == '' || token == '') {
-        alert('Please fill all fields');
-        return;
-    }
-
     submit_btn.disabled = true;
 
     let messageSection = document.getElementById('message');
     messageSection.innerHTML = 'Đang xử lý';
     messageSection.style.color = 'blue';
+
+    if (password == '' || token == '') {
+        messageSection.innerHTML = 'Hãy điền vào hết cái trường';
+        messageSection.style.color = 'red';
+        return;
+    }
 
     const data = await fetch(url,
         {

@@ -5,16 +5,18 @@ submit_btn.addEventListener('click', async (event) => {
 
     const email = document.getElementById('email').value;
 
-    if (email == '' || email.includes('@') == false || email.includes('.') == false) {
-        alert('Please enter your email address');
-        return;
-    }
-
     submit_btn.disabled = true;
 
     let messageSection = document.getElementById('message');
     messageSection.innerHTML = 'Đang xử lý';
     messageSection.style.color = 'blue';
+
+    if (email == '' || email.includes('@') == false || email.includes('.') == false) {
+        messageSection.innerHTML = 'Email không hợp lệ';
+        messageSection.style.color = 'red';
+        return;
+    }
+
 
     const data = await fetch('/access/forget-password', 
         {
