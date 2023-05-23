@@ -150,7 +150,7 @@ function showOrderDetail(btn) {
 
             cell1.innerHTML = book.name;
             cell2.innerHTML = item.quantity;
-            cell3.innerHTML = book.price * item.quantity;
+            cell3.innerHTML = (book.price * item.quantity).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         });
 
         detail_form.style.display = "block";
